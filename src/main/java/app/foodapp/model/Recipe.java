@@ -2,7 +2,13 @@ package app.foodapp.model;
 
 public class Recipe {
 
-    public Recipe(){}
+    private int id;
 
-    //TODO: Class
+    public Recipe(int id){
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
 }

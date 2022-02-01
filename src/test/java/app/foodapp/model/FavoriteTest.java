@@ -6,8 +6,9 @@ public class FavoriteTest {
 
     @Test
     void getFavoriteTest(){
+        int id = 4;
         Favorite favTest = new Favorite();
-        favTest.addRecipe(new Recipe());
+        favTest.addRecipe(new Recipe(id));
 
     }
 
