@@ -16,8 +16,10 @@ public class FindByIngridients {
                 String title =  (String) jsonO.get("title");
                 String summary = (String) jsonO.get("summary");
                 String sourceUrl = (String) jsonO.get("sourceUrl");
-                System.out.println("summary: "+ summary);
+                System.out.println("title: "+ title);
                 System.out.println("sourceUrl: "+ sourceUrl);
+                System.out.println("summary: "+ summary);
+
             } catch (IOException | ParseException e) {
                 e.printStackTrace();
             }
