@@ -1,10 +1,11 @@
 package app.appmeteo.model;
 
+import app.foodapp.model.Authors;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AuthorsTest {
 
