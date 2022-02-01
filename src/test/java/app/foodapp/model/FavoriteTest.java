@@ -7,17 +7,17 @@ public class FavoriteTest {
     @Test
     void getFavoriteTest(){
         Favorite favTest = new Favorite();
-        favTest.addDish(new Dish());
+        favTest.addRecipe(new Recipe());
 
     }
 
     @Test
-    void addDishTest(){
+    void addRecipeTest(){
         //todo
     }
 
     @Test
-    void removeDishTest(){
+    void removeRecipeTest(){
         //todo
     }
 

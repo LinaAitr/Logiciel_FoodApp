@@ -1,8 +1,8 @@
 package app.foodapp.model;
 
-public class Dish {
+public class Recipe {
 
-    public Dish(){}
+    public Recipe(){}
 
     //TODO: Class
 }

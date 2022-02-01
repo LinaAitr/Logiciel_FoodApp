@@ -4,22 +4,22 @@ import java.util.List;
 
 public class Favorite {
 
-    private List<Dish> favorites;
+    private List<Recipe> favorites;
 
     public Favorite(){
         favorites = new ArrayList<>();
     }
 
-    public List<Dish> getFavorites(){
+    public List<Recipe> getFavorites(){
         return favorites;
     }
 
-    public void addDish(Dish dish){
-        favorites.add(dish);
+    public void addRecipe(Recipe recipe){
+        favorites.add(recipe);
     }
 
-    public void removeDish(Dish dish){
-        favorites.remove(dish);
+    public void removeRecipe(Recipe recipe){
+        favorites.remove(recipe);
     }
 
     public void clean(){
