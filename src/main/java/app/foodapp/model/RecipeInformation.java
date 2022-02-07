@@ -8,6 +8,7 @@ import org.json.simple.parser.ParseException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.Map;
 
 public class RecipeInformation {
 
@@ -24,11 +25,20 @@ public class RecipeInformation {
                 System.out.println("summary: "+ summary);
 
 
-                JSONArray listOfStates = (JSONArray) jsonO.get("diets");
+                JSONArray listOfStates = (JSONArray) jsonO.get("extendedIngredients");
+
                 Iterator iterator = listOfStates.iterator();
                 while (iterator.hasNext()) {
-                    System.out.println(iterator.next());
+                    Iterator<Map.Entry> itr1 = ((Map) iterator.next()).entrySet().iterator();
+                    while (itr1.hasNext()) {
+                        Map.Entry pair = itr1.next();
+                        System.out.println(pair.getKey() + " : " + pair.getValue());
+                    }
                 }
+
+               // while (iterator.hasNext()) {
+                  //  System.out.println(iterator.next());
+             //   }
             } catch (IOException | ParseException e) {
                 e.printStackTrace();
             }
