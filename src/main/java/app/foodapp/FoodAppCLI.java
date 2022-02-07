@@ -13,6 +13,7 @@ public class FoodAppCLI {
         System.out.println("Which recipe : \n - apple, \n - vegan. ");
         Scanner scanner = new Scanner(System.in);
         System.out.println(SearchBar.search(scanner));
+        SearchBar.selectRecipe(scanner);
         scanner.close();
     }
 }
