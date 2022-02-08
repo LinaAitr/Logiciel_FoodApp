@@ -2,28 +2,36 @@ package app.foodapp.model;
 
 import org.junit.jupiter.api.Test;
 
+import static org.testfx.assertions.api.Assertions.*;
+
 public class FavoriteTest {
 
     @Test
-    void getFavoriteTest(){
+    void addRecipeTest(){
         int id = 4;
         Favorite favTest = new Favorite();
-        favTest.addRecipe(new Recipe(id));
-
-    }
-
-    @Test
-    void addRecipeTest(){
-        //todo
+        Recipe r =  new Recipe(id);
+        favTest.addRecipe(r);
+        assertThat(favTest.getFavorites().get(0)).isEqualTo(r);
     }
 
     @Test
     void removeRecipeTest(){
-        //todo
+        int id = 4;
+        Favorite favTest = new Favorite();
+        Recipe r =  new Recipe(id);
+        favTest.addRecipe(r);
+        favTest.removeRecipe(r);
+        assertThat(favTest).isNull();
     }
 
     @Test
     void cleanTest(){
-        //todo
+        int id = 4;
+        Favorite favTest = new Favorite();
+        Recipe r =  new Recipe(id);
+        favTest.addRecipe(r);
+        favTest.clean();
+        assertThat(favTest).isNull();
     }
 }
