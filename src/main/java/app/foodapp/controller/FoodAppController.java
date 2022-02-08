@@ -12,6 +12,12 @@ public class FoodAppController implements Initializable {
 
     @FXML private Button helloWorldButton;
     @FXML private Button goodByeWorldButton;
+
+    @FXML private Button logInButton;
+    @FXML private Button searchButton;
+    @FXML private Button dropMenuButton;
+    @FXML private Button homeButton;
+
     @FXML private Label label;
 
     //    @Override
@@ -31,5 +37,10 @@ public class FoodAppController implements Initializable {
         goodByeWorldButton.setVisible(false);
         if (!helloWorldButton.isVisible())
             helloWorldButton.setVisible(true);
+    }
+
+    @FXML
+    private void logIn(){
+        label.setText("your log in is done ");
     }
 }
