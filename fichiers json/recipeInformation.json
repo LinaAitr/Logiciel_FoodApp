@@ -1,0 +1,705 @@
+{
+  "vegetarian": true,
+  "vegan": true,
+  "glutenFree": true,
+  "dairyFree": true,
+  "veryHealthy": false,
+  "cheap": false,
+  "veryPopular": false,
+  "sustainable": false,
+  "weightWatcherSmartPoints": 3,
+  "gaps": "no",
+  "lowFodmap": false,
+  "aggregateLikes": 104,
+  "spoonacularScore": 68,
+  "healthScore": 11,
+  "creditsText": "Lisa's Vegetarian Kitchen",
+  "license": "CC BY 2.5 CA",
+  "sourceName": "Food and Spice",
+  "pricePerServing": 85.73,
+  "extendedIngredients": [
+    {
+      "id": 1012024,
+      "aisle": "Spices and Seasonings",
+      "image": "black-pepper.png",
+      "consistency": "solid",
+      "name": "black mustard seeds",
+      "nameClean": "black mustard seeds",
+      "original": "1 teaspoon black mustard seeds",
+      "originalString": "1 teaspoon black mustard seeds",
+      "originalName": "black mustard seeds",
+      "amount": 1,
+      "unit": "teaspoon",
+      "meta": [
+        "black"
+      ],
+      "metaInformation": [
+        "black"
+      ],
+      "measures": {
+        "us": {
+          "amount": 1,
+          "unitShort": "tsp",
+          "unitLong": "teaspoon"
+        },
+        "metric": {
+          "amount": 1,
+          "unitShort": "tsp",
+          "unitLong": "teaspoon"
+        }
+      }
+    },
+    {
+      "id": 1022030,
+      "aisle": "Spices and Seasonings",
+      "image": "black-pepper.png",
+      "consistency": "solid",
+      "name": "black peppercorns",
+      "nameClean": "black peppercorns",
+      "original": "1/2 teaspoon black peppercorns",
+      "originalString": "1/2 teaspoon black peppercorns",
+      "originalName": "black peppercorns",
+      "amount": 0.5,
+      "unit": "teaspoon",
+      "meta": [
+        "black"
+      ],
+      "metaInformation": [
+        "black"
+      ],
+      "measures": {
+        "us": {
+          "amount": 0.5,
+          "unitShort": "tsps",
+          "unitLong": "teaspoons"
+        },
+        "metric": {
+          "amount": 0.5,
+          "unitShort": "tsps",
+          "unitLong": "teaspoons"
+        }
+      }
+    },
+    {
+      "id": 2031,
+      "aisle": "Spices and Seasonings",
+      "image": "chili-powder.jpg",
+      "consistency": "solid",
+      "name": "cayenne",
+      "nameClean": "ground cayenne pepper",
+      "original": "1/2 to 1 teaspoon cayenne",
+      "originalString": "1/2 to 1 teaspoon cayenne",
+      "originalName": "cayenne",
+      "amount": 0.5,
+      "unit": "teaspoon",
+      "meta": [],
+      "metaInformation": [],
+      "measures": {
+        "us": {
+          "amount": 0.5,
+          "unitShort": "tsps",
+          "unitLong": "teaspoons"
+        },
+        "metric": {
+          "amount": 0.5,
+          "unitShort": "tsps",
+          "unitLong": "teaspoons"
+        }
+      }
+    },
+    {
+      "id": 99236,
+      "aisle": "Ethnic Foods",
+      "image": "bengal-gram.png",
+      "consistency": "solid",
+      "name": "channa dal",
+      "nameClean": "chana dal",
+      "original": "1 teaspoon channa dal or yellow split peas, well rinsed",
+      "originalString": "1 teaspoon channa dal or yellow split peas, well rinsed",
+      "originalName": "channa dal or yellow split peas, well rinsed",
+      "amount": 1,
+      "unit": "teaspoon",
+      "meta": [
+        "split",
+        "yellow",
+        "rinsed",
+        "well"
+      ],
+      "metaInformation": [
+        "split",
+        "yellow",
+        "rinsed",
+        "well"
+      ],
+      "measures": {
+        "us": {
+          "amount": 1,
+          "unitShort": "tsp",
+          "unitLong": "teaspoon"
+        },
+        "metric": {
+          "amount": 1,
+          "unitShort": "tsp",
+          "unitLong": "teaspoon"
+        }
+      }
+    },
+    {
+      "id": 11819,
+      "aisle": "Produce",
+      "image": "red-chili.jpg",
+      "consistency": "solid",
+      "name": "chilies",
+      "nameClean": "chili pepper",
+      "original": "2 to 3 dried red chilies, broken into bits",
+      "originalString": "2 to 3 dried red chilies, broken into bits",
+      "originalName": "to 3 dried red chilies, broken into bits",
+      "amount": 2,
+      "unit": "",
+      "meta": [
+        "dried",
+        "red"
+      ],
+      "metaInformation": [
+        "dried",
+        "red"
+      ],
+      "measures": {
+        "us": {
+          "amount": 2,
+          "unitShort": "",
+          "unitLong": ""
+        },
+        "metric": {
+          "amount": 2,
+          "unitShort": "",
+          "unitLong": ""
+        }
+      }
+    },
+    {
+      "id": 2013,
+      "aisle": "Spices and Seasonings",
+      "image": "coriander-seeds.jpg",
+      "consistency": "solid",
+      "name": "coriander seeds",
+      "nameClean": "whole coriander seeds",
+      "original": "1 tablespoon coriander seeds",
+      "originalString": "1 tablespoon coriander seeds",
+      "originalName": "coriander seeds",
+      "amount": 1,
+      "unit": "tablespoon",
+      "meta": [],
+      "metaInformation": [],
+      "measures": {
+        "us": {
+          "amount": 1,
+          "unitShort": "Tbsp",
+          "unitLong": "Tbsp"
+        },
+        "metric": {
+          "amount": 1,
+          "unitShort": "Tbsp",
+          "unitLong": "Tbsp"
+        }
+      }
+    },
+    {
+      "id": 2014,
+      "aisle": "Spices and Seasonings",
+      "image": "ground-cumin.jpg",
+      "consistency": "solid",
+      "name": "cumin seeds",
+      "nameClean": "cumin seeds",
+      "original": "1 teaspoon cumin seeds",
+      "originalString": "1 teaspoon cumin seeds",
+      "originalName": "cumin seeds",
+      "amount": 1,
+      "unit": "teaspoon",
+      "meta": [],
+      "metaInformation": [],
+      "measures": {
+        "us": {
+          "amount": 1,
+          "unitShort": "tsp",
+          "unitLong": "teaspoon"
+        },
+        "metric": {
+          "amount": 1,
+          "unitShort": "tsp",
+          "unitLong": "teaspoon"
+        }
+      }
+    },
+    {
+      "id": 93604,
+      "aisle": "Ethnic Foods",
+      "image": "curry-leaves.jpg",
+      "consistency": "solid",
+      "name": "curry leaves",
+      "nameClean": "curry leaves",
+      "original": "small handful of dried curry leaves",
+      "originalString": "small handful of dried curry leaves",
+      "originalName": "dried curry leaves",
+      "amount": 1,
+      "unit": "small handful",
+      "meta": [
+        "dried"
+      ],
+      "metaInformation": [
+        "dried"
+      ],
+      "measures": {
+        "us": {
+          "amount": 1,
+          "unitShort": "small handful",
+          "unitLong": "small handful"
+        },
+        "metric": {
+          "amount": 1,
+          "unitShort": "small handful",
+          "unitLong": "small handful"
+        }
+      }
+    },
+    {
+      "id": 11215,
+      "aisle": "Produce",
+      "image": "garlic.png",
+      "consistency": "solid",
+      "name": "garlic",
+      "nameClean": "garlic",
+      "original": "1 large clove garlic, minced",
+      "originalString": "1 large clove garlic, minced",
+      "originalName": "garlic, minced",
+      "amount": 1,
+      "unit": "large clove",
+      "meta": [
+        "minced"
+      ],
+      "metaInformation": [
+        "minced"
+      ],
+      "measures": {
+        "us": {
+          "amount": 1,
+          "unitShort": "large clove",
+          "unitLong": "large clove"
+        },
+        "metric": {
+          "amount": 1,
+          "unitShort": "large clove",
+          "unitLong": "large clove"
+        }
+      }
+    },
+    {
+      "id": 11282,
+      "aisle": "Produce",
+      "image": "brown-onion.png",
+      "consistency": "solid",
+      "name": "onion",
+      "nameClean": "onion",
+      "original": "1 small onion, finely chopped",
+      "originalString": "1 small onion, finely chopped",
+      "originalName": "onion, finely chopped",
+      "amount": 1,
+      "unit": "small",
+      "meta": [
+        "finely chopped"
+      ],
+      "metaInformation": [
+        "finely chopped"
+      ],
+      "measures": {
+        "us": {
+          "amount": 1,
+          "unitShort": "small",
+          "unitLong": "small"
+        },
+        "metric": {
+          "amount": 1,
+          "unitShort": "small",
+          "unitLong": "small"
+        }
+      }
+    },
+    {
+      "id": 1012047,
+      "aisle": "Spices and Seasonings",
+      "image": "salt.jpg",
+      "consistency": "solid",
+      "name": "sea salt",
+      "nameClean": "coarse sea salt",
+      "original": "1 teaspoon sea salt",
+      "originalString": "1 teaspoon sea salt",
+      "originalName": "sea salt",
+      "amount": 1,
+      "unit": "teaspoon",
+      "meta": [],
+      "metaInformation": [],
+      "measures": {
+        "us": {
+          "amount": 1,
+          "unitShort": "tsp",
+          "unitLong": "teaspoon"
+        },
+        "metric": {
+          "amount": 1,
+          "unitShort": "tsp",
+          "unitLong": "teaspoon"
+        }
+      }
+    },
+    {
+      "id": 4058,
+      "aisle": "Ethnic Foods",
+      "image": "sesame-oil.png",
+      "consistency": "liquid",
+      "name": "sesame oil",
+      "nameClean": "sesame oil",
+      "original": "1/4 cup ghee or sesame oil",
+      "originalString": "1/4 cup ghee or sesame oil",
+      "originalName": "ghee or sesame oil",
+      "amount": 0.25,
+      "unit": "cup",
+      "meta": [],
+      "metaInformation": [],
+      "measures": {
+        "us": {
+          "amount": 0.25,
+          "unitShort": "cups",
+          "unitLong": "cups"
+        },
+        "metric": {
+          "amount": 59.147,
+          "unitShort": "ml",
+          "unitLong": "milliliters"
+        }
+      }
+    },
+    {
+      "id": 11955,
+      "aisle": "Canned and Jarred;Produce",
+      "image": "sundried-tomatoes.jpg",
+      "consistency": "solid",
+      "name": "sun-dried tomatoes",
+      "nameClean": "sun dried tomatoes",
+      "original": "3 sun-dried tomatoes, soaked in hot water for 20 minutes and finely chopped",
+      "originalString": "3 sun-dried tomatoes, soaked in hot water for 20 minutes and finely chopped",
+      "originalName": "sun-dried tomatoes, soaked in hot water for 20 minutes and finely chopped",
+      "amount": 3,
+      "unit": "",
+      "meta": [
+        "hot",
+        "finely chopped",
+        "for 20 minutes and "
+      ],
+      "metaInformation": [
+        "hot",
+        "finely chopped",
+        "for 20 minutes and "
+      ],
+      "measures": {
+        "us": {
+          "amount": 3,
+          "unitShort": "",
+          "unitLong": ""
+        },
+        "metric": {
+          "amount": 3,
+          "unitShort": "",
+          "unitLong": ""
+        }
+      }
+    },
+    {
+      "id": 1009322,
+      "aisle": "Ethnic Foods",
+      "image": "Belacan-or-shrimp-paste-or-tamarind-pulp.jpg",
+      "consistency": "solid",
+      "name": "tamarind pulp",
+      "nameClean": "tamarind pulp",
+      "original": "1 1/2 teaspoons tamarind pulp",
+      "originalString": "1 1/2 teaspoons tamarind pulp",
+      "originalName": "tamarind pulp",
+      "amount": 1.5,
+      "unit": "teaspoons",
+      "meta": [],
+      "metaInformation": [],
+      "measures": {
+        "us": {
+          "amount": 1.5,
+          "unitShort": "tsps",
+          "unitLong": "teaspoons"
+        },
+        "metric": {
+          "amount": 1.5,
+          "unitShort": "tsps",
+          "unitLong": "teaspoons"
+        }
+      }
+    },
+    {
+      "id": 11529,
+      "aisle": "Produce",
+      "image": "tomato.png",
+      "consistency": "solid",
+      "name": "tomatoes",
+      "nameClean": "tomato",
+      "original": "2 medium tomatoes, finely chopped",
+      "originalString": "2 medium tomatoes, finely chopped",
+      "originalName": "tomatoes, finely chopped",
+      "amount": 2,
+      "unit": "medium",
+      "meta": [
+        "finely chopped"
+      ],
+      "metaInformation": [
+        "finely chopped"
+      ],
+      "measures": {
+        "us": {
+          "amount": 2,
+          "unitShort": "medium",
+          "unitLong": "mediums"
+        },
+        "metric": {
+          "amount": 2,
+          "unitShort": "medium",
+          "unitLong": "mediums"
+        }
+      }
+    },
+    {
+      "id": 93718,
+      "aisle": "Pasta and Rice;Canned and Jarred",
+      "image": "black-lentils.jpg",
+      "consistency": "solid",
+      "name": "urad dal",
+      "nameClean": "black lentils",
+      "original": "1 teaspoon urad dal without skins, well rinsed",
+      "originalString": "1 teaspoon urad dal without skins, well rinsed",
+      "originalName": "urad dal without skins, well rinsed",
+      "amount": 1,
+      "unit": "teaspoon",
+      "meta": [
+        "rinsed",
+        "well"
+      ],
+      "metaInformation": [
+        "rinsed",
+        "well"
+      ],
+      "measures": {
+        "us": {
+          "amount": 1,
+          "unitShort": "tsp",
+          "unitLong": "teaspoon"
+        },
+        "metric": {
+          "amount": 1,
+          "unitShort": "tsp",
+          "unitLong": "teaspoon"
+        }
+      }
+    }
+  ],
+  "id": 716000,
+  "title": "South Indian Tomato Chutney",
+  "readyInMinutes": 45,
+  "servings": 6,
+  "sourceUrl": "http://foodandspice.blogspot.com/2012/04/tomato-chutney-south-indian-style.html",
+  "image": "https://spoonacular.com/recipeImages/716000-556x370.jpg",
+  "imageType": "jpg",
+  "summary": "South Indian Tomato Chutney might be just the condiment you are searching for. Watching your figure? This gluten free and vegan recipe has <b>122 calories</b>, <b>2g of protein</b>, and <b>10g of fat</b> per serving. This recipe serves 6 and costs 87 cents per serving. Plenty of people made this recipe, and 104 would say it hit the spot. This recipe is typical of Indian cuisine. It is brought to you by foodandspice.blogspot.com. If you have sesame oil, sun-dried tomatoes, garlic, and a few other ingredients on hand, you can make it. From preparation to the plate, this recipe takes roughly <b>45 minutes</b>. Taking all factors into account, this recipe <b>earns a spoonacular score of 72%</b>, which is pretty good. Similar recipes include <a href=\"https://spoonacular.com/recipes/mullangi-pachadi-andhra-style-radish-chutney-south-indian-chutney-s-579847\">Mullangi Pachadi - Andhra Style Radish Chutney - South Indian Chutney s</a>, <a href=\"https://spoonacular.com/recipes/carrot-chutney-carrot-onion-chutney-for-idli-dosa-south-indian-chutney-s-580088\">Carrot Chutney - Carrot Onion Chutney for Idli Dosa - South Indian Chutney s</a>, and <a href=\"https://spoonacular.com/recipes/carrot-peanut-chutney-carrot-palli-pachadi-south-indian-chutney-s-for-idli-dosa-618849\">Carrot Peanut Chutney - Carrot Palli Pachadi - South Indian Chutney s for Idli Dosa</a>.",
+  "cuisines": [
+    "Indian",
+    "Asian"
+  ],
+  "dishTypes": [
+    "side dish"
+  ],
+  "diets": [
+    "gluten free",
+    "dairy free",
+    "lacto ovo vegetarian",
+    "vegan"
+  ],
+  "occasions": [],
+  "winePairing": {
+    "pairedWines": [
+      "gruener veltliner",
+      "riesling",
+      "sparkling rose"
+    ],
+    "pairingText": "Gruener Veltliner, Riesling, and Sparkling rosé are great choices for Indian. The best wine for Indian food will depending on the dish, of course, but these picks can be served chilled and have some sweetness to complement the spiciness and complex flavors of a wide variety of traditional dishes. You could try Pfaffl Zeiseneck Gruner Veltliner. Reviewers quite like it with a 4.1 out of 5 star rating and a price of about 17 dollars per bottle.",
+    "productMatches": [
+      {
+        "id": 435989,
+        "title": "Pfaffl Zeiseneck Gruner Veltliner",
+        "description": "Incredibly crispy and fine-boned with plenty of pepper and a dash of extravagance. No wonder, because this wine grows on the largest fossil oyster reef in the world.",
+        "price": "$16.99",
+        "imageUrl": "https://spoonacular.com/productImages/435989-312x231.jpg",
+        "averageRating": 0.82,
+        "ratingCount": 8,
+        "score": 0.7799999999999999,
+        "link": "https://click.linksynergy.com/deeplink?id=*QCiIS6t4gA&mid=2025&murl=https%3A%2F%2Fwww.wine.com%2Fproduct%2Fpfaffl-zeiseneck-gruner-veltliner-2015%2F163176"
+      }
+    ]
+  },
+  "instructions": "In a coffee grinder, grind together the coriander seeds, cumin seeds, peppercorns and split dal to a fine powder.In a small saucepan or frying pan, heat the ghee or oil over medium heat. When hot, add the mustard seeds, curry leaves and red chilies. Stir and fry until the mixture begins to splutter and pop. Now add the onion and garlic, stir for a minute or so, and then add the ground spice and dal mixture, along with the cayenne and salt. Stir for another few minutes. Next, add the tomatoes, sun-dried tomatoes and tamarind, reduce the heat to low, and cover and simmer until the sauce is thickened, stirring occasionally. This should take about 20 minutes. Serve warm, at room temperature, cooled, or freeze until needed.",
+  "analyzedInstructions": [
+    {
+      "name": "",
+      "steps": [
+        {
+          "number": 1,
+          "step": "In a coffee grinder, grind together the coriander seeds, cumin seeds, peppercorns and split dal to a fine powder.In a small saucepan or frying pan, heat the ghee or oil over medium heat. When hot, add the mustard seeds, curry leaves and red chilies. Stir and fry until the mixture begins to splutter and pop. Now add the onion and garlic, stir for a minute or so, and then add the ground spice and dal mixture, along with the cayenne and salt. Stir for another few minutes. Next, add the tomatoes, sun-dried tomatoes and tamarind, reduce the heat to low, and cover and simmer until the sauce is thickened, stirring occasionally. This should take about 20 minutes.",
+          "ingredients": [
+            {
+              "id": 11955,
+              "name": "sun dried tomatoes",
+              "localizedName": "sun dried tomatoes",
+              "image": "sundried-tomatoes.jpg"
+            },
+            {
+              "id": 2013,
+              "name": "whole coriander seeds",
+              "localizedName": "whole coriander seeds",
+              "image": "coriander-seeds.jpg"
+            },
+            {
+              "id": 2024,
+              "name": "mustard seeds",
+              "localizedName": "mustard seeds",
+              "image": "mustard-seeds.png"
+            },
+            {
+              "id": 93604,
+              "name": "curry leaves",
+              "localizedName": "curry leaves",
+              "image": "curry-leaves.jpg"
+            },
+            {
+              "id": 2014,
+              "name": "cumin seeds",
+              "localizedName": "cumin seeds",
+              "image": "ground-cumin.jpg"
+            },
+            {
+              "id": 1022030,
+              "name": "peppercorns",
+              "localizedName": "peppercorns",
+              "image": "black-pepper.png"
+            },
+            {
+              "id": 10511819,
+              "name": "red chili pepper",
+              "localizedName": "red chili pepper",
+              "image": "red-chili.jpg"
+            },
+            {
+              "id": 1019322,
+              "name": "tamarind",
+              "localizedName": "tamarind",
+              "image": "tamarind.png"
+            },
+            {
+              "id": 11529,
+              "name": "tomato",
+              "localizedName": "tomato",
+              "image": "tomato.png"
+            },
+            {
+              "id": 2031,
+              "name": "ground cayenne pepper",
+              "localizedName": "ground cayenne pepper",
+              "image": "chili-powder.jpg"
+            },
+            {
+              "id": 14209,
+              "name": "coffee",
+              "localizedName": "coffee",
+              "image": "brewed-coffee.jpg"
+            },
+            {
+              "id": 11215,
+              "name": "garlic",
+              "localizedName": "garlic",
+              "image": "garlic.png"
+            },
+            {
+              "id": 11282,
+              "name": "onion",
+              "localizedName": "onion",
+              "image": "brown-onion.png"
+            },
+            {
+              "id": 0,
+              "name": "sauce",
+              "localizedName": "sauce",
+              "image": ""
+            },
+            {
+              "id": 93632,
+              "name": "ghee",
+              "localizedName": "ghee",
+              "image": "ghee.jpg"
+            },
+            {
+              "id": 2047,
+              "name": "salt",
+              "localizedName": "salt",
+              "image": "salt.jpg"
+            },
+            {
+              "id": 10316069,
+              "name": "lentils",
+              "localizedName": "lentils",
+              "image": "lentils-brown.jpg"
+            },
+            {
+              "id": 4582,
+              "name": "cooking oil",
+              "localizedName": "cooking oil",
+              "image": "vegetable-oil.jpg"
+            },
+            {
+              "id": 0,
+              "name": "pop",
+              "localizedName": "soft drink",
+              "image": ""
+            }
+          ],
+          "equipment": [
+            {
+              "id": 404645,
+              "name": "frying pan",
+              "localizedName": "frying pan",
+              "image": "pan.png"
+            },
+            {
+              "id": 404669,
+              "name": "sauce pan",
+              "localizedName": "sauce pan",
+              "image": "sauce-pan.jpg"
+            }
+          ],
+          "length": {
+            "number": 20,
+            "unit": "minutes"
+          }
+        },
+        {
+          "number": 2,
+          "step": "Serve warm, at room temperature, cooled, or freeze until needed.",
+          "ingredients": [],
+          "equipment": []
+        }
+      ]
+    }
+  ],
+  "originalId": null,
+  "spoonacularSourceUrl": "https://spoonacular.com/south-indian-tomato-chutney-716000"
+}

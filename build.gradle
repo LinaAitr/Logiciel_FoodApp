@@ -36,8 +36,8 @@ repositories {
 }
 
 dependencies {
-    
 
+    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
     implementation 'org.kordamp.ikonli:ikonli-javafx:11.1.0'
     implementation 'org.kordamp.ikonli:ikonli-fontawesome5-pack:11.1.0'
     implementation 'org.kordamp.ikonli:ikonli-material-pack:11.1.0'
@@ -46,9 +46,10 @@ dependencies {
 
     testImplementation "org.junit.jupiter:junit-jupiter-api:5.4.0"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.4.0"
-
+    //testImplementation 'com.jayway.jsonpath:json-path:2.1.0'
     testImplementation "org.testfx:testfx-junit5:4.0.15-alpha"
     testRuntimeOnly "org.testfx:openjfx-monocle:jdk-11+26"
+    implementation 'com.google.code.gson:gson:2.8.5'
 }
 
 task(runCLI, dependsOn: 'classes', type: JavaExec) {
