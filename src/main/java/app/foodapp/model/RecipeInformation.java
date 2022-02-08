@@ -12,51 +12,37 @@ import java.util.Map;
 
 public class RecipeInformation {
 
-        public static void main(String[] args) {
+    public static void main(String[] args) {
 
-            JSONParser jsonP = new JSONParser();
-            try {
+        JSONParser jsonP = new JSONParser();
+        try {
+            JSONObject jsonO = (JSONObject)jsonP.parse(new FileReader("fichiers json/recipeInformation.json"));
+            String title =  (String) jsonO.get("title");
+            String summary = (String) jsonO.get("summary");
+            String sourceUrl = (String) jsonO.get("sourceUrl");
+            System.out.println("title: "+ title);
+            System.out.println("sourceUrl: "+ sourceUrl);
+            System.out.println("summary: "+ summary);
 
-                JSONObject jsonp = (JSONObject)jsonP.parse(new FileReader("fichiers json/findByIngredients.json"));
-                JSONArray listOfStates = (JSONArray) jsonp.get(jsonp);
-                Iterator iterator = listOfStates.iterator();
-                while (iterator.hasNext()) {
-                    Iterator<Map.Entry> itr1 = ((Map) iterator.next()).entrySet().iterator();
-                    while (itr1.hasNext()) {
-                        Map.Entry pair = itr1.next();
-                        System.out.println(pair.getKey() + " : " + pair.getValue());
-                    }
+
+            JSONArray listOfStates = (JSONArray) jsonO.get("extendedIngredients");
+
+            Iterator iterator = listOfStates.iterator();
+            while (iterator.hasNext()) {
+                Iterator<Map.Entry> itr1 = ((Map) iterator.next()).entrySet().iterator();
+                while (itr1.hasNext()) {
+                    Map.Entry pair = itr1.next();
+                    System.out.println(pair.getKey() + " : " + pair.getValue());
                 }
-                /*JSONObject jsonO = (JSONObject)jsonP.parse(new FileReader("fichiers json/findByIngredients.json"));
-                String title =  (String) jsonO.get("likes");
-                String summary = (String) jsonO.get("summary");
-                String sourceUrl = (String) jsonO.get("sourceUrl");
-                System.out.println("title: "+ title);
-                System.out.println("sourceUrl: "+ sourceUrl);
-                System.out.println("summary: "+ summary);
-
-
-                JSONArray listOfStates = (JSONArray) jsonO.get("extendedIngredients");
-
-                Iterator iterator = listOfStates.iterator();
-                while (iterator.hasNext()) {
-                    Iterator<Map.Entry> itr1 = ((Map) iterator.next()).entrySet().iterator();
-                    while (itr1.hasNext()) {
-                        Map.Entry pair = itr1.next();
-                        System.out.println(pair.getKey() + " : " + pair.getValue());
-                    }
-                }*/
-
-               // while (iterator.hasNext()) {
-                  //  System.out.println(iterator.next());
-             //   }
-            } catch (IOException | ParseException e) {
-                e.printStackTrace();
             }
 
+            // while (iterator.hasNext()) {
+            //  System.out.println(iterator.next());
+            //   }
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
         }
+
     }
-
-
-
+}
 
