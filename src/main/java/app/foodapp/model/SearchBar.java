@@ -1,25 +1,45 @@
 package app.foodapp.model;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+import java.io.FileReader;
 import java.util.Scanner;
 
 public class SearchBar {
 
     public static String search(Scanner scanner){ // renvoi peut etre une liste ou un object
         String result = "";
-        String scannerMessage = scanner.next(); // modifié pour mettre nextLine() et donc boucle while hasNext ..
+        JSONParser jsonP = new JSONParser();
+        String scannerMessage = scanner.nextLine(); // modifié pour mettre nextLine() et donc boucle while hasNext ..
 
         if(scannerMessage.equals("apple") ){
-            result = "apple"; // appeler methode qui renvoi les noms des plats, (list1)
+            JSONObject jsonO = (JSONObject)jsonP.parse(new FileReader("fichiers json/findByIngredients.json"));
+            RecipeInformations recipeInformations = new RecipeInformations(jsonO);
+            //result = "apple"; // appeler methode qui renvoi les noms des plats, (list1)
+            result = recipeInformations.getTitle();
         }
 
         else if(scannerMessage.equals("vegan")){
-            result ="vegan"; // appeler methode qui renvoi les noms des plats, (list2)
+            JSONObject jsonO = (JSONObject)jsonP.parse(new FileReader("fichiers json/recipeInformation.json"));
+            RecipeInformations recipeInformations = new RecipeInformations(jsonO);
+            //result ="vegan"; // appeler methode qui renvoi les noms des plats, (list2)
+            result = recipeInformations.getTitle();
         }
-        else {result ="Sorry, I can't do anything yet ! (Read: /*+ scanner.nextLine() +*/)";
+
+        if(scannerMessage.equals("favorite") ){
+            JSONObject jsonO = (JSONObject)jsonP.parse(new FileReader("fichiers json/recipeInformation.json"));
+            RecipeInformations recipeInformations = new RecipeInformations(jsonO);
+            result = recipeInformations.getTitle();
+            jsonO = (JSONObject)jsonP.parse(new FileReader("fichiers json/findByIngredients.json"));
+            recipeInformations = new RecipeInformations(jsonO);
+            result += '\n' + recipeInformations.getTitle();
+        }
+
+        else {
+            result ="Sorry, I can't do anything yet ! (Read: /*+ scanner.nextLine() +*/)";
         }
         return result;
-
-    }
 
     public static void selectRecipe(Scanner scanner){
         String scMessage = scanner.nextLine();
