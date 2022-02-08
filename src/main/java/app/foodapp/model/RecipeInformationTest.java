@@ -8,7 +8,7 @@ import org.json.simple.parser.ParseException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class RecipeInformation {
+public class RecipeInformationTest {
 
     public static void main(String[] args) {
 
