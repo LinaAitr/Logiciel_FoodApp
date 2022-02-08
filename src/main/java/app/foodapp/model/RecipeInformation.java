@@ -16,8 +16,19 @@ public class RecipeInformation {
 
             JSONParser jsonP = new JSONParser();
             try {
-                JSONObject jsonO = (JSONObject)jsonP.parse(new FileReader("fichiers json/recipeInformation.json"));
-                String title =  (String) jsonO.get("title");
+
+                JSONObject jsonp = (JSONObject)jsonP.parse(new FileReader("fichiers json/findByIngredients.json"));
+                JSONArray listOfStates = (JSONArray) jsonp.get(jsonp);
+                Iterator iterator = listOfStates.iterator();
+                while (iterator.hasNext()) {
+                    Iterator<Map.Entry> itr1 = ((Map) iterator.next()).entrySet().iterator();
+                    while (itr1.hasNext()) {
+                        Map.Entry pair = itr1.next();
+                        System.out.println(pair.getKey() + " : " + pair.getValue());
+                    }
+                }
+                /*JSONObject jsonO = (JSONObject)jsonP.parse(new FileReader("fichiers json/findByIngredients.json"));
+                String title =  (String) jsonO.get("likes");
                 String summary = (String) jsonO.get("summary");
                 String sourceUrl = (String) jsonO.get("sourceUrl");
                 System.out.println("title: "+ title);
@@ -34,7 +45,7 @@ public class RecipeInformation {
                         Map.Entry pair = itr1.next();
                         System.out.println(pair.getKey() + " : " + pair.getValue());
                     }
-                }
+                }*/
 
                // while (iterator.hasNext()) {
                   //  System.out.println(iterator.next());
