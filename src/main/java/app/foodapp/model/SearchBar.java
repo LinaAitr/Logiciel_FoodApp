@@ -16,14 +16,12 @@ public class SearchBar {
         if(scannerMessage.equals("apple") ){
             JSONObject jsonO = (JSONObject)jsonP.parse(new FileReader("fichiers json/findByIngredients.json"));
             RecipeInformations recipeInformations = new RecipeInformations(jsonO);
-            //result = "apple"; // appeler methode qui renvoi les noms des plats, (list1)
             result = recipeInformations.getTitle();
         }
 
         else if(scannerMessage.equals("vegan")){
             JSONObject jsonO = (JSONObject)jsonP.parse(new FileReader("fichiers json/recipeInformation.json"));
             RecipeInformations recipeInformations = new RecipeInformations(jsonO);
-            //result ="vegan"; // appeler methode qui renvoi les noms des plats, (list2)
             result = recipeInformations.getTitle();
         }
 
@@ -31,9 +29,6 @@ public class SearchBar {
             JSONObject jsonO = (JSONObject)jsonP.parse(new FileReader("fichiers json/recipeInformation.json"));
             RecipeInformations recipeInformations = new RecipeInformations(jsonO);
             result = recipeInformations.getTitle();
-            jsonO = (JSONObject)jsonP.parse(new FileReader("fichiers json/findByIngredients.json"));
-            recipeInformations = new RecipeInformations(jsonO);
-            result += '\n' + recipeInformations.getTitle();
         }
 
         else {
