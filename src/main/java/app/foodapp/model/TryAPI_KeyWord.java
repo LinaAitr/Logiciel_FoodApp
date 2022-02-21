@@ -9,9 +9,9 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.Scanner;
+
+import static java.lang.String.valueOf;
 
 public class TryAPI_KeyWord {
     public static void main(String[] args) throws IOException {
@@ -24,7 +24,7 @@ public class TryAPI_KeyWord {
             pour plusieurs ",+" entre les ingredients
             */
 
-            URL url = new URL("https://api.spoonacular.com/recipes/complexSearch?apiKey=ab7c3f5a18a04dd8903bc5fdb0be40e9&query=apple");
+            URL url = new URL("https://api.spoonacular.com/recipes/complexSearch?apiKey=30ca87269ac8432c8130d7bef6ae2e49&query=apple");
 
             HttpURLConnection conn =(HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
@@ -46,29 +46,31 @@ public class TryAPI_KeyWord {
                 scanner.close();
 
 
-                //System.out.println(informationString);
 
                 JSONParser parse = new JSONParser();
-                JSONArray dataObject = (JSONArray) parse.parse(String.valueOf(informationString));
+                JSONObject jsonO = (JSONObject)parse.parse(String.valueOf(informationString));
 
-                //***********************************************
-                Iterator iterator = dataObject.iterator();
-                while (iterator.hasNext()) {
-                    Iterator<Map.Entry> itr1 = ((Map) iterator.next()).entrySet().iterator();
-                    while (itr1.hasNext()) {
-                        Map.Entry pair = itr1.next();
-                        System.out.println(pair.getKey() + " : " + pair.getValue());
-                    }
+
+                JSONArray listOfStates = (JSONArray) jsonO.get("results");
+                System.out.println(jsonO.get("results"));
+                JSONArray a = (JSONArray) listOfStates;
+                for (Object o : a)
+                {
+                    JSONObject person = (JSONObject) o;
+                    String name = (String) person.get("title");
+                    String id = valueOf(person.get("id"));
+
+                    System.out.println(name);
+                    System.out.println(id);
+
+
+
+
                 }
 
-                //**************************************************
-                //System.out.println(dataObject.get(0));
-                for (int i=0; i<dataObject.size();i++){
-                    JSONObject recipeData = (JSONObject) dataObject.get(i);
-                    System.out.print(i+"-");
-                    System.out.println(recipeData.get("title"));
-                }
+
             }
+
 
 
         } catch (MalformedURLException | ParseException e) {

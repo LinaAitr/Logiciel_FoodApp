@@ -1,6 +1,5 @@
 package app.foodapp.model;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -11,7 +10,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 
-public class TryAPI {
+public class TryAPI_RecipeInfo {
+
+
 
     public static void main(String[] args) throws IOException {
 
@@ -20,11 +21,10 @@ public class TryAPI {
             /* apiKey: ab7c3f5a18a04dd8903bc5fdb0be40e9
             pour ingredient
             url : url donné +"?apiKey=ab7c3f5a18a04dd8903bc5fdb0be40e9&" et "ingredients=" et ingredient
-            cle de sooooo : 30ca87269ac8432c8130d7bef6ae2e49
             pour plusieurs ",+" entre les ingredients
             */
 
-            URL url = new URL("https://api.spoonacular.com/recipes/findByIngredients?apiKey=30ca87269ac8432c8130d7bef6ae2e49&ingredients=apple");
+            URL url = new URL("https://api.spoonacular.com/recipes/632577/information?apiKey=ab7c3f5a18a04dd8903bc5fdb0be40e9&");
 
             HttpURLConnection conn =(HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
@@ -48,14 +48,12 @@ public class TryAPI {
                 //System.out.println(informationString);
 
                 JSONParser parse = new JSONParser();
-                JSONArray dataObject = (JSONArray) parse.parse(String.valueOf(informationString));
+                JSONObject dataObject = (JSONObject) parse.parse(String.valueOf(informationString));
+                String title =  (String) dataObject.get("title");
+                System.out.println("summary: "+ title);
 
-                //System.out.println(dataObject.get(0));
-                for (int i=0; i<dataObject.size();i++){
-                    JSONObject recipeData = (JSONObject) dataObject.get(i);
-                    System.out.print(i+"-");
-                    System.out.println(recipeData.get("title"));
-                }
+
+
 
 
             }
@@ -66,3 +64,5 @@ public class TryAPI {
         }
     }
 }
+
+
