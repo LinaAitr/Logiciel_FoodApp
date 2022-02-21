@@ -8,12 +8,13 @@ import org.json.simple.parser.ParseException;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.util.Scanner;
 
 public class TryAPI {
 
-    public static void main(String[] args) throws IOException {
+    public static void SearchByIngredient(String ingredient){
 
         try {
 
@@ -24,7 +25,7 @@ public class TryAPI {
             pour plusieurs ",+" entre les ingredients
             */
 
-            URL url = new URL("https://api.spoonacular.com/recipes/findByIngredients?apiKey=30ca87269ac8432c8130d7bef6ae2e49&ingredients=apple");
+            URL url = new URL("https://api.spoonacular.com/recipes/findByIngredients?apiKey=30ca87269ac8432c8130d7bef6ae2e49&ingredients="+ingredient);
 
             HttpURLConnection conn =(HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
@@ -62,6 +63,10 @@ public class TryAPI {
 
 
         } catch (MalformedURLException | ParseException e) {
+            e.printStackTrace();
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

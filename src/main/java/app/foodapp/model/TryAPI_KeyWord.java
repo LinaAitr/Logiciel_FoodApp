@@ -8,14 +8,14 @@ import org.json.simple.parser.ParseException;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.util.Scanner;
 
 import static java.lang.String.valueOf;
 
 public class TryAPI_KeyWord {
-    public static void main(String[] args) throws IOException {
-
+    public static void SearchByKey(String key){
         try {
 
             /* apiKey: ab7c3f5a18a04dd8903bc5fdb0be40e9
@@ -24,7 +24,7 @@ public class TryAPI_KeyWord {
             pour plusieurs ",+" entre les ingredients
             */
 
-            URL url = new URL("https://api.spoonacular.com/recipes/complexSearch?apiKey=30ca87269ac8432c8130d7bef6ae2e49&query=apple");
+            URL url = new URL("https://api.spoonacular.com/recipes/complexSearch?apiKey=30ca87269ac8432c8130d7bef6ae2e49&query="+key);
 
             HttpURLConnection conn =(HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
@@ -74,6 +74,10 @@ public class TryAPI_KeyWord {
 
 
         } catch (MalformedURLException | ParseException e) {
+            e.printStackTrace();
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
