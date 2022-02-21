@@ -39,7 +39,7 @@ public class RecipeInformations {
         return usedIngredientCount;
     }
 
-    public String getmissedIngredientCount(){
+    public String getMissedIngredientCount(){
         this.missedIngredientCount = valueOf(recipeObj.get("missedIngredientCount"));
         return missedIngredientCount;
     }
@@ -51,12 +51,12 @@ public class RecipeInformations {
     public void MissedIngredients(){
 
         JSONArray missedIngredients = (JSONArray) recipeObj.get("missedIngredients");
-        System.out.println("Ingridients : ");
+        System.out.println("Ingredients : ");
         for (Object Ingredients : missedIngredients){
             JSONObject missedIngredientsObj = (JSONObject) Ingredients;
-            UsedIngredients newmissedIngredients= new UsedIngredients(missedIngredientsObj);
-            //System.out.println("Ingridients id : " + newmissedIngredients.getID());
-            System.out.println("-"+newmissedIngredients.getName());
+            UsedIngredients newMissedIngredients= new UsedIngredients(missedIngredientsObj);
+            //System.out.println("Ingredients id : " + newMissedIngredients.getID());
+            System.out.println("-"+newMissedIngredients.getName());
 
         }
 

@@ -34,18 +34,7 @@ public class RecipeInformationTest {
                 System.out.println("likes: " + newRecipe.getLikes());
                 newRecipe.MissedIngredients();
 
-
-
-
-
             }*/
-
-
-
-
-
-
-
 
             JSONObject jsonO = (JSONObject)jsonP.parse(new FileReader("fichiers json/recipeInformation.json"));
             String title =  (String) jsonO.get("title");
