@@ -7,6 +7,8 @@ import org.json.simple.parser.ParseException;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.Map;
 
 public class RecipeInformationTest {
 
@@ -15,7 +17,7 @@ public class RecipeInformationTest {
         JSONParser jsonP = new JSONParser();
         try {
 
-            JSONArray arrayOfRecipes = (JSONArray) jsonP.parse(new FileReader("fichiers json/findByIngredients.json"));
+           /* JSONArray arrayOfRecipes = (JSONArray) jsonP.parse(new FileReader("fichiers json/findByIngredients.json"));
 
             for (Object recipe : arrayOfRecipes)
             {
@@ -36,16 +38,16 @@ public class RecipeInformationTest {
 
 
 
-            }
+            }*/
 
 
 
 
 
 
-            /*
 
-            JSONObject jsonO = (JSONObject)jsonP.parse(new FileReader("fichiers json/findByIngredients.json"));
+
+            JSONObject jsonO = (JSONObject)jsonP.parse(new FileReader("fichiers json/recipeInformation.json"));
             String title =  (String) jsonO.get("title");
             String summary = (String) jsonO.get("summary");
             String sourceUrl = (String) jsonO.get("sourceUrl");
@@ -63,7 +65,7 @@ public class RecipeInformationTest {
                     Map.Entry pair = itr1.next();
                     System.out.println(pair.getKey() + " : " + pair.getValue());
                 }
-            }*/
+            }
 
             // while (iterator.hasNext()) {
             //  System.out.println(iterator.next());
