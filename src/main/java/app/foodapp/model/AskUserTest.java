@@ -17,6 +17,11 @@ public class AskUserTest {
             System.out.println("Please, give us your key !");
             String key = saisieUtilisateur.next();
             TryAPI_KeyWord.SearchByKey(key);
+            System.out.println("Do you want to know more about one this recipes? juste give us the id !");
+            System.out.print("id :");
+            int id = saisieUtilisateur.nextInt();
+            TryAPI_RecipeInfo.SearchById(id);
+
         }
         else{
             System.out.println("Please, give us your ingredient !");
@@ -33,8 +38,9 @@ public class AskUserTest {
             while (answer == 1){
                 AskUser();
                 System.out.println("Do you want to search again ? y/n");
-            }
+                answer = saisieUtilisateur.nextInt();
 
+            }
 
 
 

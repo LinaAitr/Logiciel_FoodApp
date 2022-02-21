@@ -7,14 +7,15 @@ import org.json.simple.parser.ParseException;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.util.Scanner;
+import static java.lang.String.valueOf;
+
 
 public class TryAPI_RecipeInfo {
 
-
-
-    public static void main(String[] args) throws IOException {
+        public static void SearchById(int id){
 
         try {
 
@@ -24,7 +25,7 @@ public class TryAPI_RecipeInfo {
             pour plusieurs ",+" entre les ingredients
             */
 
-            URL url = new URL("https://api.spoonacular.com/recipes/632577/information?apiKey=ab7c3f5a18a04dd8903bc5fdb0be40e9&");
+            URL url = new URL("https://api.spoonacular.com/recipes/"+id+"/information?apiKey=30ca87269ac8432c8130d7bef6ae2e49");
 
             HttpURLConnection conn =(HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
@@ -49,20 +50,32 @@ public class TryAPI_RecipeInfo {
 
                 JSONParser parse = new JSONParser();
                 JSONObject dataObject = (JSONObject) parse.parse(String.valueOf(informationString));
+                String readyInMinutes =  valueOf(dataObject.get("readyInMinutes"));
+                String servings =  valueOf(dataObject.get("servings"));
+
                 String title =  (String) dataObject.get("title");
-                System.out.println("summary: "+ title);
+                String sourceUrl =  (String) dataObject.get("sourceUrl");
+                String summary =  (String) dataObject.get("summary");
 
 
 
-
+                System.out.println("Title: "+ title);
+                System.out.print("This will be ready in: "+ readyInMinutes+" mn");
+                System.out.println(" for : "+ servings +" people");
+                System.out.println("sourceUrl: "+ sourceUrl);
+                System.out.println("summary : "+ summary);
 
             }
 
 
         } catch (MalformedURLException | ParseException e) {
             e.printStackTrace();
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-    }
+        }
 }
 
 
