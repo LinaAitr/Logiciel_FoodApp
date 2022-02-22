@@ -36,7 +36,7 @@ public class RequestAPI {
 
     public static boolean SearchByIngredient(String ingredient) throws IOException {
         try {
-            URL URL = new URL("https://api.spoonacular.com/recipes/findByIngredients?apiKey=30ca87269ac8432c8130d7bef6ae2e49&ingredients="+ingredient);
+            URL URL = new URL("https://api.spoonacular.com/recipes/findByIngredients?apiKey=30ca87269ac8432c8130d7bef6ae2e49&ingredients="+ingredient+"&number=20");
             JSONParser  parse = new JSONParser();
             JSONArray dataObject = (JSONArray) parse.parse(String.valueOf(ConnectAPI(URL)));
 
@@ -62,7 +62,7 @@ public class RequestAPI {
 
     public static boolean SearchByKey(String key){
         try {
-            URL URL = new URL("https://api.spoonacular.com/recipes/complexSearch?apiKey=30ca87269ac8432c8130d7bef6ae2e49&query="+key);
+            URL URL = new URL("https://api.spoonacular.com/recipes/complexSearch?apiKey=30ca87269ac8432c8130d7bef6ae2e49&query="+key+"&number=20");
             JSONParser parse = new JSONParser();
             JSONObject jsonO = (JSONObject)parse.parse(String.valueOf(ConnectAPI(URL)));
 
