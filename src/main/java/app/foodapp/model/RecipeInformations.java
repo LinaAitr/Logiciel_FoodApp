@@ -6,13 +6,6 @@ import org.json.simple.JSONObject;
 import static java.lang.String.valueOf;
 
 public class RecipeInformations {
-    //declaration of variables
-    private String id;
-    private String title;
-    private String image;
-    private String usedIngredientCount;
-    private String missedIngredientCount;
-    private String likes;
     JSONObject recipeObj;
 
     public  RecipeInformations (JSONObject recipeObj ){
@@ -20,43 +13,37 @@ public class RecipeInformations {
     }
 
     public String getTitle(){
-        this.title = (String) recipeObj.get("title");
-     return title;
+        return (String) recipeObj.get("title");
     }
 
     public String getImage(){
-        this.image = (String) recipeObj.get("image");
-        return image;
+        return (String) recipeObj.get("image");
     }
 
     public String getId(){
-        this.id = valueOf(recipeObj.get("id"));
-        return id;
+        return valueOf(recipeObj.get("id"));
     }
 
     public String getUsedIngredientCount(){
-        this.usedIngredientCount = valueOf(recipeObj.get("usedIngredientCount"));
-        return usedIngredientCount;
+        return valueOf(recipeObj.get("usedIngredientCount"));
     }
 
-    public String getmissedIngredientCount(){
-        this.missedIngredientCount = valueOf(recipeObj.get("missedIngredientCount"));
-        return missedIngredientCount;
+    public String getMissedIngredientCount(){
+        return valueOf(recipeObj.get("missedIngredientCount"));
     }
 
     public String getLikes(){
-        this.likes = valueOf(recipeObj.get("likes"));
-        return likes;
+        return valueOf(recipeObj.get("likes"));
     }
     public void MissedIngredients(){
 
         JSONArray missedIngredients = (JSONArray) recipeObj.get("missedIngredients");
-        System.out.println("Ingridients : ");
+        System.out.println("Ingredients : ");
         for (Object Ingredients : missedIngredients){
             JSONObject missedIngredientsObj = (JSONObject) Ingredients;
-            UsedIngredients newmissedIngredients= new UsedIngredients(missedIngredientsObj);
-            //System.out.println("Ingridients id : " + newmissedIngredients.getID());
-            System.out.println("-"+newmissedIngredients.getName());
+            UsedIngredients newMissedIngredients= new UsedIngredients(missedIngredientsObj);
+            //System.out.println("Ingredients id : " + newMissedIngredients.getID());
+            System.out.println("-"+newMissedIngredients.getName());
 
         }
 
