@@ -6,13 +6,11 @@ import static java.lang.String.valueOf;
 
 public class UsedIngredients {
 
-        private String id ;
         private String amount;
         private String unit;
         private String unitLong;
         private String unitShort;
         private String aisle;
-        private String name;
         private String original;
         private String originalString;
         private String originalName;
@@ -24,11 +22,9 @@ public class UsedIngredients {
         }
 
         public String getID(){
-                this.id = valueOf(missedIngredientsObj.get("id"));
-                return id;
+                return valueOf(missedIngredientsObj.get("id"));
         }
         public String getName(){
-                this.name = valueOf(missedIngredientsObj.get("name"));
-                return name;
+                return valueOf(missedIngredientsObj.get("name"));
         }
 }

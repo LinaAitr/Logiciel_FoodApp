@@ -7,8 +7,6 @@ import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.util.Scanner;
 
@@ -36,51 +34,58 @@ public class RequestAPI {
         return informationString;
     }
 
-    public static void SearchByIngredient(String ingredient) throws IOException {
+    public static boolean SearchByIngredient(String ingredient) throws IOException {
         try {
             URL URL = new URL("https://api.spoonacular.com/recipes/findByIngredients?apiKey=30ca87269ac8432c8130d7bef6ae2e49&ingredients="+ingredient);
             JSONParser  parse = new JSONParser();
             JSONArray dataObject = (JSONArray) parse.parse(String.valueOf(ConnectAPI(URL)));
 
-            for (int i=0; i<dataObject.size();i++){
-                JSONObject recipeData = (JSONObject) dataObject.get(i);
-                System.out.print(i+"-");
-                System.out.println(recipeData.get("title"));
+            if (dataObject.isEmpty()){
+                System.out.println("No recipe found !");
+                return false;
             }
-        } catch (MalformedURLException | ParseException e) {
-            e.printStackTrace();
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+            else{
+                for (int i=0; i<dataObject.size();i++){
+                    JSONObject recipeData = (JSONObject) dataObject.get(i);
+                    System.out.print(i+"-");
+                    System.out.println(recipeData.get("title"));
+                    System.out.println(recipeData.get("id"));
+                }
+            }
+        } catch (ParseException | IOException e) {
             e.printStackTrace();
         }
+        return true;
     }
 
 
 
-    public static void SearchByKey(String key){
+    public static boolean SearchByKey(String key){
         try {
             URL URL = new URL("https://api.spoonacular.com/recipes/complexSearch?apiKey=30ca87269ac8432c8130d7bef6ae2e49&query="+key);
             JSONParser parse = new JSONParser();
             JSONObject jsonO = (JSONObject)parse.parse(String.valueOf(ConnectAPI(URL)));
 
-            JSONArray listOfStates = (JSONArray) jsonO.get("results");
-            System.out.println(jsonO.get("results"));
-            JSONArray a = (JSONArray) listOfStates;
-            for (Object o : a) {
-                JSONObject person = (JSONObject) o;
-                String name = (String) person.get("title");
-                String id = valueOf(person.get("id"));
-                System.out.println(name);
-                System.out.println(id);
+            JSONArray resultRecipes = (JSONArray) jsonO.get("results");
+
+            if (resultRecipes.isEmpty()) {
+                System.out.println("No recipe found !");
+                return false;
             }
-        } catch (MalformedURLException | ParseException e) {
-            e.printStackTrace();
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+            else{
+                for (Object recipe : resultRecipes) {
+                    JSONObject person = (JSONObject) recipe;
+                    String name = (String) person.get("title");
+                    String id = valueOf(person.get("id"));
+                    System.out.println(name);
+                    System.out.println(id);
+                }
+            }
+
+        } catch (ParseException | IOException e) {
             e.printStackTrace();
         }
+        return true;
     }
 
     public static void SearchById(int id){
@@ -99,11 +104,7 @@ public class RequestAPI {
             System.out.println("sourceUrl: "+ sourceUrl);
             System.out.println("summary : "+ summary);
 
-        } catch (MalformedURLException | ParseException e) {
-            e.printStackTrace();
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (ParseException | IOException e) {
             e.printStackTrace();
         }
     }
