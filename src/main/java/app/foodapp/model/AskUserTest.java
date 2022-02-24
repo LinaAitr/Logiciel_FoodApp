@@ -1,9 +1,11 @@
 package app.foodapp.model;
+import org.json.simple.parser.ParseException;
+
 import java.io.IOException;
 import java.util.Scanner;
 
 public class AskUserTest {
-    public static void AskUser() throws IOException {
+    public static void AskUser() throws IOException, ParseException {
         Scanner inputUser = new Scanner(System.in);
         System.out.println("Put 1 for a query search / put 2 for an ingredient search");
         int choice = inputUser.nextInt();
@@ -31,14 +33,26 @@ public class AskUserTest {
         }
     }
 
-    private static void recipeInfoByID(Scanner inputUser) {
+    private static void recipeInfoByID(Scanner inputUser) throws IOException, ParseException {
         System.out.println("Do you want to know more about one this recipes? just give us the number !");
         System.out.print("Number : ");
         int index = inputUser.nextInt();
-        RecipeInformations.SearchById(RequestAPI.idList.get(index));
+        RecipeInformations recipe = new  RecipeInformations(RequestAPI.idList.get(index));
+        RecipeInformations.SearchById(recipe);
+        System.out.print("Do you want to add to favorite ?  1 for yes / 2 for no");
+        int answ = inputUser.nextInt();
+        while (answ != 1 && answ!=2){
+            System.out.print("Do you want to add to favorite ?  1 for yes / 2 for no");
+            answ = inputUser.nextInt();
+        }
+        if (answ==1){
+            FavoriteRecipes.FillFile(recipe.getTitle());
+        }
+
+
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ParseException {
         AskUser();
         Scanner inputUser = new Scanner(System.in);
         System.out.println("Do you want to search again ? 1 for yes / 2 for no");
