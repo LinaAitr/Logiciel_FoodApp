@@ -35,7 +35,7 @@ public class AskUserTest {
         System.out.println("Do you want to know more about one this recipes? just give us the number !");
         System.out.print("Number : ");
         int index = inputUser.nextInt();
-        RequestById.SearchById(RequestAPI.idList.get(index));
+        RecipeInformations.SearchById(RequestAPI.idList.get(index));
     }
 
     public static void main(String[] args) throws IOException {
