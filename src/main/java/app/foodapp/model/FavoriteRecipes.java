@@ -48,12 +48,12 @@ public class FavoriteRecipes {
 
     static ArrayList<String> nameList= new ArrayList<>();
 
-    public static boolean ShowFavorites(String code) throws IOException, ParseException {
+    public static Object ShowFavorites(String code) throws IOException, ParseException {
 
 
     String fileName = "Favorites.json";
     boolean containsValue= false;
-    int j=0;
+    int j=-1;
     File f = new File(fileName);
     f.createNewFile();
     if (f.isFile()) {
@@ -65,20 +65,20 @@ public class FavoriteRecipes {
                     if (favoriteRecipe.get(code)!=null){
                         containsValue=true;
                         nameList.add((String) favoriteRecipe.get(code));
-                        System.out.print(j+" )");
                         j++;
+                        System.out.print(j+" )");
                         System.out.println(favoriteRecipe.get(code));
                     }
                 }
           if (!containsValue)  System.out.println("Nothing to show");
-
 
     }
         else System.out.println("Nothing to show");
 
     }
 
- return containsValue;
+    Object infos[] = new Object[]{j,containsValue};
+        return infos;
     }
 
 

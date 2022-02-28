@@ -11,22 +11,21 @@ public class AskUserTest {
         int choice = inputUser.nextInt();
 
         while (choice != 1 && choice!=2 && choice!=3){
-            System.out.println("Put 1 for a query search / put 2 for an ingredient search");
+            System.out.println("Put 1 for a query search / put 2 for an ingredient search / Put 3 to show your favorites");
             choice = inputUser.nextInt();
         }
-
         if (choice == 1){
             System.out.println("Please, give us your key word !");
             String keyWord = inputUser.next();
-           if (RequestAPI.SearchByKey(keyWord)){
+            if (RequestAPI.SearchByKey(keyWord)){
                recipeInfoByID(inputUser);
            }
-
         }
+
         else if (choice == 2){
             System.out.println("Please, give us your ingredient !");
             String ingredient = inputUser.next();
-            if (RequestAPI.SearchByIngredient(ingredient) ) {
+            if (RequestAPI.SearchByIngredient(ingredient)) {
                 recipeInfoByID(inputUser);
             }
 
@@ -34,8 +33,10 @@ public class AskUserTest {
          else{
             System.out.println("What is you code ?");
             String code = inputUser.next();
-           boolean favoritesIsNotEmpty= FavoriteRecipes.ShowFavorites(code);
-           if (favoritesIsNotEmpty){
+           Object favoritesDetails[]= (Object[]) FavoriteRecipes.ShowFavorites(code);
+           Boolean favoritesIsNotEmpty= (Boolean) favoritesDetails[1];
+           int numberOfFavorites= (int) favoritesDetails[0];
+            if (favoritesIsNotEmpty){
                System.out.println("Do you want yo delete something ? 1 for no / 2 for no");
                int number = inputUser.nextInt();
                while (number != 1 && number!=2 ){
@@ -45,15 +46,18 @@ public class AskUserTest {
                if (number==2) AskUser();
                else
                {
-                   System.out.println("Choose a numver from your favorites recipes ");
+                   System.out.println("Choose a number from your favorites recipes ");
                    int numberFav = inputUser.nextInt();
+                   System.out.println(numberOfFavorites);
+                   while (0>numberFav || numberFav>numberOfFavorites){
+                       System.out.println("Choose a number from your favorites recipes ");
+                       numberFav = inputUser.nextInt();
+                   }
                    FavoriteRecipes.DeleteFavorite(code,numberFav);
                }
 
 
            }
-
-
 
         }
     }
