@@ -32,7 +32,6 @@ public class  FoodAppController implements Initializable {
     @FXML private Label label;
     @FXML private Label recipes;
 
-
     //    @Override
     public void initialize(URL location, ResourceBundle resourceBundle) {
         searchBar.setAlignment(Pos.TOP_CENTER);
@@ -88,8 +87,15 @@ public class  FoodAppController implements Initializable {
         recipes.setText(ShowRecipes.showRecipe(searchBar.getText()));
     }
 
-//    @FXML
-//    private void recipe() throws IOException, ParseException {
-//        recipes.setText(ShowRecipes.showRecipe(searchBar.getText()));
-//    }
+    @FXML
+    private void recipe() throws IOException, ParseException {
+        String charOfRecipe = ShowRecipes.showRecipe(searchBar.getText());
+        for(int i =0; i< charOfRecipe.length(); i++){
+            Hyperlink link = new Hyperlink();
+            link.setText(charOfRecipe[i]);
+
+        }
+        recipes.setText();
+    }
+
 }

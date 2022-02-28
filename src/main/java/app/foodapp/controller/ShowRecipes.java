@@ -6,7 +6,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import javax.security.auth.kerberos.KerberosKey;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -23,7 +22,6 @@ public class ShowRecipes {
         Scanner word = new Scanner(keyWord);
         return SearchByIngredient(keyWord);
 
-
     }
     public static String SearchByIngredient(String ingredient) throws IOException {
         String result = "";
@@ -39,7 +37,7 @@ public class ShowRecipes {
                 return result;
             }
             else{
-                for (int i=1; i<dataObject.size();i++){
+                for (int i=0; i<dataObject.size();i++){
                     JSONObject recipeData = (JSONObject) dataObject.get(i);
                     String id = valueOf(recipeData.get("id"));
                      result = result + i+"-" +
