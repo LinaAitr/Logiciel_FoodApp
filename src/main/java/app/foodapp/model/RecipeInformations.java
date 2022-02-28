@@ -10,9 +10,9 @@ import java.net.URL;
 
 public class RecipeInformations {
     JSONObject recipeObj;
-    public static String APIKey = "ab7c3f5a18a04dd8903bc5fdb0be40e9";
-   // public static String APIKey = "30ca87269ac8432c8130d7bef6ae2e49";
-    //public static String APIKey = "4e944d67e59d4271b4181168f3535444";
+    //public static String APIKey = "ab7c3f5a18a04dd8903bc5fdb0be40e9";
+    //public static String APIKey = "30ca87269ac8432c8130d7bef6ae2e49";
+    public static String APIKey = "4e944d67e59d4271b4181168f3535444";
 
 
 
@@ -23,7 +23,6 @@ public class RecipeInformations {
     }
 
     public String getTitle(){
-        System.out.println("title: "+recipeObj.get("title"));
         return (String) recipeObj.get("title");
     }
     public String getSummary(){
@@ -72,13 +71,13 @@ public class RecipeInformations {
 
 
     public static String SearchById(RecipeInformations recipe){
-            return recipe.getTitle() +"\n"+
-            recipe.getSummary() +"\n"+
-            recipe.getReadyInMinutes() +"\n"+
-            recipe.getServings() +"\n"+
-            recipe.getImage() +"\n"+
-            recipe.extendedIngredients() +"\n"+
-            recipe.getInstructions();
+            return recipe.getTitle() +"\n"+"\n"+
+            recipe.getSummary() +"\n"+"\n"+
+            recipe.getReadyInMinutes() +"\n"+"\n"+
+            recipe.getServings() +"\n"+"\n"+
+            recipe.getImage() +"\n"+"\n"+
+            recipe.extendedIngredients() +"\n"+"\n"+
+            recipe.getInstructions()+"\n";
     }
 
 }

@@ -2,6 +2,7 @@ package app.foodapp.model;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 public class AskUserTest {
@@ -33,9 +34,9 @@ public class AskUserTest {
          else{
             System.out.println("What is you code ?");
             String code = inputUser.next();
-           Object favoritesDetails[]= (Object[]) FavoriteRecipes.ShowFavorites(code);
-           Boolean favoritesIsNotEmpty= (Boolean) favoritesDetails[1];
-           int numberOfFavorites= (int) favoritesDetails[0];
+            Object favoritesDetails[]= (Object[]) FavoriteRecipes.ShowFavorites(code);
+            Boolean favoritesIsNotEmpty= (Boolean) favoritesDetails[1];
+            int numberOfFavorites= (int) favoritesDetails[0];
             if (favoritesIsNotEmpty){
                System.out.println("Do you want yo delete something ? 1 for no / 2 for no");
                int number = inputUser.nextInt();
@@ -55,8 +56,6 @@ public class AskUserTest {
                    }
                    FavoriteRecipes.DeleteFavorite(code,numberFav);
                }
-
-
            }
 
         }
@@ -75,13 +74,12 @@ public class AskUserTest {
             answ = inputUser.nextInt();
         }
         if (answ==1){
-           System.out.print("Donez votre Code ! : ");
+           System.out.print("Give your Code ! : ");
            String code = inputUser.next();
-            FavoriteRecipes.FillFile(recipe.getTitle(),code);
+           FavoriteRecipes.FillFile(recipe.getTitle(),code);
         }
-
-
     }
+
 
     public static void main(String[] args) throws IOException, ParseException {
         AskUser();

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class FavoriteRecipes {
 
+    static ArrayList<String> nameList= new ArrayList<>();
 
     public static void FillFile(String FavoriteRecipe,String code) throws IOException, ParseException {
         String fileName = "Favorites.json";
@@ -46,11 +47,7 @@ public class FavoriteRecipes {
        }
     }
 
-    static ArrayList<String> nameList= new ArrayList<>();
-
     public static Object ShowFavorites(String code) throws IOException, ParseException {
-
-
     String fileName = "Favorites.json";
     boolean containsValue= false;
     int j=-1;
@@ -74,7 +71,6 @@ public class FavoriteRecipes {
 
     }
         else System.out.println("Nothing to show");
-
     }
 
     Object infos[] = new Object[]{j,containsValue};
@@ -96,22 +92,17 @@ public class FavoriteRecipes {
                     if (favoriteRecipe.containsKey(code) && favoriteRecipe.containsValue(nameList.get(number))){
                         arrayOfRecipes.remove(favoriteRecipe);
                     }
-                    }
-
+                }
                 FileWriter fw = new FileWriter(fileName);
                 BufferedWriter bw = new BufferedWriter(fw);
                 fw.write(String.valueOf(arrayOfRecipes));
                 bw.newLine();
                 fw.close();
-
-                }
             }
-
-
-
-            }
-
+        }
     }
+
+}
 
 
 
