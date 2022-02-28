@@ -16,7 +16,7 @@ public class RecipeInformations {
 
 
 
-    public  RecipeInformations (String id ) throws IOException, ParseException {
+    public RecipeInformations (String id ) throws IOException, ParseException {
         URL URL = new URL("https://api.spoonacular.com/recipes/"+id+"/information?apiKey="+APIKey);
         JSONParser parse = new JSONParser();
         recipeObj = (JSONObject) parse.parse(String.valueOf(RequestAPI.ConnectAPI(URL)));
