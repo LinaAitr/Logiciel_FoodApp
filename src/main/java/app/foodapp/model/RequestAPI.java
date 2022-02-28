@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static java.lang.String.valueOf;
@@ -21,7 +22,7 @@ public class RequestAPI {
     public static String APIKey = "79f2327aad3240e68f49b7de252cd5fe";
 
 
-    public static StringBuilder ConnectAPI(URL url) throws IOException {
+    public static StringBuilder connectAPI(URL url) throws IOException {
         HttpURLConnection conn =(HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         conn.connect();
@@ -41,72 +42,54 @@ public class RequestAPI {
         return informationString;
     }
 
-    public static boolean SearchByIngredient(String ingredient) throws IOException {
+    public static List<String> searchByIngredient(String ingredient) throws IOException {
         try {
-            boolean recipeFound = false;
-            idList.clear();
-            int numberRecipe=20;
-            URL URL = new URL("https://api.spoonacular.com/recipes/findByIngredients?apiKey="+APIKey+"&ingredients="+ingredient+"&number="+numberRecipe);
-            JSONParser  parse = new JSONParser();
-            JSONArray dataObject = (JSONArray) parse.parse(String.valueOf(ConnectAPI(URL)));
-
-            if (dataObject.isEmpty()){
-                System.out.println("No recipe found !");
-                return recipeFound;
+            JSONArray dataObject = jsonSearchByIngredient(ingredient);
+            List<String> idList = new ArrayList<>();
+            for (int i=0; i<dataObject.size();i++){
+                JSONObject recipeData = (JSONObject) dataObject.get(i);
+                String id = valueOf(recipeData.get("id"));
+                idList.add(id);
             }
-            else{
-                for (int i=0; i<dataObject.size();i++){
-                    JSONObject recipeData = (JSONObject) dataObject.get(i);
-
-                    System.out.print(i+"-");
-                    System.out.println(recipeData.get("title"));
-                    String id = valueOf(recipeData.get("id"));
-                    idList.add(id);
-                }
+            return idList;
             }
-        } catch (ParseException | IOException e) {
-            e.printStackTrace();
+        catch (ParseException parseException) {
+            parseException.printStackTrace();
         }
-
-     return true;
+        return new ArrayList<>();
     }
 
-    static ArrayList<String> idList= new ArrayList<>();
+    public static JSONArray jsonSearchByIngredient(String ingredient) throws IOException, ParseException {
+        int numberRecipe=20;
+        URL URL = new URL("https://api.spoonacular.com/recipes/findByIngredients?apiKey="+APIKey+"&ingredients="+ingredient+"&number="+numberRecipe);
+        JSONParser  parse = new JSONParser();
 
-    public static boolean SearchByKey(String key){
+        return (JSONArray) parse.parse(String.valueOf(connectAPI(URL)));
+    }
+
+
+    public static List<String> searchByKey(String key){
         try {
-            int l=-1;
-            idList.clear();
-            int numberRecipe=20;
-            URL URL = new URL("https://api.spoonacular.com/recipes/complexSearch?apiKey="+APIKey+"&query="+key+"&number="+numberRecipe);
-            JSONParser parse = new JSONParser();
-            JSONObject jsonO = (JSONObject)parse.parse(String.valueOf(ConnectAPI(URL)));
-
-            JSONArray resultRecipes = (JSONArray) jsonO.get("results");
-
-            if (resultRecipes.isEmpty()) {
-                System.out.println("No recipe found !");
-                return false;
+            JSONArray resultRecipes = jsonSearchByKey(key);
+            List<String> idList = new ArrayList<>();
+            for (Object recipe : resultRecipes) {
+                JSONObject person = (JSONObject) recipe;
+                String id = valueOf(person.get("id"));
+                idList.add(id);
             }
-            else{
-                for (Object recipe : resultRecipes) {
-                    JSONObject person = (JSONObject) recipe;
-                    l++;
-                    System.out.print(l+"-");
-                    String name = (String) person.get("title");
-                    String id = valueOf(person.get("id"));
-                    idList.add(id);
-                    System.out.println(name);
-                }
-            }
-
+            return idList;
         } catch (ParseException | IOException e) {
             e.printStackTrace();
         }
-        if (idList.size() !=0 ){
-            return true;
-        }
-        return false;
+        return new ArrayList<>();
+    }
+
+    public static JSONArray jsonSearchByKey(String key) throws IOException, ParseException {
+        int numberRecipe=20;
+        URL URL = new URL("https://api.spoonacular.com/recipes/complexSearch?apiKey="+APIKey+"&query="+key+"&number="+numberRecipe);
+        JSONParser parse = new JSONParser();
+        JSONObject jsonO = (JSONObject) parse.parse(String.valueOf(connectAPI(URL)));
+        return (JSONArray) jsonO.get("results");
     }
 
 }

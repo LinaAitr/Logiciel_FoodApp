@@ -1,4 +1,6 @@
 package app.foodapp.model;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
@@ -8,6 +10,7 @@ import java.util.Scanner;
 public class AskUserTest {
     public static void AskUser() throws IOException, ParseException {
         Scanner inputUser = new Scanner(System.in);
+        List<String> idList;
         System.out.println("Put 1 for a query search / put 2 for an ingredient search / Put 3 to show your favorites");
         int choice = inputUser.nextInt();
 
@@ -18,16 +21,20 @@ public class AskUserTest {
         if (choice == 1){
             System.out.println("Please, give us your key word !");
             String keyWord = inputUser.next();
-            if (RequestAPI.SearchByKey(keyWord)){
-               recipeInfoByID(inputUser);
+            if (displaySearchByKey(RequestAPI.jsonSearchByKey(keyWord))){
+                idList = RequestAPI.searchByKey(keyWord);
+                recipeInfoByID(inputUser, idList);
+
            }
         }
 
         else if (choice == 2){
             System.out.println("Please, give us your ingredient !");
             String ingredient = inputUser.next();
-            if (RequestAPI.SearchByIngredient(ingredient)) {
-                recipeInfoByID(inputUser);
+            if (displaySearchByIngredient(RequestAPI.jsonSearchByIngredient(ingredient))) {
+                idList = RequestAPI.searchByIngredient(ingredient);
+                recipeInfoByID(inputUser, idList);
+
             }
 
         }
@@ -61,11 +68,11 @@ public class AskUserTest {
         }
     }
 
-    private static void recipeInfoByID(Scanner inputUser) throws IOException, ParseException {
+    private static void recipeInfoByID(Scanner inputUser, List<String> idList) throws IOException, ParseException {
         System.out.println("Do you want to know more about one this recipes? just give us the number !");
         System.out.print("Number : ");
         int index = inputUser.nextInt();
-        RecipeInformations recipe = new  RecipeInformations(RequestAPI.idList.get(index));
+        RecipeInformations recipe = new  RecipeInformations(idList.get(index));
         System.out.print(RecipeInformations.SearchById(recipe));
         System.out.print("Do you want to add to favorite ?  1 for yes / 2 for no");
         int answ = inputUser.nextInt();
@@ -78,6 +85,40 @@ public class AskUserTest {
            String code = inputUser.next();
            FavoriteRecipes.FillFile(recipe.getTitle(),code);
         }
+    }
+
+    public static boolean displaySearchByIngredient(JSONArray dataObject){
+        if (dataObject.isEmpty()){
+            System.out.println("No recipe found !");
+            return false;
+        }
+        else{
+            for (int i=0; i<dataObject.size();i++){
+                JSONObject recipeData = (JSONObject) dataObject.get(i);
+
+                System.out.print(i+"-");
+                System.out.println(recipeData.get("title"));
+            }
+        }
+        return true;
+    }
+
+    public static boolean displaySearchByKey(JSONArray resultRecipes){
+        if (resultRecipes.isEmpty()){
+            System.out.println("No recipe found !");
+            return false;
+        }
+        else{
+            int l=-1;
+            for (Object recipe : resultRecipes) {
+                JSONObject person = (JSONObject) recipe;
+                l++;
+                System.out.print(l+"-");
+                String name = (String) person.get("title");
+                System.out.println(name);
+            }
+        }
+        return true;
     }
 
 
