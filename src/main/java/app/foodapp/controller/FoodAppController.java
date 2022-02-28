@@ -57,7 +57,6 @@ public class FoodAppController implements Initializable {
     private void openFavorites() {
         codeFav.setVisible(true);
         searchFavButton.setVisible(true);
-
     }
 
     @FXML
@@ -65,6 +64,8 @@ public class FoodAppController implements Initializable {
         int i = 0;
         List<String> favList = new ArrayList<>();
         favList.add("69095");
+        favList.add("665469");
+
         //FavoriteRecipes.ShowFavorites(codeFav.getText());
         for(String fav : favList){
             RecipeInformations infoFav = new RecipeInformations(fav);
