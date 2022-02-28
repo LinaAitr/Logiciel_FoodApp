@@ -25,6 +25,7 @@ public class FoodAppController implements Initializable {
     @FXML private TextField codeFav;
     @FXML private Button searchFavButton;
     @FXML private Button favoritesButton;
+    @FXML private Hyperlink listFav;
 
     @FXML private Button helloWorldButton;
     @FXML private Button goodByeWorldButton;
@@ -49,6 +50,7 @@ public class FoodAppController implements Initializable {
         searchBar.setText("");
         //logInButton.setVisible(false);
         goodByeWorldButton.setVisible(false);
+        Hyperlink test = new Hyperlink("test");
     }
 
     @FXML
@@ -66,7 +68,8 @@ public class FoodAppController implements Initializable {
         //FavoriteRecipes.ShowFavorites(codeFav.getText());
         for(String fav : favList){
             RecipeInformations infoFav = new RecipeInformations(fav);
-            Hyperlink hyperlink = new Hyperlink(i+")"+ infoFav.getTitle());
+            listFav.setText(i+")"+ infoFav.getTitle());
+            listFav.setVisible(true);
         }
     }
 

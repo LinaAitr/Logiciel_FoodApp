@@ -13,8 +13,9 @@
         <Button fx:id="searchButton" layoutX="200.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#search" text="Search" />
         <Button fx:id="favoritesButton" layoutX="550.0" layoutY="20.0" onMouseClicked="#openFavorites" text="Favorites" />
         <TextField fx:id="codeFav" layoutX="473.0" layoutY="61.0" promptText="Enter your code" visible="false" />
-        <Button fx:id="searchFavButton" layoutX="623.0" layoutY="61.0" mnemonicParsing="false" onMouseClicked="#searchFav" text="Enter" visible="false"/>
+        <Button fx:id="searchFavButton" layoutX="623.0" layoutY="61.0" mnemonicParsing="false" onMouseClicked="#searchFav" text="Enter" visible="false" />
         <Label fx:id="image" />
+        <Hyperlink fx:id="listFav" layoutX="506.0" layoutY="126.0" text=".." />
 
     </children>
 </AnchorPane>

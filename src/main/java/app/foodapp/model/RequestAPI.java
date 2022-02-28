@@ -74,6 +74,7 @@ public class RequestAPI {
 
     public static boolean SearchByKey(String key){
         try {
+
             int l=-1;
             idList.clear();
             int numberRecipe=20;
