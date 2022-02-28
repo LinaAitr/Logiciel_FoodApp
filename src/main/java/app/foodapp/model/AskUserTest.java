@@ -33,7 +33,7 @@ public class AskUserTest {
          else{
             System.out.println("What is you code ?");
             String code = inputUser.next();
-           Object favoritesDetails[]= (Object[]) FavoriteRecipes.ShowFavorites(code);
+           Object[] favoritesDetails = (Object[]) FavoriteRecipes.ShowFavorites(code);
            Boolean favoritesIsNotEmpty= (Boolean) favoritesDetails[1];
            int numberOfFavorites= (int) favoritesDetails[0];
             if (favoritesIsNotEmpty){
@@ -62,7 +62,7 @@ public class AskUserTest {
         }
     }
 
-    private static void recipeInfoByID(Scanner inputUser) throws IOException, ParseException {
+    public static void recipeInfoByID(Scanner inputUser) throws IOException, ParseException {
         System.out.println("Do you want to know more about one this recipes? just give us the number !");
         System.out.print("Number : ");
         int index = inputUser.nextInt();
