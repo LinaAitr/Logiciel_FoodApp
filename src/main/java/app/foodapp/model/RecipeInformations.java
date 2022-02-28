@@ -11,8 +11,8 @@ import java.net.URL;
 public class RecipeInformations {
     JSONObject recipeObj;
    // public static String APIKey = "ab7c3f5a18a04dd8903bc5fdb0be40e9";
-    //public static String APIKey = "30ca87269ac8432c8130d7bef6ae2e49";
-    public static String APIKey = "4e944d67e59d4271b4181168f3535444";
+    public static String APIKey = "30ca87269ac8432c8130d7bef6ae2e49";
+    //public static String APIKey = "4e944d67e59d4271b4181168f3535444";
 
 
 

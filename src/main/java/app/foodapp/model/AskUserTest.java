@@ -7,10 +7,10 @@ import java.util.Scanner;
 public class AskUserTest {
     public static void AskUser() throws IOException, ParseException {
         Scanner inputUser = new Scanner(System.in);
-        System.out.println("Put 1 for a query search / put 2 for an ingredient search");
+        System.out.println("Put 1 for a query search / put 2 for an ingredient search / Put 3 to show your favorites");
         int choice = inputUser.nextInt();
 
-        while (choice != 1 && choice!=2){
+        while (choice != 1 && choice!=2 && choice!=3){
             System.out.println("Put 1 for a query search / put 2 for an ingredient search");
             choice = inputUser.nextInt();
         }
@@ -23,12 +23,37 @@ public class AskUserTest {
            }
 
         }
-        else{
+        else if (choice == 2){
             System.out.println("Please, give us your ingredient !");
             String ingredient = inputUser.next();
             if (RequestAPI.SearchByIngredient(ingredient) ) {
                 recipeInfoByID(inputUser);
             }
+
+        }
+         else{
+            System.out.println("What is you code ?");
+            String code = inputUser.next();
+           boolean favoritesIsNotEmpty= FavoriteRecipes.ShowFavorites(code);
+           if (favoritesIsNotEmpty){
+               System.out.println("Do you want yo delete something ? 1 for no / 2 for no");
+               int number = inputUser.nextInt();
+               while (number != 1 && number!=2 ){
+                   System.out.println("Do you want yo delete something ? 1 for no / 2 for no");
+                   number = inputUser.nextInt();
+               }
+               if (number==2) AskUser();
+               else
+               {
+                   System.out.println("Choose a numver from your favorites recipes ");
+                   int numberFav = inputUser.nextInt();
+                   FavoriteRecipes.DeleteFavorite(code,numberFav);
+               }
+
+
+           }
+
+
 
         }
     }
@@ -42,11 +67,13 @@ public class AskUserTest {
         System.out.print("Do you want to add to favorite ?  1 for yes / 2 for no");
         int answ = inputUser.nextInt();
         while (answ != 1 && answ!=2){
-            System.out.print("Do you want to add to favorite ?  1 for yes / 2 for no");
+            System.out.print("Do you want to add to favorite ?  1 for yes / 2 for no \n");
             answ = inputUser.nextInt();
         }
         if (answ==1){
-            FavoriteRecipes.FillFile(recipe.getTitle());
+           System.out.print("Donez votre Code ! : ");
+           String code = inputUser.next();
+            FavoriteRecipes.FillFile(recipe.getTitle(),code);
         }
 
 
