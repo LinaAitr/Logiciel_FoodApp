@@ -67,11 +67,11 @@ public class AskUserTest {
         System.out.print("Number : ");
         int index = inputUser.nextInt();
         RecipeInformations recipe = new  RecipeInformations(RequestAPI.idList.get(index));
-        RecipeInformations.SearchById(recipe);
+        System.out.print(RecipeInformations.SearchById(recipe));
         System.out.print("Do you want to add to favorite ?  1 for yes / 2 for no");
         int answ = inputUser.nextInt();
         while (answ != 1 && answ!=2){
-            System.out.print("Do you want to add to favorite ?  1 for yes / 2 for no \n");
+            System.out.print("Do you want to add to favorite ?  1 for yes / 2 for no " + "\n");
             answ = inputUser.nextInt();
         }
         if (answ==1){

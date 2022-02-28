@@ -76,4 +76,10 @@ public class FoodAppController implements Initializable {
         if (!goodByeWorldButton.isVisible())
             goodByeWorldButton.setVisible(true);
     }
+
+
+    @FXML
+    private void selectRecipe(){
+
+    }
 }
