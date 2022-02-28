@@ -27,4 +27,10 @@ public class UsedIngredients {
         public String getName(){
                 return valueOf(missedIngredientsObj.get("name"));
         }
+        public String getUnit(){
+                return valueOf(missedIngredientsObj.get("unit"));
+        }
+        public String getAmount(){
+                return valueOf(missedIngredientsObj.get("amount"));
+        }
 }

@@ -1,15 +1,6 @@
 package app.foodapp.model;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Scanner;
-
+/*
 public class SearchBar {
 
     public static String search(Scanner scanner) throws IOException, ParseException { // renvoi peut etre une liste ou un object
@@ -43,7 +34,7 @@ public class SearchBar {
         }
         else {
             //System.out.println(scannerMessage);
-            result = "Sorry, I can't do anything yet ! ";/*(Read:  scanner.nextLine() +")";*/
+            result = "Sorry, I can't do anything yet ! ";(Read:  scanner.nextLine() +")";
         }
         return result;
     }
@@ -53,3 +44,4 @@ public class SearchBar {
         // faire appel methode de team2;
     }
 }
+*/
