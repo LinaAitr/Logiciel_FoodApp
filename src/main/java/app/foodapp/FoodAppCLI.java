@@ -1,6 +1,5 @@
 package app.foodapp;
 
-import app.foodapp.model.SearchBar;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
@@ -14,7 +13,7 @@ public class FoodAppCLI {
         //System.out.println("Input your command: ");
         System.out.println("Which recipe : \n - apple \n - vegan \n - favorite ");
         Scanner scanner = new Scanner(System.in);
-        System.out.println(SearchBar.search(scanner));
+    //    System.out.println(SearchBar.search(scanner));
         //SearchBar.selectRecipe(scanner);
         scanner.close();
     }

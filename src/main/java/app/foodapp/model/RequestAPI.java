@@ -8,11 +8,17 @@ import org.json.simple.parser.ParseException;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static java.lang.String.valueOf;
 
 public class RequestAPI {
+
+    //public static String APIKey = "ab7c3f5a18a04dd8903bc5fdb0be40e9";
+    //public static String APIKey = "30ca87269ac8432c8130d7bef6ae2e49";
+    public static String APIKey = "4e944d67e59d4271b4181168f3535444";
+
 
     public static StringBuilder ConnectAPI(URL url) throws IOException {
         HttpURLConnection conn =(HttpURLConnection) url.openConnection();
@@ -36,33 +42,42 @@ public class RequestAPI {
 
     public static boolean SearchByIngredient(String ingredient) throws IOException {
         try {
-            URL URL = new URL("https://api.spoonacular.com/recipes/findByIngredients?apiKey=30ca87269ac8432c8130d7bef6ae2e49&ingredients="+ingredient);
+            boolean recipeFound = false;
+            idList.clear();
+            int numberRecipe=20;
+            URL URL = new URL("https://api.spoonacular.com/recipes/findByIngredients?apiKey="+APIKey+"&ingredients="+ingredient+"&number="+numberRecipe);
             JSONParser  parse = new JSONParser();
             JSONArray dataObject = (JSONArray) parse.parse(String.valueOf(ConnectAPI(URL)));
 
             if (dataObject.isEmpty()){
                 System.out.println("No recipe found !");
-                return false;
+                return recipeFound;
             }
             else{
                 for (int i=0; i<dataObject.size();i++){
                     JSONObject recipeData = (JSONObject) dataObject.get(i);
+
                     System.out.print(i+"-");
                     System.out.println(recipeData.get("title"));
-                    System.out.println(recipeData.get("id"));
+                    String id = valueOf(recipeData.get("id"));
+                    idList.add(id);
                 }
             }
         } catch (ParseException | IOException e) {
             e.printStackTrace();
         }
-        return true;
+
+     return true;
     }
 
-
+    static ArrayList<String> idList= new ArrayList<>();
 
     public static boolean SearchByKey(String key){
         try {
-            URL URL = new URL("https://api.spoonacular.com/recipes/complexSearch?apiKey=30ca87269ac8432c8130d7bef6ae2e49&query="+key);
+            int l=-1;
+            idList.clear();
+            int numberRecipe=20;
+            URL URL = new URL("https://api.spoonacular.com/recipes/complexSearch?apiKey="+APIKey+"&query="+key+"&number="+numberRecipe);
             JSONParser parse = new JSONParser();
             JSONObject jsonO = (JSONObject)parse.parse(String.valueOf(ConnectAPI(URL)));
 
@@ -75,38 +90,22 @@ public class RequestAPI {
             else{
                 for (Object recipe : resultRecipes) {
                     JSONObject person = (JSONObject) recipe;
+                    l++;
+                    System.out.print(l+"-");
                     String name = (String) person.get("title");
                     String id = valueOf(person.get("id"));
+                    idList.add(id);
                     System.out.println(name);
-                    System.out.println(id);
                 }
             }
 
         } catch (ParseException | IOException e) {
             e.printStackTrace();
         }
-        return true;
-    }
-
-    public static void SearchById(int id){
-        try {
-            URL URL = new URL("https://api.spoonacular.com/recipes/"+id+"/information?apiKey=30ca87269ac8432c8130d7bef6ae2e49");
-            JSONParser parse = new JSONParser();
-            JSONObject dataObject = (JSONObject) parse.parse(String.valueOf(ConnectAPI(URL)));
-            String readyInMinutes =  valueOf(dataObject.get("readyInMinutes"));
-            String servings =  valueOf(dataObject.get("servings"));
-            String title =  (String) dataObject.get("title");
-            String sourceUrl =  (String) dataObject.get("sourceUrl");
-            String summary =  (String) dataObject.get("summary");
-            System.out.println("Title: "+ title);
-            System.out.print("This will be ready in: "+ readyInMinutes+" mn");
-            System.out.println(" for : "+ servings +" people");
-            System.out.println("sourceUrl: "+ sourceUrl);
-            System.out.println("summary : "+ summary);
-
-        } catch (ParseException | IOException e) {
-            e.printStackTrace();
+        if (idList.size() !=0 ){
+            return true;
         }
+        return false;
     }
 
 }
