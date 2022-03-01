@@ -5,10 +5,7 @@ import app.foodapp.model.RecipeInformations;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
@@ -94,6 +91,7 @@ public class FoodAppController implements Initializable {
     @FXML
     private void logIn(){
         label.setText("your log in is done ");
+        logInButton.setVisible(false);
     }
 
     @FXML
