@@ -24,6 +24,7 @@ public class ShowRecipes {
 
     }
     public static String SearchByIngredient(String ingredient) throws IOException {
+        ArrayList<String> searchResult = new ArrayList<>();
         String result = "";
         try {
             idList.clear();
