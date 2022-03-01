@@ -73,6 +73,9 @@ public class  FoodAppController implements Initializable {
     @FXML
     private void logIn(){
         label.setText("your log in is done ");
+        recipes.setVisible(false);
+        if (!recipes.isVisible())
+            recipes.setVisible(false);
     }
 
     @FXML
@@ -85,7 +88,7 @@ public class  FoodAppController implements Initializable {
 
     @FXML
     private void showRecipes() throws IOException, ParseException {
-        recipes.setText(ShowRecipes.showRecipe(searchBar.getText()));
+        recipes.setText(String.valueOf(ShowRecipes.showRecipe(searchBar.getText())));
     }
 
 //    @FXML
