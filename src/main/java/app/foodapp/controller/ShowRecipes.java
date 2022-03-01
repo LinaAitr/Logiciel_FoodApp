@@ -28,7 +28,7 @@ public class ShowRecipes {
     }
     public static ArrayList<String> SearchByIngredient(String ingredient) throws IOException {
         ArrayList<String> searchResult = new ArrayList<>();
-        String result = "";
+        StringBuilder result = new StringBuilder();
         try {
             idList.clear();
             int numberRecipe=20;
@@ -37,7 +37,7 @@ public class ShowRecipes {
             JSONArray dataObject = (JSONArray) parse.parse(String.valueOf(RequestAPI.ConnectAPI(URL)));
 
             if (dataObject.isEmpty()){
-                result = result +"No recipe found !";
+                result.append("No recipe found !");
                 searchResult.add("No recipe found !");
                 return searchResult;
             }
@@ -46,9 +46,7 @@ public class ShowRecipes {
                     JSONObject recipeData = (JSONObject) dataObject.get(i);
                     String id = valueOf(recipeData.get("id"));
                     searchResult.add(""+ i+1 +"-"+    recipeData.get("title")+" "+  id);
-                     result = result + (i+1)+"-" +
-                    recipeData.get("title")+ "  " +
-                    id;
+                     result.append(i + 1).append("-").append(recipeData.get("title")).append("  ").append(id);
                     idList.add(id);
                 }
                 return searchResult ;

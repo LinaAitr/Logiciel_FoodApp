@@ -33,7 +33,7 @@ public class  FoodAppController implements Initializable {
 
     @FXML private Label label;
     @FXML private Label recipes;
-    @FXML private Hyperlink recipe;
+//    @FXML private Hyperlink recipe;
 
     //    @Override
     public void initialize(URL location, ResourceBundle resourceBundle) {
@@ -97,10 +97,11 @@ public class  FoodAppController implements Initializable {
     private void showRecipes() throws IOException, ParseException {
         ArrayList<String> charOfRecipe= ShowRecipes.showRecipe(searchBar.getText());
         for (String s : charOfRecipe) {
-            recipe.setText(s +"\n");
+            Hyperlink recipe = new Hyperlink();
+            recipe.setText(s);
 
+            recipes.setText(recipes.getText()+ recipe.getText() +"\r");
 
-            recipes.setText("\n"+ recipes.getText() + recipe.getText());
         }
 
     }
