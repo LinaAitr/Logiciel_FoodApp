@@ -8,13 +8,13 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" styleClass="anchor" stylesheets="@Stylesheet.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.foodapp.controller.FoodAppController">
     <children>
-        <ScrollPane layoutY="115.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="700.0">
+        <ScrollPane layoutY="115.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="700.0" visible="false">
             <content>
                 <Label fx:id="image" />
                 <Hyperlink fx:id="listFav" layoutX="550.0" layoutY="200.0" text="TEST" />
             </content>
         </ScrollPane>
-        <ToolBar layoutX="3.0" prefHeight="115.0" prefWidth="700.0">
+        <ToolBar layoutX="3.0" prefHeight="115.0" prefWidth="700.0" visible="false">
             <items>
                 <Button fx:id="logInButton" layoutX="45.0" layoutY="87.0" mnemonicParsing="false" onMouseClicked="#logIn"  text="Log In" />
                 <TextField fx:id="searchBar" alignment="TOP_CENTER" />
