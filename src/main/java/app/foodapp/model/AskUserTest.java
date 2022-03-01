@@ -75,7 +75,7 @@ public class AskUserTest {
             answ = inputUser.nextInt();
         }
         if (answ==1){
-           System.out.print("Donez votre Code ! : ");
+           System.out.print("Dogive us your search Code ! : ");
            String code = inputUser.next();
             FavoriteRecipes.FillFile(recipe.getTitle(),code);
         }

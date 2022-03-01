@@ -13,6 +13,7 @@ import org.json.simple.parser.ParseException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.ResourceBundle;
 
 public class  FoodAppController implements Initializable {
@@ -32,6 +33,7 @@ public class  FoodAppController implements Initializable {
 
     @FXML private Label label;
     @FXML private Label recipes;
+    @FXML private Hyperlink recipe;
 
     //    @Override
     public void initialize(URL location, ResourceBundle resourceBundle) {
@@ -86,20 +88,21 @@ public class  FoodAppController implements Initializable {
             goodByeWorldButton.setVisible(true);
     }
 
+//    @FXML
+//    private void showRecipes() throws IOException, ParseException {
+//        recipes.setText(String.valueOf(ShowRecipes.showRecipe(searchBar.getText())));
+//    }
+
     @FXML
     private void showRecipes() throws IOException, ParseException {
-        recipes.setText(String.valueOf(ShowRecipes.showRecipe(searchBar.getText())));
-    }
+        ArrayList<String> charOfRecipe= ShowRecipes.showRecipe(searchBar.getText());
+        for (String s : charOfRecipe) {
+            recipe.setText(s +"\n");
 
-//    @FXML
-//    private void recipe() throws IOException, ParseException {
-//        String charOfRecipe= ShowRecipes.showRecipe(searchBar.getText());
-//        for(int i =0; i< charOfRecipe.size(); i++){
-//            Hyperlink link = new Hyperlink();
-//            link.setText((String) charOfRecipe[i]);
-//
-//        }
-//        recipes.setText();
-//    }
+
+            recipes.setText("\n"+ recipes.getText() + recipe.getText());
+        }
+
+    }
 
 }
