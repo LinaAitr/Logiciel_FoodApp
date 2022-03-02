@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.image.*?>
-
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" styleClass="anchor" stylesheets="@Stylesheet.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.foodapp.controller.FoodAppController">
     <children>
+        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" styleClass="anchor" stylesheets="@Stylesheet.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+            <children>
+                <TextField fx:id="logInEmail" alignment="CENTER" layoutX="256.0" layoutY="248.0" promptText="User Name" />
+                <TextField fx:id="logInPassword" alignment="CENTER" layoutX="257.0" layoutY="292.0" promptText="Password" />
+                <Button fx:id="firstLogInButton" layoutX="263.0" layoutY="335.0" mnemonicParsing="false" text="Log In" />
+                <Button fx:id="signInButton" layoutX="359.0" layoutY="335.0" mnemonicParsing="false" text="Sign In" />
+                <Button fx:id="continueButton" layoutX="274.0" layoutY="382.0" mnemonicParsing="false" text="Continue as visitor">
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@loupe.jpg" />
+                     </image></ImageView>
+               </graphic></Button>
+            </children>
+        </AnchorPane>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
         <ScrollPane layoutY="115.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="700.0" visible="false">
             <content>
                 <Label fx:id="image" />
@@ -16,9 +32,9 @@
         </ScrollPane>
         <ToolBar layoutX="3.0" prefHeight="115.0" prefWidth="700.0" visible="false">
             <items>
-                <Button fx:id="logInButton" layoutX="45.0" layoutY="87.0" mnemonicParsing="false" onMouseClicked="#logIn"  text="Log In" />
+                <Button fx:id="logInButton" layoutX="45.0" layoutY="87.0" mnemonicParsing="false" onMouseClicked="#logIn" text="Log In" />
                 <TextField fx:id="searchBar" alignment="TOP_CENTER" />
-                <Button fx:id="searchButton" layoutX="200.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#search" text="Search" >
+                <Button fx:id="searchButton" layoutX="200.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#search" text="Search">
                     <font>
                         <Font size="20.0" />
                     </font>
