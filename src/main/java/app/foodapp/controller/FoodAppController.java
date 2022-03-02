@@ -1,6 +1,8 @@
 package app.foodapp.controller;
 
 import app.foodapp.model.AskUserTest;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -33,7 +35,9 @@ public class  FoodAppController implements Initializable {
 
     @FXML private Label label;
     @FXML private Label recipes;
-//    @FXML private Hyperlink recipe;
+//    @FXML private Hyperlink linkBlog =new Hyperlink("link");
+//    @FXML private StringProperty lblBlogText= new SimpleStringProperty("link");
+
 
     //    @Override
     public void initialize(URL location, ResourceBundle resourceBundle) {
@@ -96,11 +100,16 @@ public class  FoodAppController implements Initializable {
     @FXML
     private void showRecipes() throws IOException, ParseException {
         ArrayList<String> charOfRecipe= ShowRecipes.showRecipe(searchBar.getText());
-        for (String s : charOfRecipe) {
-            Hyperlink recipe = new Hyperlink();
-            recipe.setText(s);
+        Hyperlink hpls[] = new Hyperlink[charOfRecipe.size()];
+        for (int i = 0; i < charOfRecipe.size(); i++) {
+           // hpls[i] = new Hyperlink(charOfRecipe.get(i));
+//            Hyperlink recipe = ;
+//            recipe.setText();
+//            linkBlog.setText(charOfRecipe.get(i));
+//            recipes.textProperty().bind( linkBlog.textProperty()recipes.textProperty());
 
-            recipes.setText(recipes.getText()+ recipe.getText() +"\r");
+
+            recipes.setText(recipes.getText()+ charOfRecipe.get(i) + "\r");
 
         }
 
