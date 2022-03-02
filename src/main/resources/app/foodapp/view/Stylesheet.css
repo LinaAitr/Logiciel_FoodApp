@@ -2,9 +2,8 @@
     -fx-background : lightgrey;
 }
 
+.rectangle{
 
-.searchButton{
-    -fx-graphic: url("/loupe.jpg");
 }
 
 .favoritesButton{
