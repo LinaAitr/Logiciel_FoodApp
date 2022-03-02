@@ -2,6 +2,7 @@
     -fx-background : lightgrey;
 }
 
+
 .searchButton{
     -fx-graphic: url("/loupe.jpg");
 }

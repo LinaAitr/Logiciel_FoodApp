@@ -6,17 +6,18 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" styleClass="anchor" stylesheets="@Stylesheet.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.foodapp.controller.FoodAppController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" styleClass="windows" stylesheets="@Stylesheet.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.foodapp.controller.FoodAppController">
     <children>
-        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" styleClass="anchor" stylesheets="@Stylesheet.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+        <AnchorPane fx:id="firstPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
             <children>
-                <TextField fx:id="logInEmail" alignment="CENTER" layoutX="256.0" layoutY="248.0" promptText="User Name" />
-                <TextField fx:id="logInPassword" alignment="CENTER" layoutX="257.0" layoutY="292.0" promptText="Password" />
-                <Button fx:id="firstLogInButton" layoutX="263.0" layoutY="335.0" mnemonicParsing="false" text="Log In" />
+                <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="200.0" layoutX="243.0" layoutY="235.0" stroke="#ffffff00" strokeType="INSIDE" width="200.0" />
+                <TextField fx:id="logInEmail" alignment="CENTER" layoutX="258.0" layoutY="250.0" promptText="User Name" />
+                <TextField fx:id="logInPassword" alignment="CENTER" layoutX="258.0" layoutY="293.0" promptText="Password" />
+                <Button fx:id="firstLogInButton" layoutX="267.0" layoutY="335.0" mnemonicParsing="false" text="Log In" />
                 <Button fx:id="signInButton" layoutX="359.0" layoutY="335.0" mnemonicParsing="false" text="Sign In" />
-                <Button fx:id="continueButton" layoutX="274.0" layoutY="382.0" mnemonicParsing="false" text="Continue as visitor">
+                <Button fx:id="continueButton" layoutX="271.0" layoutY="382.0" mnemonicParsing="false" text="Continue as visitor">
                <graphic>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true"/>
+                  <ImageView fitHeight="5.0" fitWidth="1.0" pickOnBounds="true" preserveRatio="true" />
 <!--                     <image>-->
 <!--                        <Image url="@loupe.jpg" />-->
 <!--                     </image></ImageView>-->
@@ -24,27 +25,23 @@
                 </Button>
             </children>
         </AnchorPane>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
-        <ScrollPane layoutY="115.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="700.0" visible="false">
-            <content>
-                <Label fx:id="image" />
-                <Hyperlink fx:id="listFav" layoutX="550.0" layoutY="200.0" text="TEST" />
-            </content>
-        </ScrollPane>
-        <ToolBar layoutX="3.0" prefHeight="115.0" prefWidth="700.0" visible="false">
+
+        <ToolBar fx:id="toolBar" layoutX="3.0" prefHeight="115.0" prefWidth="700.0" visible="false">
             <items>
                 <Button fx:id="logInButton" layoutX="45.0" layoutY="87.0" mnemonicParsing="false" onMouseClicked="#logIn" text="Log In" />
                 <TextField fx:id="searchBar" alignment="TOP_CENTER" />
-                <Button fx:id="searchButton" layoutX="200.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#search" text="Search">
-                    <font>
-                        <Font size="20.0" />
-                    </font>
-                </Button>
-
+                <Button fx:id="searchButton" layoutX="200.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#search" text="Search"/>
                 <Button fx:id="favoritesButton" layoutX="550.0" layoutY="20.0" onMouseClicked="#openFavorites" text="Favorites" />
                 <TextField fx:id="codeFav" layoutX="473.0" layoutY="61.0" promptText="Enter your code" visible="false" />
                 <Button fx:id="searchFavButton" layoutX="623.0" layoutY="61.0" mnemonicParsing="false" onMouseClicked="#searchFav" text="Enter" visible="false" />
             </items>
         </ToolBar>
+        <ScrollPane fx:id="scrollPane" layoutY="115.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="700.0" visible="false">
+            <content>
+                <Label fx:id="image" />
+                <Hyperlink fx:id="listFav" layoutX="550.0" layoutY="200.0" text="TEST" />
+            </content>
+        </ScrollPane>
+
     </children>
 </AnchorPane>
