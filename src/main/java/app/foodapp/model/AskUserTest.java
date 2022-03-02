@@ -118,22 +118,26 @@ public class AskUserTest {
         ArrayList userUpdate =FavoriteRecipes.SignIn(user,logAndSign);
         if (logAndSign==2){
             if (userUpdate.get(2) == "alreadyCreated"){
+                System.out.println();
                 System.out.println("Account Already created !");
                 System.out.println("Welcome Again "+ userUpdate.get(0));
             }
             else if (userUpdate.get(2)=="AccountCreated"){
+                System.out.println();
                 System.out.println("Account created !");
-                System.out.println("Welcome  "+ userUpdate.get(0));
+                System.out.println("Welcome  "+ userUpdate.get(0)+" !");
             }
         }
         else if (logAndSign==1)
         {
             if (userUpdate.get(2)=="notExist"){
+                System.out.println();
                 System.out.println("Account doesnt exist ! PLease verify spelling or create a new one !");
                 LogAndSign();
             }
             else if (userUpdate.get(2)=="alreadyCreated2") {
-                System.out.println("Welcome Again "+ userUpdate.get(0));
+                System.out.println();
+                System.out.println("Welcome Again "+ userUpdate.get(0)+" !");
             }
 
         }
