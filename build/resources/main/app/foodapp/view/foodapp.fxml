@@ -8,14 +8,14 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" styleClass="windows" stylesheets="@Stylesheet.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.foodapp.controller.FoodAppController">
     <children>
-        <AnchorPane fx:id="firstPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <AnchorPane fx:id="firstPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-background-image: url('background.jpg')"  stylesheets="@Stylesheet.css" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <Rectangle fx:id="rectangle" arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="200.0" stroke="#ffffff00" strokeType="INSIDE" width="200.0" AnchorPane.topAnchor="160.0" />
-                <TextField fx:id="logInEmail" alignment="CENTER" promptText="User Name" AnchorPane.topAnchor="250.0" />
-                <TextField fx:id="logInPassword" alignment="CENTER" promptText="Password" AnchorPane.topAnchor="300.0" />
-                <Button fx:id="firstLogInButton" mnemonicParsing="false" text="Log In" AnchorPane.topAnchor="350.0" />
-                <Button fx:id="signInButton" mnemonicParsing="false" text="Sign In" AnchorPane.topAnchor="350.0" />
-                <Button fx:id="continueButton" mnemonicParsing="false" text="Continue as visitor" AnchorPane.topAnchor="400.0">
+                <Rectangle fx:id="rectangle" arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="200.0" layoutX="250.0" layoutY="200.0" stroke="#ffffff00" strokeType="INSIDE" width="200.0" AnchorPane.topAnchor="200.0" />
+                <TextField fx:id="logInEmail" alignment="CENTER" layoutX="265.0" layoutY="224.0" promptText="User Name" AnchorPane.topAnchor="224.0" />
+                <TextField fx:id="logInPassword" alignment="CENTER" layoutX="265.0" layoutY="274.0" promptText="Password" AnchorPane.topAnchor="274.0" />
+                <Button fx:id="firstLogInButton" layoutX="265.0" layoutY="324.0" mnemonicParsing="false" text="Log In" AnchorPane.topAnchor="324.0" />
+                <Button fx:id="signInButton" layoutX="373.0" layoutY="324.0" mnemonicParsing="false" text="Sign In" AnchorPane.topAnchor="324.0" />
+                <Button fx:id="continueButton" layoutX="278.0" layoutY="362.0" mnemonicParsing="false" text="Continue as visitor" AnchorPane.topAnchor="362.0">
                <graphic>
                   <ImageView fitHeight="5.0" fitWidth="1.0" pickOnBounds="true" preserveRatio="true" />
 <!--                     <image>-->
@@ -30,25 +30,32 @@
             <items>
                 <Button fx:id="logInButton" layoutX="45.0" layoutY="87.0" mnemonicParsing="false" onMouseClicked="#logIn" text="Log In" />
                 <TextField fx:id="searchBar" alignment="TOP_CENTER" />
-                <Button fx:id="searchButton" layoutX="200.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#search" text="Search" />
+                <Button fx:id="searchButton" alignment="CENTER" contentDisplay="CENTER" layoutX="200.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#search" prefHeight="30.0" prefWidth="30.0" text="">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@loupe.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
                 <Button fx:id="favoritesButton" layoutX="550.0" layoutY="20.0" onMouseClicked="#openFavorites" text="Favorites" />
-                <TextField fx:id="codeFav" layoutX="473.0" layoutY="61.0" promptText="Enter your code" visible="false" />
-                <ComboBox prefHeight="42.0" prefWidth="39.0">
-                <items>
-                    <FXCollections fx:factory="observableArrayList">
-                        <Label fx:id="home" text="Home" />
-                        <Label fx:id="favorite" text="favorite" />
-                        <Label fx:id="logIn" text="..." />
-                    </FXCollections>
-                </items>
+
+                <ComboBox layoutX="1000.0" layoutY="20.0" prefHeight="25.0" prefWidth="39.0">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <Label fx:id="home" text="Home" />
+                            <Label fx:id="favorite" onMouseClicked="#openFavorites" text="favorite" />
+                            <Label fx:id="logIn" onMouseClicked="#logIn" text="..." />
+                        </FXCollections>
+                    </items>
                 </ComboBox>
-                <Button fx:id="searchFavButton" layoutX="623.0" layoutY="61.0" mnemonicParsing="false" onMouseClicked="#searchFav" text="Enter" visible="false" />
 
             </items>
         </ToolBar>
         <ScrollPane fx:id="scrollPane" layoutY="115.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="700.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="115.0">
             <content>
-                <Label fx:id="image" />
+                <Button fx:id="searchFavButton" layoutX="623.0" layoutY="61.0" mnemonicParsing="false" onMouseClicked="#searchFav" text="Enter" visible="false" />
+                <TextField fx:id="codeFav" layoutX="473.0" layoutY="61.0" promptText="Enter your code" visible="false" />
                 <Hyperlink fx:id="listFav" layoutX="550.0" layoutY="200.0" text="TEST" />
                 <Label fx:id="recipes" layoutX="100.0" layoutY="150.0" prefHeight="25.0" prefWidth="200.0" wrapText="true" />
             </content>
