@@ -29,7 +29,6 @@ public class FavoriteRecipes {
                 else
                 {
                     JSONObject jsonObject1 = new JSONObject();
-                    JSONArray jsonArray2 = new JSONArray();
                     jsonObject1.put(code, FavoriteRecipe);
                     jsonArray.add(jsonObject1);
 
@@ -85,8 +84,9 @@ public class FavoriteRecipes {
 
 
 
-    public static ArrayList<String> SignIn(ArrayList<String> user, int logAndSign) throws IOException, ParseException {
+    public static ArrayList<String> SignIn(ArrayList<String> listOfInfos, int logAndSign) throws IOException, ParseException {
         String fileName = "Favorites.json";
+        String code = listOfInfos.get(0)+listOfInfos.get(1);
         File f = new File(fileName);
         f.createNewFile();
         if (f.isFile()) {
@@ -96,31 +96,31 @@ public class FavoriteRecipes {
                 if (f.length()!=0){
                     jsonArray = (JSONArray) jsonP.parse(new FileReader(fileName));
                     JSONObject jsonObject1 = new JSONObject();
-                    jsonObject1.put(user.get(0)+user.get(1), "");
+                    jsonObject1.put(code, "");
                     if(jsonArray.contains(jsonObject1)){
                         if (logAndSign == 2){
                             System.out.println("Account Already created !");
-                            System.out.println("Welcome Again "+ user.get(0));
+                            System.out.println("Welcome Again "+ listOfInfos.get(0));
                         }
                         else
                         {
-                            System.out.println("Welcome Again "+ user.get(0));
+                            System.out.println("Welcome Again "+ listOfInfos.get(0));
                         }
-                        return user;
+                        return listOfInfos;
                     }
-                    else
-                    if (logAndSign==1)
-                    {
-                        user.add(2,"no");
-                        return user;
-                    }
-                   // jsonArray.add(jsonObject1);
+
+                   jsonArray.add(jsonObject1);
                 }
                 else
                 {
                     JSONObject jsonObject1 = new JSONObject();
-                    jsonObject1.put(user, "");
+                    jsonObject1.put(code, "");
                     jsonArray.add(jsonObject1);
+                }
+                if (logAndSign==1)
+                {
+                    listOfInfos.add(2,"no");
+                    return listOfInfos;
                 }
                 FileWriter fw = new FileWriter(fileName);
                 BufferedWriter bw = new BufferedWriter(fw);
@@ -128,13 +128,13 @@ public class FavoriteRecipes {
                 bw.newLine();
                 fw.close();
                 System.out.println("Account created !");
-                System.out.println("Welcome  "+ user.get(0));
+                System.out.println("Welcome  "+ listOfInfos.get(0));
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        return user;
+        return listOfInfos;
     }
 
 
