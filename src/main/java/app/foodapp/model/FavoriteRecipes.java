@@ -12,7 +12,10 @@ public class FavoriteRecipes {
 
 
     public static void FillFile(String FavoriteRecipe,ArrayList<String> listOfInfos) throws IOException, ParseException {
-        String code = listOfInfos.get(0)+listOfInfos.get(1);
+        ArrayList<String> userAndPassword = new ArrayList<>();
+        userAndPassword.add(0,listOfInfos.get(0));
+        userAndPassword.add(1,listOfInfos.get(1));
+        String code = String.valueOf(userAndPassword);
         String fileName = "Favorites.json";
         File f = new File(fileName);
         f.createNewFile();
@@ -49,8 +52,10 @@ public class FavoriteRecipes {
     static ArrayList<String> nameList= new ArrayList<>();
 
     public static Object ShowFavorites(ArrayList<String> listOfInfos) throws IOException, ParseException {
-      String code = listOfInfos.get(0)+listOfInfos.get(1);
-    String fileName = "Favorites.json";
+    ArrayList<String> userAndPassword = new ArrayList<>();
+    userAndPassword.add(0,listOfInfos.get(0));
+    userAndPassword.add(1,listOfInfos.get(1));
+    String code = String.valueOf(userAndPassword);    String fileName = "Favorites.json";
     boolean containsValue= false;
     int j=-1;
     File f = new File(fileName);
@@ -65,7 +70,7 @@ public class FavoriteRecipes {
                         containsValue=true;
                         nameList.add((String) favoriteRecipe.get(code));
                         j++;
-                        System.out.print(j+" )");
+                        System.out.print(j+") ");
                         System.out.println(favoriteRecipe.get(code));
                     }
                 }
@@ -86,7 +91,10 @@ public class FavoriteRecipes {
 
     public static ArrayList<String> SignIn(ArrayList<String> listOfInfos, int logAndSign) throws IOException, ParseException {
         String fileName = "Favorites.json";
-        String code = listOfInfos.get(0)+listOfInfos.get(1);
+        ArrayList<String> userAndPassword = new ArrayList<>();
+        userAndPassword.add(0,listOfInfos.get(0));
+        userAndPassword.add(1,listOfInfos.get(1));
+        String code = String.valueOf(userAndPassword);
         File f = new File(fileName);
         f.createNewFile();
         if (f.isFile()) {
@@ -99,12 +107,12 @@ public class FavoriteRecipes {
                     jsonObject1.put(code, "");
                     if(jsonArray.contains(jsonObject1)){
                         if (logAndSign == 2){
-                            System.out.println("Account Already created !");
-                            System.out.println("Welcome Again "+ listOfInfos.get(0));
+                            listOfInfos.add(2, "alreadyCreated");
+
                         }
                         else
                         {
-                            System.out.println("Welcome Again "+ listOfInfos.get(0));
+                            listOfInfos.add(2, "alreadyCreated2");
                         }
                         return listOfInfos;
                     }
@@ -119,7 +127,7 @@ public class FavoriteRecipes {
                 }
                 if (logAndSign==1)
                 {
-                    listOfInfos.add(2,"no");
+                    listOfInfos.add(2,"notExist");
                     return listOfInfos;
                 }
                 FileWriter fw = new FileWriter(fileName);
@@ -127,8 +135,8 @@ public class FavoriteRecipes {
                 fw.write(String.valueOf(jsonArray));
                 bw.newLine();
                 fw.close();
-                System.out.println("Account created !");
-                System.out.println("Welcome  "+ listOfInfos.get(0));
+                listOfInfos.add(2, "AccountCreated");
+
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -144,7 +152,10 @@ public class FavoriteRecipes {
 
         public static void DeleteFavorite(ArrayList<String> listOfInfos, int number) throws IOException, ParseException {
         String fileName = "Favorites.json";
-        String code = listOfInfos.get(0)+listOfInfos.get(1);
+        ArrayList<String> userAndPassword = new ArrayList<>();
+        userAndPassword.add(0,listOfInfos.get(0));
+        userAndPassword.add(1,listOfInfos.get(1));
+        String code = String.valueOf(userAndPassword);
             File f = new File(fileName);
         f.createNewFile();
         if (f.isFile()) {
