@@ -6,6 +6,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -35,7 +36,9 @@ public class AddRecipes {
                     Map.Entry ingredient = (Map.Entry) iterator.next();
                     JSONObject ingredientObject = new JSONObject();
                     ingredientObject.put("Name",ingredient.getKey());
-                    ingredientObject.put("Quantity",ingredient.getValue());
+                    ArrayList<String> ingredientQuantityAndUnity = (ArrayList<String>) ingredient.getValue();
+                    ingredientObject.put("Quantity", ingredientQuantityAndUnity.get(0));
+                    ingredientObject.put("Unity", ingredientQuantityAndUnity.get(1));
                     ingredientsObject.put(ingredientsNumber,ingredientObject);
                 }
 

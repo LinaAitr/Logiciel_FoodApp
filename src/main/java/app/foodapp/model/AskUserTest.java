@@ -92,7 +92,7 @@ public class AskUserTest {
             String time = inputUser.next();
             System.out.println("ingredients : ");
             int i=0;
-            HashMap<String,String> ingredients = new HashMap<>();
+            HashMap<String,ArrayList<String>> ingredients = new HashMap<>();
             int moreIngredients;
             do {
                 i++;
@@ -102,8 +102,11 @@ public class AskUserTest {
                 System.out.print("Quantity :");
                 String ingredientQtt = inputUser.next();
                 System.out.print("Unity :");
-               // String ingredientUnity = inputUser.next();
-                ingredients.put(ingredientName,ingredientQtt);
+                String ingredientUnity = inputUser.next();
+                ArrayList<String> ingredientQuantityAndUnity =new ArrayList<>();
+                ingredientQuantityAndUnity.add(ingredientQtt);
+                ingredientQuantityAndUnity.add(ingredientUnity);
+                ingredients.put(ingredientName, ingredientQuantityAndUnity);
                 System.out.println("Do you want to add an ingredient ?");
                 System.out.println("1-yes");
                 System.out.println("2-No");
