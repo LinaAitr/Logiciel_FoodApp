@@ -1,4 +1,6 @@
 package app.foodapp.model;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
@@ -12,26 +14,33 @@ public class AskUserTest {
         Scanner inputUser = new Scanner(System.in);
         int choice;
         do {
-            System.out.println();
-            System.out.println("Choose an option :\n");
+            System.out.println("Choose an option :");
+            System.out.println("--------------------------");
             System.out.println("1-Key research");
             System.out.println("2-Ingredient research");
             System.out.println("3-Show favorites");
             System.out.println("4-Add a recipe");
             System.out.println("5-Quit");
             System.out.println("6-Log out");
+            System.out.println("7-Show my own recipes");
+            System.out.println("--------------------------");
+
             System.out.print("Your choice : ");
+
             choice = inputUser.nextInt();
-        } while (choice != 1 && choice!=2 && choice!=3 && choice!=4 && choice!=5 && choice!=6);
+        } while (choice != 1 && choice!=2 && choice!=3 && choice!=4 && choice!=5 && choice!=6 && choice!=7);
 
 
         if (choice == 1){
             System.out.println();
             System.out.print("Give us your key word : ");
             String keyWord = inputUser.next();
+            System.out.println("--------------------------");
             if (RequestAPI.SearchByKey(keyWord)){
-               recipeInfoByID(user,inputUser);
-           }
+                System.out.println("--------------------------");
+                recipeInfoByID(user,inputUser);
+
+            }
             AskUser(user);
         }
 
@@ -83,22 +92,34 @@ public class AskUserTest {
          else if (choice==6){
              StartApp();
         }
+        if (choice == 7){
+            System.out.println();
+            AddRecipes.ShowRecipes(user);
+            System.out.println();
+
+            AskUser(user);
+        }
+
          else if (choice==4){
             System.out.println("Give us infos ");
             System.out.println();
             System.out.print("title : ");
-            String title = inputUser.next();
+            Scanner sc = new Scanner(System.in);
+            String title = sc.nextLine();
             System.out.print("time : ");
             String time = inputUser.next();
             System.out.println("ingredients : ");
             int i=0;
+            int j=0;
             HashMap<String,ArrayList<String>> ingredients = new HashMap<>();
             int moreIngredients;
+            int moreSteps;
             do {
                 i++;
                 System.out.println("ingredient "+i+" : ");
                 System.out.print("Name :");
-                String ingredientName = inputUser.next();
+                sc = new Scanner(System.in);
+                String ingredientName = sc.nextLine();
                 System.out.print("Quantity :");
                 String ingredientQtt = inputUser.next();
                 System.out.print("Unity :");
@@ -113,9 +134,28 @@ public class AskUserTest {
                 System.out.print("Your choice : ");
                 moreIngredients = inputUser.nextInt();
             } while (moreIngredients==1);
-            AddRecipes.AddRecipe(user,title, time,ingredients);
+            System.out.println("Steps : ");
+            ArrayList<String> steps =new ArrayList<>();
+
+            do {
+                j++;
+                System.out.print("Step "+j+" :");
+                sc = new Scanner(System.in);
+                String step = sc.nextLine();
+                steps.add(step);
+                System.out.println("Do you want to add a step ?");
+                System.out.println("1-yes");
+                System.out.println("2-No");
+                System.out.print("Your choice : ");
+                moreSteps = inputUser.nextInt();
+            }while (moreSteps==1);
+
+            AddRecipes.AddRecipe(user,title, time,ingredients,steps);
+            AskUser(user);
         }
     }
+
+
 
     private static void recipeInfoByID(ArrayList<String> user ,Scanner inputUser) throws IOException, ParseException {
         System.out.println();
@@ -141,10 +181,14 @@ public class AskUserTest {
     }
 
     private static ArrayList<String> LogAndSign( ) throws IOException, ParseException {
+        System.out.println();
         System.out.println("Choose an option :");
+        System.out.println("--------------------------");
         System.out.println("1-Log in");
         System.out.println("2-Sign in");
         System.out.println("3-Quit");
+        System.out.println("--------------------------");
+        System.out.println("Your choice : ");
         Scanner inputUser = new Scanner(System.in);
         int logAndSign = inputUser.nextInt();
         if (logAndSign==3){
@@ -176,19 +220,19 @@ public class AskUserTest {
             if (Objects.equals(userUpdate.get(2), "notExist")){
                 System.out.println();
                 System.out.println("Account doesnt exist ! PLease verify spelling or create a new one !");
-                LogAndSign();
+                return LogAndSign();
             }
             else if (Objects.equals(userUpdate.get(2), "alreadyCreated2")) {
                 System.out.println();
                 System.out.println("Welcome Again "+ userUpdate.get(0)+" !");
+                System.out.println();
+
             }
-
-
         }
         return user;
     }
 
-    private static void StartApp( ) throws IOException, ParseException {
+    private static void StartApp() throws IOException, ParseException {
         ArrayList<String> user = LogAndSign();
         if (user.size()!=0){
             AskUser(user);
