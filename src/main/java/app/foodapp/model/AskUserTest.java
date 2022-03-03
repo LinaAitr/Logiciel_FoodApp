@@ -113,7 +113,7 @@ public class AskUserTest {
                 System.out.print("Your choice : ");
                 moreIngredients = inputUser.nextInt();
             } while (moreIngredients==1);
-            AddRecipes.AddRecipe(title, time,ingredients);
+            AddRecipes.AddRecipe(user,title, time,ingredients);
         }
     }
 

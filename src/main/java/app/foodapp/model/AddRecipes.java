@@ -13,9 +13,13 @@ import java.util.Map;
 
 public class AddRecipes {
 
-    public static <e> void AddRecipe(String title , String time, HashMap ingredients) throws IOException, ParseException {
+    public static <e> void AddRecipe(ArrayList<String> user ,String title , String time, HashMap ingredients) throws IOException, ParseException {
         String fileName = "MyRecipes.json";
         File f = new File(fileName);
+        ArrayList<String> userAndPassword = new ArrayList<>();
+        userAndPassword.add(0,user.get(0));
+        userAndPassword.add(1,user.get(1));
+        String code = String.valueOf(userAndPassword);
         f.createNewFile();
         if (f.isFile()) {
             JSONParser jsonP = new JSONParser();
@@ -43,10 +47,12 @@ public class AddRecipes {
                 }
 
                 JSONObject jsonObjectNewRecipe = new JSONObject();
+                JSONObject jsonObjectNewRecipeUser = new JSONObject();
                 jsonObjectNewRecipe.put("Time",  time);
                 jsonObjectNewRecipe.put("Name",  title);
                 jsonObjectNewRecipe.put("Ingredients",  ingredientsObject);
-                NewJsonArrayHomeRecipes.add(jsonObjectNewRecipe);
+                jsonObjectNewRecipeUser.put(code,jsonObjectNewRecipe);
+                NewJsonArrayHomeRecipes.add(jsonObjectNewRecipeUser);
 
                 FileWriter fw = new FileWriter(fileName);
                 BufferedWriter bw = new BufferedWriter(fw);
