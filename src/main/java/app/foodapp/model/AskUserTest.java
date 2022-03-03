@@ -3,22 +3,26 @@ import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class AskUserTest {
-    public static void AskUser(ArrayList user) throws IOException, ParseException {
+    public static void AskUser(ArrayList<String> user) throws IOException, ParseException {
         Scanner inputUser = new Scanner(System.in);
-        int choice = -1;
+        int choice;
         do {
             System.out.println();
             System.out.println("Choose an option :\n");
             System.out.println("1-Key research");
             System.out.println("2-Ingredient research");
             System.out.println("3-Show favorites");
-            System.out.println("4-Quit");
+            System.out.println("4-Add a recipe");
+            System.out.println("5-Quit");
+            System.out.println("6-Log out");
             System.out.print("Your choice : ");
             choice = inputUser.nextInt();
-        } while (choice != 1 && choice!=2 && choice!=3 && choice!=4);
+        } while (choice != 1 && choice!=2 && choice!=3 && choice!=4 && choice!=5 && choice!=6);
 
 
         if (choice == 1){
@@ -46,7 +50,7 @@ public class AskUserTest {
            Boolean favoritesIsNotEmpty= (Boolean) favoritesDetails[1];
            int numberOfFavorites= (int) favoritesDetails[0];
             if (favoritesIsNotEmpty){
-                int number = -1;
+                int number ;
                 do {
                     System.out.println();
                     System.out.println("Do you want to delete something ? ");
@@ -59,7 +63,7 @@ public class AskUserTest {
                if (number==2) AskUser(user);
                else
                {
-                   int numberFav =-1;
+                   int numberFav;
                    do {
                        System.out.println();
                        System.out.println("Choose a number from your favorite recipes ! ");
@@ -76,6 +80,38 @@ public class AskUserTest {
             AskUser(user);
 
         }
+         else if (choice==6){
+             StartApp();
+        }
+         else if (choice==4){
+            System.out.println("Give us infos ");
+            System.out.println();
+            System.out.print("title : ");
+            String title = inputUser.next();
+            System.out.print("time : ");
+            String time = inputUser.next();
+            System.out.println("ingredients : ");
+            int i=0;
+            HashMap<String,String> ingredients = new HashMap<>();
+            int moreIngredients;
+            do {
+                i++;
+                System.out.println("ingredient "+i+" : ");
+                System.out.print("Name :");
+                String ingredientName = inputUser.next();
+                System.out.print("Quantity :");
+                String ingredientQtt = inputUser.next();
+                System.out.print("Unity :");
+               // String ingredientUnity = inputUser.next();
+                ingredients.put(ingredientName,ingredientQtt);
+                System.out.println("Do you want to add an ingredient ?");
+                System.out.println("1-yes");
+                System.out.println("2-No");
+                System.out.print("Your choice : ");
+                moreIngredients = inputUser.nextInt();
+            } while (moreIngredients==1);
+            AddRecipes.AddRecipe(title, time,ingredients);
+        }
     }
 
     private static void recipeInfoByID(ArrayList<String> user ,Scanner inputUser) throws IOException, ParseException {
@@ -86,15 +122,15 @@ public class AskUserTest {
         RecipeInformations recipe = new  RecipeInformations(RequestAPI.idList.get(index));
         RecipeInformations.SearchById(recipe);
 
-        int answ = -1;
+        int answer;
         do {
             System.out.println();
             System.out.println("Do you want to add to favorite ?");
             System.out.println("1-Yes");
             System.out.println("2-No");
-            answ = inputUser.nextInt();
-        }while (answ != 1 && answ!=2);
-        if (answ==1){
+            answer = inputUser.nextInt();
+        }while (answer != 1 && answer!=2);
+        if (answer==1){
             FavoriteRecipes.FillFile(recipe.getTitle(),user);
         }
 
@@ -105,8 +141,12 @@ public class AskUserTest {
         System.out.println("Choose an option :");
         System.out.println("1-Log in");
         System.out.println("2-Sign in");
+        System.out.println("3-Quit");
         Scanner inputUser = new Scanner(System.in);
         int logAndSign = inputUser.nextInt();
+        if (logAndSign==3){
+            return new ArrayList<>();
+        }
         System.out.print("Username : ");
         String userName = inputUser.next();
         System.out.print("Password : ");
@@ -115,14 +155,14 @@ public class AskUserTest {
         user.add(userName);
         user.add(password);
         user.add("yes");
-        ArrayList userUpdate =FavoriteRecipes.SignIn(user,logAndSign);
+        ArrayList<String> userUpdate =FavoriteRecipes.SignIn(user,logAndSign);
         if (logAndSign==2){
-            if (userUpdate.get(2) == "alreadyCreated"){
+            if (Objects.equals(userUpdate.get(2), "alreadyCreated")){
                 System.out.println();
                 System.out.println("Account Already created !");
                 System.out.println("Welcome Again "+ userUpdate.get(0));
             }
-            else if (userUpdate.get(2)=="AccountCreated"){
+            else if (Objects.equals(userUpdate.get(2), "AccountCreated")){
                 System.out.println();
                 System.out.println("Account created !");
                 System.out.println("Welcome  "+ userUpdate.get(0)+" !");
@@ -130,18 +170,26 @@ public class AskUserTest {
         }
         else if (logAndSign==1)
         {
-            if (userUpdate.get(2)=="notExist"){
+            if (Objects.equals(userUpdate.get(2), "notExist")){
                 System.out.println();
                 System.out.println("Account doesnt exist ! PLease verify spelling or create a new one !");
                 LogAndSign();
             }
-            else if (userUpdate.get(2)=="alreadyCreated2") {
+            else if (Objects.equals(userUpdate.get(2), "alreadyCreated2")) {
                 System.out.println();
                 System.out.println("Welcome Again "+ userUpdate.get(0)+" !");
             }
 
+
         }
         return user;
+    }
+
+    private static void StartApp( ) throws IOException, ParseException {
+        ArrayList<String> user = LogAndSign();
+        if (user.size()!=0){
+            AskUser(user);
+        }
     }
 
 
@@ -149,9 +197,9 @@ public class AskUserTest {
 
 
 
+
         public static void main(String[] args) throws IOException, ParseException {
-        ArrayList user = LogAndSign();
-        AskUser(user);
+      StartApp();
     }
 
 }
