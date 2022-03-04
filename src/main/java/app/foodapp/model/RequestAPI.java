@@ -16,8 +16,12 @@ import static java.lang.String.valueOf;
 public class RequestAPI {
 
     //public static String APIKey = "ab7c3f5a18a04dd8903bc5fdb0be40e9";
-    public static String APIKey = "30ca87269ac8432c8130d7bef6ae2e49";
+    //public static String APIKey = "30ca87269ac8432c8130d7bef6ae2e49";
     //public static String APIKey = "4e944d67e59d4271b4181168f3535444";
+    //public static String APIKey   = "79f2327aad3240e68f49b7de252cd5fe";
+    public static String APIKey = "a2c302f11e894e71962240cde6bd7c5e";
+
+
 
 
     public static StringBuilder ConnectAPI(URL url) throws IOException {
@@ -72,7 +76,7 @@ public class RequestAPI {
 
     static ArrayList<String> idList= new ArrayList<>();
 
-    public static boolean SearchByKey(String key){
+    public static ArrayList<String> SearchByKey(String key){
         try {
             int l=-1;
             idList.clear();
@@ -82,12 +86,12 @@ public class RequestAPI {
             JSONObject jsonO = (JSONObject)parse.parse(String.valueOf(ConnectAPI(URL)));
 
             JSONArray resultRecipes = (JSONArray) jsonO.get("results");
-
+/*
             if (resultRecipes.isEmpty()) {
                 System.out.println("No recipe found !");
                 return false;
-            }
-            else{
+            }*/
+            //else{
                 for (Object recipe : resultRecipes) {
                     JSONObject person = (JSONObject) recipe;
                     l++;
@@ -97,15 +101,12 @@ public class RequestAPI {
                     idList.add(id);
                     System.out.println(name);
                 }
-            }
+         //   }
 
         } catch (ParseException | IOException e) {
             e.printStackTrace();
         }
-        if (idList.size() !=0 ){
-            return true;
-        }
-        return false;
+        return idList;
     }
 
 }

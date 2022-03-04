@@ -36,7 +36,7 @@ public class AskUserTest {
             System.out.print("Give us your key word : ");
             String keyWord = inputUser.next();
             System.out.println("--------------------------");
-            if (RequestAPI.SearchByKey(keyWord)){
+            if (RequestAPI.SearchByKey(keyWord).size()!=0){
                 System.out.println("--------------------------");
                 recipeInfoByID(user,inputUser);
 
