@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class  FoodAppController implements Initializable {
@@ -106,12 +107,16 @@ public class  FoodAppController implements Initializable {
     @FXML
     private void showRecipes() throws IOException, ParseException {
 
-        ArrayList<String> charOfRecipe= ShowRecipes.showRecipe(searchBar.getText());
-
+        //ArrayList<String> charOfRecipe= ShowRecipes.showRecipe(searchBar.getText());
+        List<String> charOfRecipe = new ArrayList<>();
+        charOfRecipe.add("69095");
+        charOfRecipe.add("665469");
         for (String s : charOfRecipe) {
-
-            recipe.setText( s+ "\r");
-            recipe.setVisible(true);
+            RecipeInformations infoFav = new RecipeInformations(s);
+            recipe.setText(")"+ infoFav.getTitle());
+            recipes.setVisible(true);
+           // recipe.setText( s+ "\r");
+           // recipe.setVisible(true);
 
 //             Label recipe = new Label();
 //             recipe.setText(charOfRecipe.get(i));
