@@ -91,6 +91,7 @@ public class FavoriteRecipes {
 
     public static ArrayList<String> SignIn(ArrayList<String> listOfInfos, int logAndSign) throws IOException, ParseException {
         String fileName = "Favorites.json";
+
         ArrayList<String> userAndPassword = new ArrayList<>();
         userAndPassword.add(0,listOfInfos.get(0));
         userAndPassword.add(1,listOfInfos.get(1));
