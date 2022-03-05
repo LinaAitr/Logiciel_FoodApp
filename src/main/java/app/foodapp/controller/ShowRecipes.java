@@ -1,5 +1,6 @@
 package app.foodapp.controller;
 
+import app.foodapp.model.RecipeInformations;
 import app.foodapp.model.RequestAPI;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -58,5 +59,9 @@ public class ShowRecipes {
      return  searchResult;
     }
 
+//    public static void getRecipeiInformations(){
+//        RecipeInformations recipe = new  RecipeInformations(RequestAPI.idList.get());
+//        RecipeInformations.SearchById(recipe);
+//    }
 
 }

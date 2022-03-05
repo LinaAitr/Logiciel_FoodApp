@@ -2,6 +2,7 @@ package app.foodapp.controller;
 
 import app.foodapp.model.AskUserTest;
 import app.foodapp.model.RecipeInformations;
+import app.foodapp.model.RequestAPI;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
@@ -115,10 +116,8 @@ public class  FoodAppController implements Initializable {
         //List<String> charOfRecipe = new ArrayList<>();
 
         for (String s : charOfRecipe) {
-            Hyperlink c = new Hyperlink(s);
-            c.setText(s);
-            c.setVisible(true);
-            recipe.setText(recipe.getText()+ s+ "\r");
+            recipe.setVisible(true);
+            recipe.setText(s+ "\r");
             recipe.setVisible(true);
 //
 //            l.add(c);
@@ -138,7 +137,8 @@ public class  FoodAppController implements Initializable {
     }
 
     @FXML
-    private void toPrint(){
+    private void getRecipeInformation(){
+
         System.out.println("ça marche!!");
     }
 }

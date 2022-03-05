@@ -63,7 +63,7 @@ public class AskUserTest {
     }
 
     public static void recipeInfoByID(Scanner inputUser) throws IOException, ParseException {
-        System.out.println("Do you want to know more about one this recipes? just give us the number !");
+        System.out.println("Do you want to know more about this recipe? just give us the number !");
         System.out.print("Number : ");
         int index = inputUser.nextInt();
         RecipeInformations recipe = new  RecipeInformations(RequestAPI.idList.get(index));
@@ -75,7 +75,7 @@ public class AskUserTest {
             answ = inputUser.nextInt();
         }
         if (answ==1){
-           System.out.print("Dogive us your search Code ! : ");
+           System.out.print("Give us your search Code ! : ");
            String code = inputUser.next();
             FavoriteRecipes.FillFile(recipe.getTitle(),code);
         }
