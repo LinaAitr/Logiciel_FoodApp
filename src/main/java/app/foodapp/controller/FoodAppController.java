@@ -1,12 +1,5 @@
 package app.foodapp.controller;
 
-import app.foodapp.model.AskUserTest;
-import app.foodapp.model.RecipeInformations;
-import app.foodapp.model.RequestAPI;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -14,14 +7,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class  FoodAppController implements Initializable {
@@ -41,10 +31,7 @@ public class  FoodAppController implements Initializable {
 
 
     @FXML private Label label;
-    @FXML private Label recipes;
-    //@FXML  public Label recipe;
-    @FXML  private Hyperlink recipe;
-    @FXML  private ArrayList<Hyperlink> l = new ArrayList<Hyperlink>();
+    @FXML private Hyperlink recipe;
 
 
 
@@ -89,9 +76,9 @@ public class  FoodAppController implements Initializable {
     @FXML
     private void logIn(){
         label.setText("your log in is done ");
-        recipes.setVisible(false);
-        if (!recipes.isVisible())
-            recipes.setVisible(false);
+        recipe.setVisible(false);
+        if (!recipe.isVisible())
+            recipe.setVisible(false);
     }
 
     @FXML
@@ -111,34 +98,18 @@ public class  FoodAppController implements Initializable {
     private void showRecipes() throws IOException, ParseException {
 
         ArrayList<String> charOfRecipe= ShowRecipes.showRecipe(searchBar.getText());
-        ArrayList<Hyperlink> l = new ArrayList<Hyperlink>();
-        System.out.println(charOfRecipe);
-        //List<String> charOfRecipe = new ArrayList<>();
+        //System.out.println(charOfRecipe);
 
         for (String s : charOfRecipe) {
-            recipe.setVisible(true);
-            recipe.setText(s+ "\r");
-            recipe.setVisible(true);
-//
-//            l.add(c);
 
-//            RecipeInformations infoFav = new RecipeInformations(s);
-//            recipe.setText(")"+ infoFav.getTitle());
-//            recipes.setVisible(true);
-//           recipe.setText( s+ "\r");
-//           recipe.setVisible(true);
-
-//             Label recipe = new Label();
-//             recipe.setText(charOfRecipe.get(i));
-//            recipes.setText(recipes.getText()+ recipe.getText()+ "\r");
-////            recipe.setOnMouseClicked(event -> System.out.println("oui!!"));
+            recipe.setText( s+ "\r");
+            recipe.setVisible(true);
         }
 
     }
 
     @FXML
-    private void getRecipeInformation(){
-
+    private void toPrint(){
         System.out.println("ça marche!!");
     }
 }
