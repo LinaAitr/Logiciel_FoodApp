@@ -42,7 +42,9 @@ public class  FoodAppController implements Initializable {
     @FXML private Label label;
     @FXML private Label recipes;
     //@FXML  public Label recipe;
-    @FXML  public Hyperlink recipe;
+    @FXML  private Hyperlink recipe;
+    @FXML  private ArrayList<Hyperlink> l = new ArrayList<Hyperlink>();
+
 
 
 
@@ -107,16 +109,25 @@ public class  FoodAppController implements Initializable {
     @FXML
     private void showRecipes() throws IOException, ParseException {
 
-        //ArrayList<String> charOfRecipe= ShowRecipes.showRecipe(searchBar.getText());
-        List<String> charOfRecipe = new ArrayList<>();
-        charOfRecipe.add("69095");
-        charOfRecipe.add("665469");
+        ArrayList<String> charOfRecipe= ShowRecipes.showRecipe(searchBar.getText());
+        ArrayList<Hyperlink> l = new ArrayList<Hyperlink>();
+        System.out.println(charOfRecipe);
+        //List<String> charOfRecipe = new ArrayList<>();
+
         for (String s : charOfRecipe) {
-            RecipeInformations infoFav = new RecipeInformations(s);
-            recipe.setText(")"+ infoFav.getTitle());
-            recipes.setVisible(true);
-           // recipe.setText( s+ "\r");
-           // recipe.setVisible(true);
+            Hyperlink c = new Hyperlink(s);
+            c.setText(s);
+            c.setVisible(true);
+            recipe.setText(recipe.getText()+ s+ "\r");
+            recipe.setVisible(true);
+//
+//            l.add(c);
+
+//            RecipeInformations infoFav = new RecipeInformations(s);
+//            recipe.setText(")"+ infoFav.getTitle());
+//            recipes.setVisible(true);
+//           recipe.setText( s+ "\r");
+//           recipe.setVisible(true);
 
 //             Label recipe = new Label();
 //             recipe.setText(charOfRecipe.get(i));
