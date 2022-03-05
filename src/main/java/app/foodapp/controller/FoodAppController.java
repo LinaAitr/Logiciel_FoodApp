@@ -1,6 +1,7 @@
 package app.foodapp.controller;
 
 import app.foodapp.model.AskUserTest;
+import app.foodapp.model.RecipeInformations;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
@@ -39,7 +40,9 @@ public class  FoodAppController implements Initializable {
 
     @FXML private Label label;
     @FXML private Label recipes;
-    @FXML  public Label recipe;
+    //@FXML  public Label recipe;
+    @FXML  public Hyperlink recipe;
+
 
 
     //    @Override
@@ -105,12 +108,15 @@ public class  FoodAppController implements Initializable {
 
         ArrayList<String> charOfRecipe= ShowRecipes.showRecipe(searchBar.getText());
 
-        for (int i = 0; i < charOfRecipe.size(); i++) {
+        for (String s : charOfRecipe) {
 
-             Label recipe = new Label();
-             recipe.setText(charOfRecipe.get(i));
-            recipes.setText(recipes.getText()+ recipe.getText()+ "\r");
-//            recipe.setOnMouseClicked(event -> System.out.println("oui!!"));
+            recipe.setText( s+ "\r");
+            recipe.setVisible(true);
+
+//             Label recipe = new Label();
+//             recipe.setText(charOfRecipe.get(i));
+//            recipes.setText(recipes.getText()+ recipe.getText()+ "\r");
+////            recipe.setOnMouseClicked(event -> System.out.println("oui!!"));
         }
 
     }
@@ -119,13 +125,4 @@ public class  FoodAppController implements Initializable {
     private void toPrint(){
         System.out.println("ça marche!!");
     }
-
-
 }
-//            Hyperlink recipe = ;
-//            recipe.setText();
-//            linkBlog.setText(charOfRecipe.get(i));
-//            recipes.textProperty().bind( linkBlog.textProperty()recipes.textProperty());
-
-//recipes.setOnMouseClicked(recipe.getOnMouseClicked());
-// hpls[i] = new Hyperlink(charOfRecipe.get(i));
