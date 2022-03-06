@@ -28,6 +28,8 @@ import java.util.Timer;
 public class FoodApp extends Application {
     VBox vbox = new VBox();
     VBox vbox2 = new VBox();
+    VBox vBox4 =new VBox();
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/app/foodapp/view/foodapp.fxml"));
@@ -138,38 +140,50 @@ public class FoodApp extends Application {
 
         //VBox vbox = new VBox();
         int n=5;
+        vbox2.getChildren().remove(0,vbox2.getChildren().size());
         for (int j=0; j<(n/4);j++){
         HBox hbox = new HBox();
         hbox.setId(String.valueOf(j));
         for (int i=j*4; i<(j+1)*(n);i++){
             VBox vbox3 = new VBox();
-            //RecipeInformations rec = new RecipeInformations(tr.get(i));
-            //final Image image = new Image(rec.getImage());
-            //Hyperlink tg =new Hyperlink(""+rec.getTitle());
-            Hyperlink tg =new Hyperlink("tg"+i);
-            showSingelRecipe(tg,tr.get(i) );
+            RecipeInformations rec = new RecipeInformations(tr.get(i));
+            final Image image = new Image(rec.getImage());
+            Hyperlink tg =new Hyperlink(""+rec.getTitle());
+            //Hyperlink tg =new Hyperlink("tg"+i);
+            showSingelRecipe(tg,tr.get(i),textField );
             tg.setMaxHeight(400);
-           // final ImageView imageView = new ImageView(image);
-            //imageView.setFitHeight(100);
-            //imageView.setFitWidth(200);
+           final ImageView imageView = new ImageView(image);
+            imageView.setFitHeight(100);
+            imageView.setFitWidth(200);
             vbox3.getChildren().add(tg);
-            //vbox3.getChildren().add(imageView);
+            vbox3.getChildren().add(imageView);
             hbox.getChildren().add(vbox3);
 
             }
         hbox.setSpacing(50);
-        vbox2.getChildren().add(hbox);
+            vbox2.getChildren().add(hbox);
         vbox2.setLayoutX(100);
         vbox2.setLayoutY(150);
 
         }
     }
 
-    public void showSingelRecipe(Hyperlink tg, String id){
+    public void showSingelRecipe(Hyperlink tg, String id, TextField textField){
         tg.setOnAction(event->{
             try {
                 RecipeInformations rec = new RecipeInformations(id);
                 vbox2.getChildren().remove(0,vbox2.getChildren().size());
+                Button previous = new Button("<--Previous");
+                previous.setOnAction(prev ->{
+                    try {
+                        showRecipes(textField);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                });
+                vbox2.getChildren().add(previous);
                 Label title = new Label(tg.getText());
                 Label time = new Label("Time : "+ rec.getReadyInMinutes());
                 Label servings = new Label(rec.getServings());
@@ -212,7 +226,6 @@ public class FoodApp extends Application {
     public void mainPage( ){
         vbox.setLayoutX(0);
         vbox.setLayoutY(0);
-
         final Button button = new Button("Search");
         Label ingredient = new Label("Give us an ingredient");
         TextField textField = new TextField("");
@@ -227,6 +240,7 @@ public class FoodApp extends Application {
 
         button.setOnAction(actionEvent -> {
             try {
+                vbox2.getChildren().remove(0,vbox2.getChildren().size());
                 showRecipes(textField);
             } catch (IOException e) {
                 e.printStackTrace();
