@@ -62,8 +62,7 @@ public class ShowRecipes {
 //        System.out.println();
 //        return null;
         InformationsOfRecipe recipe = new InformationsOfRecipe(id);
-        String info = ""+ recipe.getSummary()+"\r" +recipe.getReadyInMinutes()+"\r" + recipe.getServings() +"\r"
-                + recipe.getImage()+ "\r"+ recipe.extendedIngredients()+"\r"+recipe.getInstructions();
+        String info = ""+ recipe.getSummary()+"\r" +recipe.getReadyInMinutes()+"\r" + recipe.getServings() +"\r"+ recipe.getImage()+ "\r"+ recipe.extendedIngredients()+"\r"+recipe.getInstructions();
         //String info ="a";
 
         return info;
