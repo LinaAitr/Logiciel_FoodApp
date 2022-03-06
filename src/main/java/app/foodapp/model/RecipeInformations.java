@@ -16,6 +16,7 @@ public class RecipeInformations {
     public static String APIKey = "4e944d67e59d4271b4181168f3535444";
    //public static String APIKey   = "79f2327aad3240e68f49b7de252cd5fe";
     //public static String APIKey = "a2c302f11e894e71962240cde6bd7c5e";
+    //public static String APIKey =  "46058900bcc748ed8daaf0ba6ec0deea";
 
 
 
