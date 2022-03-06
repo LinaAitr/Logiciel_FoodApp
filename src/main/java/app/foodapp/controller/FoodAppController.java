@@ -1,5 +1,6 @@
 package app.foodapp.controller;
 
+import app.foodapp.model.ShowRecipes;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -33,6 +34,7 @@ public class  FoodAppController implements Initializable {
 
     @FXML private Label label;
     @FXML private Hyperlink recipe;
+    @FXML private Label info;
     @FXML private AnchorPane pane;
 
 
@@ -106,6 +108,16 @@ public class  FoodAppController implements Initializable {
             recipe.setText( s+ "\r");
             recipe.setVisible(true);
         }
+
+    }
+
+    @FXML
+    private void showInformations() throws IOException, ParseException {
+
+        info.setText(ShowRecipes.getRecipeiInformations("636571"));
+        info.setVisible(true);
+        recipe.setVisible(false);
+
 
     }
 

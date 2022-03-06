@@ -37,10 +37,10 @@ public class AskUserTest {
            Boolean favoritesIsNotEmpty= (Boolean) favoritesDetails[1];
            int numberOfFavorites= (int) favoritesDetails[0];
             if (favoritesIsNotEmpty){
-               System.out.println("Do you want yo delete something ? 1 for no / 2 for no");
+               System.out.println("Do you want to delete something ? 1 for no / 2 for no");
                int number = inputUser.nextInt();
                while (number != 1 && number!=2 ){
-                   System.out.println("Do you want yo delete something ? 1 for no / 2 for no");
+                   System.out.println("Do you want to delete something ? 1 for no / 2 for no");
                    number = inputUser.nextInt();
                }
                if (number==2) AskUser();

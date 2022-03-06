@@ -1,7 +1,5 @@
-package app.foodapp.controller;
+package app.foodapp.model;
 
-import app.foodapp.model.RecipeInformations;
-import app.foodapp.model.RequestAPI;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -10,20 +8,19 @@ import org.json.simple.parser.ParseException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import static java.lang.String.valueOf;
 
 public class ShowRecipes {
    //public static String APIKey = "ab7c3f5a18a04dd8903bc5fdb0be40e9";
     //public static String APIKey = "30ca87269ac8432c8130d7bef6ae2e49";
-    public static String APIKey = "4e944d67e59d4271b4181168f3535444";
+    //public static String APIKey = "4e944d67e59d4271b4181168f3535444";
     //public static String APIKey ="79f2327aad3240e68f49b7de252cd5fe";
+    public static String APIKey ="e9110f876bc04c26955a4049c161be94"; //nvl api
     static ArrayList<String> idList= new ArrayList<>();
 
 
     public static ArrayList<String> showRecipe(String keyWord) throws IOException, ParseException {
-        Scanner word = new Scanner(keyWord);
         return SearchByIngredient(keyWord);
 
     }
@@ -59,9 +56,17 @@ public class ShowRecipes {
      return  searchResult;
     }
 
-//    public static void getRecipeiInformations(){
-//        RecipeInformations recipe = new  RecipeInformations(RequestAPI.idList.get());
+    public static String getRecipeiInformations(String id) throws IOException, ParseException {
+//        RecipeInformations recipe = new  RecipeInformations(RequestAPI.idList.get(id));
 //        RecipeInformations.SearchById(recipe);
-//    }
+//        System.out.println();
+//        return null;
+        InformationsOfRecipe recipe = new InformationsOfRecipe(id);
+        String info = ""+ recipe.getSummary()+"\r" +recipe.getReadyInMinutes()+"\r" + recipe.getServings() +"\r"
+                + recipe.getImage()+ "\r"+ recipe.extendedIngredients()+"\r"+recipe.getInstructions();
+        //String info ="a";
+
+        return info;
+    }
 
 }

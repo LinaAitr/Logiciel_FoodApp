@@ -102,10 +102,7 @@ public class RequestAPI {
         } catch (ParseException | IOException e) {
             e.printStackTrace();
         }
-        if (idList.size() !=0 ){
-            return true;
-        }
-        return false;
+        return idList.size() != 0;
     }
 
 }
