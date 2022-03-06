@@ -55,10 +55,8 @@ public class AskUserTest {
 
         }
          else if (choice == 3) {
-           Object favoritesDetails[]= (Object[]) FavoriteRecipes.ShowFavorites(user);
-           Boolean favoritesIsNotEmpty= (Boolean) favoritesDetails[1];
-           int numberOfFavorites= (int) favoritesDetails[0];
-            if (favoritesIsNotEmpty){
+             ArrayList<String> listOfId = FavoriteRecipes.ShowFavorites(user);
+            if (listOfId.size()!=0){
                 int number ;
                 do {
                     System.out.println();
@@ -77,7 +75,7 @@ public class AskUserTest {
                        System.out.println();
                        System.out.println("Choose a number from your favorite recipes ! ");
                        numberFav = inputUser.nextInt();
-                   } while (0>numberFav || numberFav>numberOfFavorites);
+                   } while (0>numberFav || numberFav>listOfId.size());
 
                    FavoriteRecipes.DeleteFavorite(user,numberFav);
                    System.out.println("Recipe deleted !");
@@ -174,7 +172,7 @@ public class AskUserTest {
             answer = inputUser.nextInt();
         }while (answer != 1 && answer!=2);
         if (answer==1){
-            FavoriteRecipes.FillFile(recipe.getTitle(),user);
+            FavoriteRecipes.FillFile(recipe.getId(),user);
         }
 
 

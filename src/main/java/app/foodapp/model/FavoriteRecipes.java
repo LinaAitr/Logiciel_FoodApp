@@ -51,7 +51,7 @@ public class FavoriteRecipes {
 
     static ArrayList<String> nameList= new ArrayList<>();
 
-    public static Object ShowFavorites(ArrayList<String> listOfInfos) throws IOException, ParseException {
+    public static ArrayList<String> ShowFavorites(ArrayList<String> listOfInfos) throws IOException, ParseException {
     ArrayList<String> userAndPassword = new ArrayList<>();
     userAndPassword.add(0,listOfInfos.get(0));
     userAndPassword.add(1,listOfInfos.get(1));
@@ -81,8 +81,7 @@ public class FavoriteRecipes {
 
     }
 
-    Object infos[] = new Object[]{j,containsValue};
-        return infos;
+        return nameList;
     }
 
 

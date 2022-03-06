@@ -1,4 +1,3 @@
-
 package app.foodapp;
 
 import app.foodapp.model.FavoriteRecipes;
@@ -67,9 +66,9 @@ public class FoodApp extends Application {
                 ArrayList<String> usersInfos = new ArrayList<>();
                 usersInfos.add(passwordTextField.getText());
                 usersInfos.add(userNameTextField.getText());
-                //Label notExist=ConexionWindow.sign(usersInfos);
+               //Label notExist=ConexionWindow.sign(usersInfos);
                 //notExist.setText(ConexionWindow.sign(usersInfos).getText());
-                ArrayList<String> loginInfos = FavoriteRecipes.SignIn(usersInfos,1);
+                 ArrayList<String> loginInfos = FavoriteRecipes.SignIn(usersInfos,1);
                 if (loginInfos.get(2)=="notExist"){
                     Label notExist = new Label("You account doesn't exist !");
                     vbox.getChildren().add(notExist);
@@ -149,33 +148,33 @@ public class FoodApp extends Application {
     }
 
     public void showRecipes(TextField textField,ArrayList<String> lisOfId, int n) throws IOException, ParseException {
-        vbox2.getChildren().addAll(new Text("Recipes with "+ textField.getText() +" :"));
+      vbox2.getChildren().addAll(new Text("Recipes with "+ textField.getText() +" :"));
 
         //VBox vbox = new VBox();
         vbox2.getChildren().remove(0,vbox2.getChildren().size());
         for (int j=0; j<=(n/5);j++){
-            HBox hbox = new HBox();
-            hbox.setId(String.valueOf(j));
-            for (int i=j*5; i<(j+1)*(n);i++){
-                VBox vbox3 = new VBox();
-                RecipeInformations rec = new RecipeInformations(lisOfId.get(i));
-                final Image image = new Image(rec.getImage());
-                Hyperlink tg =new Hyperlink(""+rec.getTitle());
-                //Hyperlink tg =new Hyperlink("tg"+i);
-                showSingelRecipe(tg,lisOfId.get(i),textField );
-                tg.setMaxHeight(400);
-                final ImageView imageView = new ImageView(image);
-                imageView.setFitHeight(100);
-                imageView.setFitWidth(200);
-                vbox3.getChildren().add(tg);
-                vbox3.getChildren().add(imageView);
-                hbox.getChildren().add(vbox3);
+        HBox hbox = new HBox();
+        hbox.setId(String.valueOf(j));
+        for (int i=j*5; i<(j+1)*(n);i++){
+            VBox vbox3 = new VBox();
+            RecipeInformations rec = new RecipeInformations(lisOfId.get(i));
+            final Image image = new Image(rec.getImage());
+            Hyperlink tg =new Hyperlink(""+rec.getTitle());
+            //Hyperlink tg =new Hyperlink("tg"+i);
+            showSingelRecipe(tg,lisOfId.get(i),textField );
+            tg.setMaxHeight(400);
+           final ImageView imageView = new ImageView(image);
+            imageView.setFitHeight(100);
+            imageView.setFitWidth(200);
+            vbox3.getChildren().add(tg);
+            vbox3.getChildren().add(imageView);
+            hbox.getChildren().add(vbox3);
 
             }
-            hbox.setSpacing(50);
+        hbox.setSpacing(50);
             vbox2.getChildren().add(hbox);
-            vbox2.setLayoutX(100);
-            vbox2.setLayoutY(150);
+        vbox2.setLayoutX(100);
+        vbox2.setLayoutY(150);
 
         }
     }
@@ -277,7 +276,9 @@ public class FoodApp extends Application {
     }
 
     private void showMyFavorites(ArrayList<String> loginInfos,TextField textField) throws IOException, ParseException {
-        getListOfIdForFavorites(textField);
+       getListOfIdForFavorites(textField);
 
     }
+
+    public static void main(String[] args) { launch(args); }
 }
