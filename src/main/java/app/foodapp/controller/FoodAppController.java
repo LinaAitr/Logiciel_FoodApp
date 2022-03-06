@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
@@ -32,7 +33,7 @@ public class  FoodAppController implements Initializable {
 
     @FXML private Label label;
     @FXML private Hyperlink recipe;
-
+    @FXML private AnchorPane pane;
 
 
 

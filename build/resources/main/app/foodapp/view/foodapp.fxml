@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<?import javafx.scene.control.Hyperlink?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.foodapp.controller.FoodAppController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.foodapp.controller.FoodAppController">
     <children>
+        <TextField fx:id="searchBar" alignment="TOP_CENTER" layoutX="238.0" layoutY="63.0" promptText="Enter your ingredient" />
+        <Button fx:id="searchButton" layoutX="409.0" layoutY="63.0" mnemonicParsing="false" onMouseClicked="#showRecipes" text="Search" />
+        <Hyperlink fx:id="recipe" layoutX="190.0" layoutY="137.0" text="" />
 
-        <Label fx:id="label" layoutX="100.0" layoutY="150.0" prefHeight="25.0" prefWidth="200.0" wrapText="true" />
-        <Label fx:id="recipes" layoutX="100.0" layoutY="150.0" prefHeight="25.0" prefWidth="200.0" wrapText="true" />
-<!--        <Label fx:id="recipe" layoutX="100.0" layoutY="150.0" prefHeight="25.0" prefWidth="200.0" wrapText="true" onMouseClicked="#toPrint" />-->
-        <Hyperlink fx:id="recipe" layoutX="100.0" layoutY="150.0" text=".." />
+<!--        <Label fx:id="label" layoutX="100.0" layoutY="150.0" prefHeight="25.0" prefWidth="200.0" wrapText="true" />-->
+<!--        <Label fx:id="recipes" layoutX="100.0" layoutY="150.0" prefHeight="25.0" prefWidth="200.0" wrapText="true" />-->
+<!--&lt;!&ndash;        <Label fx:id="recipe" layoutX="100.0" layoutY="150.0" prefHeight="25.0" prefWidth="200.0" wrapText="true" onMouseClicked="#toPrint" />&ndash;&gt;-->
+<!--        <Hyperlink fx:id="recipe" layoutX="100.0" layoutY="150.0" text=".." />-->
 
 
 
-        <TextField fx:id="searchBar" alignment="TOP_CENTER" layoutX="30.0" layoutY="20" />
-        <Button fx:id="searchButton"  layoutX="200.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#showRecipes" text="Search" />
-        <Button fx:id="favoritesButton" layoutX="550.0" layoutY="20.0" onMouseClicked="#openFavorites" text="Favorites" />
+<!--        <TextField fx:id="searchBar" alignment="TOP_CENTER" layoutX="30.0" layoutY="20" />-->
+<!--        <Button fx:id="searchButton"  layoutX="200.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#showRecipes" text="Search" />-->
+<!--        <Button fx:id="favoritesButton" layoutX="550.0" layoutY="20.0" onMouseClicked="#openFavorites" text="Favorites" />-->
 
-        <Label fx:id="image"/>
+<!--        <Label fx:id="image"/>-->
 
     </children>
 </AnchorPane>
