@@ -34,7 +34,6 @@ public class FoodAppController implements Initializable {
     @FXML private Button dropMenuButton;
     @FXML private Button homeButton;
 
-
     @FXML private Label label;
 
     //    @Override

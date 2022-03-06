@@ -2,12 +2,12 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.foodapp.controller.FoodAppController">
     <children>
-        <Button fx:id="logInButton" layoutX="45.0" layoutY="87.0" mnemonicParsing="false" onMouseClicked="#logIn" text="Log In" />
-        <Button fx:id="goodByeWorldButton" layoutX="175.0" layoutY="87.0" mnemonicParsing="false" onMouseClicked="#goodByeWorld" text="Good Bye World" />
-        <Label fx:id="label" layoutX="100.0" layoutY="150.0" prefHeight="25.0" prefWidth="200.0" wrapText="true" />
+        <Button fx:id="logInButton" disable="true" layoutX="45.0" layoutY="87.0" mnemonicParsing="false" onMouseClicked="#logIn" text="Log In" />
+        <Label fx:id="label" layoutX="50.0" layoutY="136.0" prefHeight="26.0" prefWidth="89.0" text="Title Recipe :" textAlignment="CENTER" wrapText="true" />
 
         <TextField fx:id="searchBar" alignment="TOP_CENTER" layoutX="30.0" layoutY="20" />
         <Button fx:id="searchButton" layoutX="200.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#search" text="Search" />
@@ -15,7 +15,20 @@
         <TextField fx:id="codeFav" layoutX="473.0" layoutY="61.0" promptText="Enter your code" visible="false" />
         <Button fx:id="searchFavButton" layoutX="623.0" layoutY="61.0" mnemonicParsing="false" onMouseClicked="#searchFav" text="Enter" visible="false" />
         <Label fx:id="image" />
-        <Hyperlink fx:id="listFav" layoutX="506.0" layoutY="126.0" text=".." />
+
+
+
+      <TextField id="TitleRecipe" layoutX="160.0" layoutY="136.0" prefHeight="26.0" prefWidth="183.0" />
+      <TextField layoutX="152.0" layoutY="212.0" promptText="Name" />
+      <TextField layoutX="316.0" layoutY="212.0" promptText="Quantity ( in grammes)" />
+      <TextField layoutX="482.0" layoutY="212.0" promptText="Unity" />
+      <TextField layoutX="534.0" layoutY="136.0" prefHeight="26.0" prefWidth="44.0" />
+      <TextField layoutX="88.0" layoutY="298.0" prefHeight="26.0" prefWidth="509.0" promptText="Step" />
+      <Button id="AddNewRecipeButton" layoutX="324.0" layoutY="398.0" mnemonicParsing="false" text="Add" textFill="#ca5252">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
 
     </children>
 </AnchorPane>
