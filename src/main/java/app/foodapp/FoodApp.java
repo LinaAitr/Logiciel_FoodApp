@@ -37,6 +37,7 @@ import java.util.Timer;
 
 public class FoodApp extends Application {
     VBox vbox = new VBox();
+    VBox vbox2 = new VBox();
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/app/foodapp/view/foodapp.fxml"));
@@ -128,6 +129,7 @@ public class FoodApp extends Application {
 
 
         group.getChildren().add(vbox);
+        group.getChildren().add(vbox2);
         group.setStyle("-fx-alignment:TOP_CENTER");
         Scene sc =new Scene(group);
         //primaryStage.setResizable(false);
@@ -142,16 +144,16 @@ public class FoodApp extends Application {
 
     public void showrecipe(TextField textField) throws IOException, ParseException {
       ArrayList<String> tr = RequestAPI.SearchByKey(textField.getText());
-      vbox.getChildren().addAll(new Text("Recipes with "+ textField.getText() +" :"));
+      vbox2.getChildren().addAll(new Text("Recipes with "+ textField.getText() +" :"));
 
         //VBox vbox = new VBox();
-        int n=8;
-        for (int j=0; j<n/4;j++){
+        int n=5;
+        for (int j=0; j<(n/4);j++){
         HBox hbox = new HBox();
         hbox.setId(String.valueOf(j));
-        for (int i=j*4; i<=(j+1)*4;i++){
-            VBox vbox2 = new VBox();
-            RecipeInformations rec = new RecipeInformations(tr.get(i-1));
+        for (int i=j*4; i<(j+1)*(n);i++){
+            VBox vbox3 = new VBox();
+            RecipeInformations rec = new RecipeInformations(tr.get(i));
             final Image image = new Image(rec.getImage());
             Hyperlink tg =new Hyperlink(""+rec.getTitle());
             //Hyperlink tg =new Hyperlink("000");
@@ -159,12 +161,15 @@ public class FoodApp extends Application {
             final ImageView imageView = new ImageView(image);
             imageView.setFitHeight(100);
             imageView.setFitWidth(200);
-            vbox2.getChildren().add(tg);
-            vbox2.getChildren().add(imageView);
-            hbox.getChildren().add(vbox2);
+            vbox3.getChildren().add(tg);
+            vbox3.getChildren().add(imageView);
+            hbox.getChildren().add(vbox3);
 
             }
-        vbox.getChildren().add(hbox);
+        hbox.setSpacing(50);
+        vbox2.getChildren().add(hbox);
+        vbox2.setLayoutX(100);
+        vbox2.setLayoutY(150);
 
         }
     }
@@ -182,6 +187,7 @@ public class FoodApp extends Application {
         vbox.getChildren().add(ingredient);
         vbox.getChildren().add(hBoxMain);
         vbox.setStyle("-fx-alignment:TOP_CENTER");
+        vbox.setLayoutX(600);
 
         button.setOnAction(actionEvent -> {
             try {
