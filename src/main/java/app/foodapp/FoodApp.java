@@ -1,17 +1,11 @@
 package app.foodapp;
 
-import app.foodapp.model.ConexionWindow;
 import app.foodapp.model.FavoriteRecipes;
 import app.foodapp.model.RecipeInformations;
 import app.foodapp.model.RequestAPI;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -21,16 +15,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.json.simple.parser.ParseException;
 
-import javax.swing.*;
-import javax.xml.datatype.Duration;
 import java.io.IOException;
-import java.net.URL;
 import java.util.*;
 import java.util.Timer;
 
@@ -142,7 +132,7 @@ public class FoodApp extends Application {
         primaryStage.setScene(sc);
     }
 
-    public void showrecipe(TextField textField) throws IOException, ParseException {
+    public void showRecipes(TextField textField) throws IOException, ParseException {
       ArrayList<String> tr = RequestAPI.SearchByKey(textField.getText());
       vbox2.getChildren().addAll(new Text("Recipes with "+ textField.getText() +" :"));
 
@@ -153,16 +143,17 @@ public class FoodApp extends Application {
         hbox.setId(String.valueOf(j));
         for (int i=j*4; i<(j+1)*(n);i++){
             VBox vbox3 = new VBox();
-            RecipeInformations rec = new RecipeInformations(tr.get(i));
-            final Image image = new Image(rec.getImage());
-            Hyperlink tg =new Hyperlink(""+rec.getTitle());
-            //Hyperlink tg =new Hyperlink("000");
+            //RecipeInformations rec = new RecipeInformations(tr.get(i));
+            //final Image image = new Image(rec.getImage());
+            //Hyperlink tg =new Hyperlink(""+rec.getTitle());
+            Hyperlink tg =new Hyperlink("tg"+i);
+            showSingelRecipe(tg,tr.get(i) );
             tg.setMaxHeight(400);
-            final ImageView imageView = new ImageView(image);
-            imageView.setFitHeight(100);
-            imageView.setFitWidth(200);
+           // final ImageView imageView = new ImageView(image);
+            //imageView.setFitHeight(100);
+            //imageView.setFitWidth(200);
             vbox3.getChildren().add(tg);
-            vbox3.getChildren().add(imageView);
+            //vbox3.getChildren().add(imageView);
             hbox.getChildren().add(vbox3);
 
             }
@@ -172,6 +163,51 @@ public class FoodApp extends Application {
         vbox2.setLayoutY(150);
 
         }
+    }
+
+    public void showSingelRecipe(Hyperlink tg, String id){
+        tg.setOnAction(event->{
+            try {
+                RecipeInformations rec = new RecipeInformations(id);
+                vbox2.getChildren().remove(0,vbox2.getChildren().size());
+                Label title = new Label(tg.getText());
+                Label time = new Label("Time : "+ rec.getReadyInMinutes());
+                Label servings = new Label(rec.getServings());
+                ArrayList<String> ingredients =rec.extendedIngredients();
+                vbox2.getChildren().add(title);
+                vbox2.getChildren().add(time);
+                vbox2.getChildren().add(servings);
+
+                Label ingredientLabel = new Label("Ingredients : ");
+                vbox2.getChildren().add(ingredientLabel);
+
+                for (int i=0;i<ingredients.size();i++){
+                    Label ingredient = new Label("     -"+ingredients.get(i));
+                    vbox2.getChildren().add(ingredient);
+
+                }
+                ArrayList<String> steps =rec.getInstructions();
+
+                Label stepsLabel = new Label("steps : ");
+                vbox2.getChildren().add(stepsLabel);
+                for (int i=0;i<steps.size();i++){
+                    Label step = new Label("     -"+steps.get(i));
+                    vbox2.getChildren().add(step);
+
+                }
+
+
+
+
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        });
+
     }
     public void mainPage( ){
         vbox.setLayoutX(0);
@@ -191,7 +227,7 @@ public class FoodApp extends Application {
 
         button.setOnAction(actionEvent -> {
             try {
-                showrecipe(textField);
+                showRecipes(textField);
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ParseException e) {
