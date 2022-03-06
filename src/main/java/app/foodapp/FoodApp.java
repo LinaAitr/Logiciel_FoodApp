@@ -1,4 +1,3 @@
-
 package app.foodapp;
 
 import app.foodapp.model.FavoriteRecipes;
@@ -31,6 +30,7 @@ public class FoodApp extends Application {
     VBox vbox2 = new VBox();
     VBox vBox4 =new VBox();
     Stage primaryStage1;
+    ArrayList<String> loginInfos        = new ArrayList<>();
     //ArrayList<String> loginInfos = new ArrayList<>();
 
     @Override
@@ -69,7 +69,7 @@ public class FoodApp extends Application {
                 usersInfos.add(userNameTextField.getText());
                 //Label notExist=ConexionWindow.sign(usersInfos);
                 //notExist.setText(ConexionWindow.sign(usersInfos).getText());
-                ArrayList<String> loginInfos = FavoriteRecipes.SignIn(usersInfos,1);
+                loginInfos = FavoriteRecipes.SignIn(usersInfos,1);
                 if (loginInfos.get(2)=="notExist"){
                     Label notExist = new Label("You account doesn't exist !");
                     vbox.getChildren().add(notExist);
@@ -143,8 +143,8 @@ public class FoodApp extends Application {
 
     }
     public  void getListOfIdForFavorites(TextField textField) throws IOException, ParseException {
-        //ArrayList<String> lisOfId = FavoriteRecipes.ShowFavorites(loginInfos);
-        //showRecipes(textField,lisOfId,lisOfId.size());
+        ArrayList<String> lisOfId = FavoriteRecipes.ShowFavorites(loginInfos);
+        showRecipes(textField,lisOfId,lisOfId.size());
 
     }
 
@@ -261,7 +261,13 @@ public class FoodApp extends Application {
         vbox.setStyle("-fx-alignment:TOP_CENTER");
         vbox.setLayoutX(600);
         favorites.setOnAction(fav->{
-            //showMyFavorites(loginInfos,textField);
+            try {
+                showMyFavorites(loginInfos,textField);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         });
 
         button.setOnAction(actionEvent -> {
@@ -280,4 +286,6 @@ public class FoodApp extends Application {
         getListOfIdForFavorites(textField);
 
     }
+
+    public static void main(String[] args) { launch(args); }
 }
