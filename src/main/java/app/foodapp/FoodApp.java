@@ -4,12 +4,14 @@ import app.foodapp.model.ConexionWindow;
 import app.foodapp.model.FavoriteRecipes;
 import app.foodapp.model.RecipeInformations;
 import app.foodapp.model.RequestAPI;
+import com.sun.prism.paint.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -21,18 +23,26 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.CycleMethod;
+
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.json.simple.parser.ParseException;
 
-import javax.swing.*;
-import javax.xml.datatype.Duration;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 import java.util.Timer;
+
+import static com.sun.prism.paint.Color.*;
+import static javafx.scene.paint.Color.WHITE;
+import static javafx.scene.paint.Color.LIGHTGREY;
 
 
 public class FoodApp extends Application {
@@ -47,7 +57,6 @@ public class FoodApp extends Application {
         primaryStage.setWidth(1500);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
-
 
         Group group = new Group();
 
@@ -112,6 +121,9 @@ public class FoodApp extends Application {
         //signButton.setStyle("-fx-background-color: pink");
         signButton.setLayoutX(1200);
         HBox hbox =new HBox();
+
+
+
         hbox.getChildren().add(signButton);
         hbox.getChildren().add(logButton);
         vbox.getChildren().add(hbox);
@@ -124,9 +136,7 @@ public class FoodApp extends Application {
 
 
 
-
         hbox.setStyle("-fx-alignment:TOP_CENTER");
-
 
         group.getChildren().add(vbox);
         group.getChildren().add(vbox2);
@@ -138,13 +148,15 @@ public class FoodApp extends Application {
         vbox.setLayoutX((windowHeight/2)-100);
         vbox.setLayoutY(windowHeight/2-100);
 
-
         primaryStage.setScene(sc);
+        sc.setFill(LIGHTGREY);
+
     }
 
     public void showrecipe(TextField textField) throws IOException, ParseException {
-      ArrayList<String> tr = RequestAPI.SearchByKey(textField.getText());
-      vbox2.getChildren().addAll(new Text("Recipes with "+ textField.getText() +" :"));
+        ArrayList<String> tr = new ArrayList<>();
+        //ArrayList<String> tr = RequestAPI.SearchByKey(textField.getText());
+        vbox2.getChildren().addAll(new Text("Recipes with "+ textField.getText() +" :"));
 
         //VBox vbox = new VBox();
         int n=5;
