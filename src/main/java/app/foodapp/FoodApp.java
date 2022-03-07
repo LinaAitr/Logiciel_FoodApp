@@ -25,6 +25,7 @@ import org.json.simple.parser.ParseException;
 
 import javax.print.DocFlavor;
 import java.awt.*;
+import java.awt.Menu;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -383,6 +384,7 @@ public class FoodApp extends Application {
         final Button button = new Button("Search");
         final Button favorites = new Button("Favorites");
         final Button logOut = new Button("Log Out");
+
         final Button addMyRecipeButton = new Button("Add a recipe");
 
         logOut.setOnAction(logoff->{
@@ -438,7 +440,8 @@ public class FoodApp extends Application {
     private void addARecipe() {
         vbox2.getChildren().remove(0,vbox2.getChildren().size());
         Label title = new Label("Title : ");
-        TextField titleField = new TextField();
+        TextField titleField = new TextField();vbox2.setLayoutX(100);
+            vbox2.setLayoutY(150);
         HBox titleAndFieldTitleHbox = new HBox();
         titleAndFieldTitleHbox.getChildren().add(title);
         titleAndFieldTitleHbox.getChildren().add(titleField);
