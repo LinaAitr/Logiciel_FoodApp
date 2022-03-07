@@ -14,13 +14,18 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.json.simple.parser.ParseException;
 
+import javax.print.DocFlavor;
+import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URL;
 import java.util.*;
 import java.util.Timer;
 
@@ -57,8 +62,8 @@ public class FoodApp extends Application {
         signButton.setLayoutX(1222);
         signButton.paddingProperty();
 
-        TextField passwordTextField = new TextField("");
-        TextField userNameTextField = new TextField("");
+        TextField passwordTextField = new TextField("sofiane");
+        TextField userNameTextField = new TextField("8dd4");
 
         //Label notExist=new Label("");
 
@@ -71,7 +76,7 @@ public class FoodApp extends Application {
                 //notExist.setText(ConexionWindow.sign(usersInfos).getText());
                 loginInfos = FavoriteRecipes.SignIn(usersInfos,1);
                 if (loginInfos.get(2)=="notExist"){
-                    Label notExist = new Label("You account doesn't exist !");
+                    Label notExist = new Label("Account doesnt exist ! PLease verify spelling or create a new one !");
                     vbox.getChildren().add(notExist);
                     Timer t =new Timer();
                     t.schedule(new TimerTask() {
@@ -105,6 +110,56 @@ public class FoodApp extends Application {
                 e.printStackTrace();
             }
         });
+
+
+
+
+        signButton.setOnAction(sign -> {
+            try {
+                ArrayList<String> usersInfos = new ArrayList<>();
+                usersInfos.add(passwordTextField.getText());
+                usersInfos.add(userNameTextField.getText());
+                loginInfos = FavoriteRecipes.SignIn(usersInfos,2);
+                if (loginInfos.get(2)=="AccountCreated"){
+                    vbox.getChildren().remove(0,vbox.getChildren().size());
+                    Label notExist = new Label("Account created !");
+                    Label welcomeUser = new Label(" Welcome "+usersInfos.get(0));
+                    vbox.getChildren().add(notExist);
+                    vbox.getChildren().add(welcomeUser);
+                    Timer t =new Timer();
+                    t.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            // vbox.getChildren().remove(notExist);
+                            notExist.setVisible(false);
+                        }
+                    },1000);
+                    mainPage();
+                }
+                else if (loginInfos.get(2)=="alreadyCreated"){
+                    vbox.getChildren().remove(0,vbox.getChildren().size());
+                    Label accountExists = new Label("Account Already created !");
+                    Label welcomeUser = new Label(" Welcome again "+usersInfos.get(0));
+                    vbox.getChildren().add(accountExists);
+                    vbox.getChildren().add(welcomeUser);
+                    Timer t =new Timer();
+                    t.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            accountExists.setVisible(false);
+                        }
+                    },3000);
+                    mainPage();
+                }
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        });
+
 
 
         //signButton.setStyle("-fx-background-color: pink");
@@ -144,7 +199,7 @@ public class FoodApp extends Application {
     }
     public  void getListOfIdForFavorites(TextField textField) throws IOException, ParseException {
         ArrayList<String> lisOfId = FavoriteRecipes.ShowFavorites(loginInfos);
-        showRecipes(textField,lisOfId,lisOfId.size());
+        showRecipes(textField,lisOfId,lisOfId.size()-1);
 
     }
 
@@ -159,16 +214,74 @@ public class FoodApp extends Application {
             for (int i=j*5; i<(j+1)*(n);i++){
                 VBox vbox3 = new VBox();
                 RecipeInformations rec = new RecipeInformations(lisOfId.get(i));
-                final Image image = new Image(rec.getImage());
-                Hyperlink tg =new Hyperlink(""+rec.getTitle());
-                //Hyperlink tg =new Hyperlink("tg"+i);
-                showSingelRecipe(tg,lisOfId.get(i),textField );
-                tg.setMaxHeight(400);
-                final ImageView imageView = new ImageView(image);
-                imageView.setFitHeight(100);
-                imageView.setFitWidth(200);
-                vbox3.getChildren().add(tg);
-                vbox3.getChildren().add(imageView);
+                final Image imageRecipe = new Image(rec.getImage());
+
+                File file2 = new File("/amuhome/k21232433/Bureau/Genie logiciel/foodapp/coeurRempli.png");
+                String localUrlFullHeart = file2.toURI().toURL().toString();
+                final Image iconFull = new Image(localUrlFullHeart);
+
+                File file = new File("/amuhome/k21232433/Bureau/Genie logiciel/foodapp/coeurVide.png");
+                String localUrl = file.toURI().toURL().toString();
+                final Image icon = new Image(localUrl);
+
+                ArrayList<String> idLIstFavorite = FavoriteRecipes.ShowFavorites(loginInfos);
+
+
+                Hyperlink title =new Hyperlink(""+rec.getTitle());
+                Label time = new Label("Time : "+rec.getReadyInMinutes());
+                //Hyperlink title =new Hyperlink("title"+i);
+                showSingelRecipe(title,lisOfId.get(i),textField );
+                title.setMaxHeight(400);
+                String recipeId = rec.getId();
+                final ImageView recipeImage = new ImageView(imageRecipe);
+                final ImageView favoriteImage;
+
+                if (idLIstFavorite.contains(recipeId)){
+                    favoriteImage =new ImageView(iconFull);
+                }
+                else favoriteImage =new ImageView(icon);
+
+
+                Button addFavoriteButton = new Button();
+                addFavoriteButton.setOnAction(addToFavorite ->{
+                    try {
+                        if ( !idLIstFavorite.contains(rec.getId())){
+
+                            favoriteImage.setImage(iconFull);
+                            FavoriteRecipes.FillFile(rec.getId(),loginInfos);
+                        }
+                        else
+                        {
+
+                            favoriteImage.setImage(icon);
+                            FavoriteRecipes.DeleteFavorite(loginInfos,idLIstFavorite.indexOf(rec.getId()));
+
+                        }
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                });
+                addFavoriteButton.setStyle("-fx-background-color: transparent;");
+                addFavoriteButton.setGraphic(favoriteImage);
+                recipeImage.setFitHeight(100);
+                recipeImage.setFitWidth(200);
+                favoriteImage.setFitHeight(20);
+                favoriteImage.setFitWidth(20);
+                vbox3.getChildren().add(title);
+                HBox hboxFav = new HBox();
+                hboxFav.getChildren().add(time);
+                hboxFav.getChildren().add(addFavoriteButton);
+                hboxFav.setSpacing(30);
+                hboxFav.setStyle("-fx-alignment:TOP_CENTER");
+                vbox3.setStyle("-fx-alignment:TOP_CENTER");
+                vbox3.getChildren().add(hboxFav);
+                vbox3.setStyle("-fx-background-color: pink;");
+
+                vbox3.getChildren().add(recipeImage);
+
                 hbox.getChildren().add(vbox3);
 
             }
@@ -179,6 +292,8 @@ public class FoodApp extends Application {
 
         }
     }
+
+
 
     public void showSingelRecipe(Hyperlink tg, String id, TextField textField){
         tg.setOnAction(event->{

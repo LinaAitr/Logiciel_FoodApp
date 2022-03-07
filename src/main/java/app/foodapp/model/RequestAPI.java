@@ -18,10 +18,10 @@ public class RequestAPI {
     // public static String APIKey = "ab7c3f5a18a04dd8903bc5fdb0be40e9";
     //public static String APIKey = "30ca87269ac8432c8130d7bef6ae2e49";
     //public static String APIKey = "4e944d67e59d4271b4181168f3535444";
-    //public static String APIKey   = "79f2327aad3240e68f49b7de252cd5fe";
+    public static String APIKey   = "79f2327aad3240e68f49b7de252cd5fe";
     //public static String APIKey = "a2c302f11e894e71962240cde6bd7c5e";
    // public static String APIKey =  "46058900bcc748ed8daaf0ba6ec0deea";
-   public static String APIKey =  "62347f3022614a4ea4288fb87c696515";
+   //public static String APIKey =  "62347f3022614a4ea4288fb87c696515";
 
 
 
@@ -50,7 +50,7 @@ public class RequestAPI {
         try {
             boolean recipeFound = false;
             idList.clear();
-            int numberRecipe=20;
+            int numberRecipe=5;
             URL URL = new URL("https://api.spoonacular.com/recipes/findByIngredients?apiKey="+APIKey+"&ingredients="+ingredient+"&number="+numberRecipe);
             JSONParser  parse = new JSONParser();
             JSONArray dataObject = (JSONArray) parse.parse(String.valueOf(ConnectAPI(URL)));
@@ -82,7 +82,7 @@ public class RequestAPI {
         try {
             int l=-1;
             idList.clear();
-            int numberRecipe=20;
+            int numberRecipe=5;
             URL URL = new URL("https://api.spoonacular.com/recipes/complexSearch?apiKey="+APIKey+"&query="+key+"&number="+numberRecipe);
             JSONParser parse = new JSONParser();
             JSONObject jsonO = (JSONObject)parse.parse(String.valueOf(ConnectAPI(URL)));

@@ -15,20 +15,20 @@ public class RecipeInformations {
    //public static String APIKey = "30ca87269ac8432c8130d7bef6ae2e49";
     //public static String APIKey = "4e944d67e59d4271b4181168f3535444";
    //public static String APIKey   = "79f2327aad3240e68f49b7de252cd5fe";
-    //public static String APIKey = "a2c302f11e894e71962240cde6bd7c5e";
-    //public static String APIKey =  "46058900bcc748ed8daaf0ba6ec0deea";
-   public static String APIKey =  "62347f3022614a4ea4288fb87c696515";
+   // public static String APIKey = "a2c302f11e894e71962240cde6bd7c5e";
+   // public static String APIKey =  "46058900bcc748ed8daaf0ba6ec0deea";
+   //public static String APIKey =  "62347f3022614a4ea4288fb87c696515";
 
 
 
     public RecipeInformations (String id ) throws IOException, ParseException {
-        URL URL = new URL("https://api.spoonacular.com/recipes/"+id+"/information?apiKey="+APIKey);
+        URL URL = new URL("https://api.spoonacular.com/recipes/"+id+"/information?apiKey="+RequestAPI.APIKey);
         JSONParser parse = new JSONParser();
         recipeObj = (JSONObject) parse.parse(String.valueOf(RequestAPI.ConnectAPI(URL)));
     }
 
     public String getTitle(){
-        System.out.println("title: "+recipeObj.get("title"));
+       // System.out.println("title: "+recipeObj.get("title"));
         return (String) recipeObj.get("title");
     }
     public String getSummary(){
@@ -48,7 +48,7 @@ public class RecipeInformations {
         return "servings: "+recipeObj.get("servings");
     }
     public String getImage(){
-        System.out.println("image: "+recipeObj.get("image"));
+      //  System.out.println("image: "+recipeObj.get("image"));
         return (String) recipeObj.get("image");
     }
     public ArrayList<String> getInstructions(){
