@@ -460,6 +460,7 @@ public class FoodApp extends Application {
     private void showListOfMyRecipes() throws IOException, ParseException {
         vbox2.setLayoutX(100);
         vbox2.setLayoutY(150);
+        vbox2.getChildren().remove(0,vbox2.getChildren().size());
         String fileName = "MyRecipes.json";
         File f = new File(fileName);
         ArrayList<String> userAndPassword = new ArrayList<>();
@@ -467,30 +468,35 @@ public class FoodApp extends Application {
         userAndPassword.add(1,loginInfos.get(1));
         String code = String.valueOf(userAndPassword);
         f.createNewFile();
-        ArrayList<JSONObject> names = new ArrayList<>();
-
+        int d =0;
         if (f.isFile()) {
             if (f.length()!=0){
                 JSONParser jsonP = new JSONParser();
                 JSONArray arrayOfRecipes = (JSONArray) jsonP.parse(new FileReader(fileName));
                 for (int i=0; i<arrayOfRecipes.size();i++) {
-                    System.out.println();
+                        System.out.println();
                     JSONObject myRecipes = (JSONObject) arrayOfRecipes.get(i);
-                    names.add(myRecipes);
+                    if (myRecipes.get(code)!=null){
                         JSONObject recipe = (JSONObject) myRecipes.get(code);
                         Hyperlink name = new Hyperlink("-"+recipe.get("Name")+" "+recipe.get("Time"));
                         vbox2.getChildren().add(name);
-                    name.setOnAction(event->{
-                        try {
-                            showDetailsOfMyRecipes((String) recipe.get("Name"));
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (ParseException e) {
-                            e.printStackTrace();
+                        showDetailsOfMyRecipes(name,(String) recipe.get("Name") );
+                    }
+                    else{
+                        if (d==0)
+                        {
+                            Label notFound = new Label("No recipe found");
+                            vbox2.getChildren().add(notFound);
+                            d++;
                         }
-                    });
+                    }
                 }
                 }
+            else{
+                Label notFound = new Label("No recipe found");
+                vbox2.getChildren().add(notFound);
+            }
+
             }
             else{
                 Label notFound = new Label("No recipe found");
@@ -501,56 +507,71 @@ public class FoodApp extends Application {
 
 
 
+    private void showDetailsOfMyRecipes(Hyperlink name,String nameText)  {
+        name.setOnAction(event->{
+            System.out.println(name.getText());
+            vbox2.getChildren().remove(0,vbox2.getChildren().size());
+            String fileName = "MyRecipes.json";
+            File f = new File(fileName);
+            ArrayList<String> userAndPassword = new ArrayList<>();
+            userAndPassword.add(0,loginInfos.get(0));
+            userAndPassword.add(1,loginInfos.get(1));
+            String code = String.valueOf(userAndPassword);
+            ArrayList<JSONObject> names = new ArrayList<>();
+            if (f.isFile()) {
+                if (f.length()!=0){
+                    JSONParser jsonP = new JSONParser();
+                    JSONArray arrayOfRecipes = null;
+                    try {
+                        arrayOfRecipes = (JSONArray) jsonP.parse(new FileReader(fileName));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    for (int i=0; i<arrayOfRecipes.size();i++) {
+                        System.out.println();
+                        JSONObject myRecipes = (JSONObject) arrayOfRecipes.get(i);
+                        if (myRecipes.get(code)!=null) {
+                            JSONObject recipe = (JSONObject) myRecipes.get(code);
+                            JSONArray arrayOfIngredients = (JSONArray) recipe.get("Ingredients");
+                            System.out.println((String) recipe.get("Name"));
+                            System.out.println(nameText);
+                            if (recipe.get("Name").equals(nameText)) {
+                                Label nameRecipe = new Label("-" + recipe.get("Name") + " " + recipe.get("Time"));
+                                vbox2.getChildren().add(nameRecipe);
+                                Label ingredientsLabel = new Label("Ingredients :");
+                                vbox2.getChildren().add(ingredientsLabel);
 
-    private void showDetailsOfMyRecipes(String name) throws IOException, ParseException {
-        vbox2.getChildren().remove(0,vbox2.getChildren().size());
-        String fileName = "MyRecipes.json";
-        File f = new File(fileName);
-        ArrayList<String> userAndPassword = new ArrayList<>();
-        userAndPassword.add(0,loginInfos.get(0));
-        userAndPassword.add(1,loginInfos.get(1));
-        String code = String.valueOf(userAndPassword);
-        ArrayList<JSONObject> names = new ArrayList<>();
-        if (f.isFile()) {
-            if (f.length()!=0){
-                JSONParser jsonP = new JSONParser();
-                JSONArray arrayOfRecipes = (JSONArray) jsonP.parse(new FileReader(fileName));
-                for (int i=0; i<arrayOfRecipes.size();i++) {
-                    System.out.println();
-                    JSONObject myRecipes = (JSONObject) arrayOfRecipes.get(i);
-                    if (myRecipes.get(code)!=null) {
-                        JSONObject recipe = (JSONObject) myRecipes.get(code);
-                        JSONArray arrayOfIngredients = (JSONArray) recipe.get("Ingredients");
-                        System.out.println((String) recipe.get("Name"));
-                        System.out.println(name);
-                        if ((String) recipe.get("Name")  == name) {
-                            Label nameRecipe = new Label("-" + recipe.get("Name") + " " + recipe.get("Time"));
-                            vbox2.getChildren().add(nameRecipe);
-                            Label ingredientsLabel = new Label("Ingredients :");
-                            vbox2.getChildren().add(ingredientsLabel);
+                                for (int j = 0; j < arrayOfIngredients.size(); j++) {
+                                    JSONObject ingredient = (JSONObject) arrayOfIngredients.get(j);
+                                    Label ingredientRecipe = new Label("     "+(j+1)+"-" + ingredient.get("Name")+" : "+ingredient.get("Quantity")+" "+  ingredient.get("Unity"));
+                                //    Label quantity = new Label("-Quantity : " + ingredient.get("Quantity") + " " + ingredient.get("Unity"));
+                                    vbox2.getChildren().addAll(ingredientRecipe);
+                                }
+                                JSONArray arrayOfSteps = (JSONArray) recipe.get("Steps");
+                                Label stepsLabel = new Label("Steps :");
+                                vbox2.getChildren().add(stepsLabel);
+                                for (int j = 0; j < arrayOfSteps.size(); j++) {
+                                    JSONObject step = (JSONObject) arrayOfSteps.get(j);
+                                    names.add(step);
+                                    Label stepRecipe = new Label("     -step " + (j + 1) + " : " + step.get("Step"));
+                                    vbox2.getChildren().add(stepRecipe);
+                                }
+                                vbox2.setSpacing(20);
 
-                            for (int j = 0; j < arrayOfIngredients.size(); j++) {
-                                JSONObject ingredient = (JSONObject) arrayOfIngredients.get(j);
-                                Label ingredientRecipe = new Label("-Name : " + ingredient.get("Name"));
-                                Label quantity = new Label("-Quantity : " + ingredient.get("Quantity") + " " + ingredient.get("Unity"));
-                                vbox2.getChildren().addAll(ingredientRecipe, quantity);
+
                             }
-                            JSONArray arrayOfSteps = (JSONArray) recipe.get("Steps");
-
-                            for (int j = 0; j < arrayOfSteps.size(); j++) {
-                                JSONObject step = (JSONObject) arrayOfSteps.get(j);
-                                names.add(step);
-                                Label stepRecipe = new Label("-step " + (j + 1) + " : " + step.get("Step"));
-                                vbox2.getChildren().add(stepRecipe);
-                            }
-
-
                         }
                     }
                 }
-            }
 
             }
+        });
+
+
+
+
 
         }
 
