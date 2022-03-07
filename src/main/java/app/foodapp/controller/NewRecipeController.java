@@ -12,7 +12,7 @@ import java.util.ResourceBundle;
 
 public class NewRecipeController {
 
-    /*@FXML private TextField titleNewRecipe;
+    @FXML private TextField titleNewRecipe;
     @FXML private TextField timeProductionNewRecipe;
 
     @FXML private TextField ingredientName1;
@@ -123,7 +123,7 @@ public class NewRecipeController {
 
             return steps;
 
-        }*/
+        }
 
 
 

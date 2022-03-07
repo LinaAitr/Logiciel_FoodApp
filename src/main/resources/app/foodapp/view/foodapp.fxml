@@ -18,12 +18,12 @@
 
 
 
-      <TextField id="TitleRecipe" layoutX="160.0" layoutY="136.0" prefHeight="26.0" prefWidth="183.0" />
-      <TextField layoutX="152.0" layoutY="212.0" promptText="Name" />
-      <TextField layoutX="316.0" layoutY="212.0" promptText="Quantity ( in grammes)" />
-      <TextField layoutX="482.0" layoutY="212.0" promptText="Unity" />
-      <TextField layoutX="534.0" layoutY="136.0" prefHeight="26.0" prefWidth="44.0" />
-      <TextField layoutX="88.0" layoutY="298.0" prefHeight="26.0" prefWidth="509.0" promptText="Step" />
+      <TextField id="titleNewRecipe" layoutX="160.0" layoutY="136.0" prefHeight="26.0" prefWidth="183.0" />
+      <TextField id="ingredientName1" layoutX="152.0" layoutY="212.0" promptText="Name" />
+      <TextField id="ingredientQuantity1" layoutX="316.0" layoutY="212.0" promptText="Quantity ( in grammes)" />
+      <TextField id="ingredientUnity1" layoutX="482.0" layoutY="212.0" promptText="Unity" />
+      <TextField id="timeProductionNewRecipe" layoutX="534.0" layoutY="136.0" prefHeight="26.0" prefWidth="44.0" />
+      <TextField id="step1" layoutX="88.0" layoutY="298.0" prefHeight="26.0" prefWidth="509.0" promptText="Step" />
       <Button id="AddNewRecipeButton" layoutX="324.0" layoutY="398.0" mnemonicParsing="false" text="Add" textFill="#ca5252">
          <font>
             <Font name="System Bold" size="12.0" />
