@@ -3,31 +3,36 @@ package app.foodapp;
 import app.foodapp.model.FavoriteRecipes;
 import app.foodapp.model.RecipeInformations;
 import app.foodapp.model.RequestAPI;
+import com.sun.javafx.geom.Shape;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.json.simple.parser.ParseException;
 
 import javax.print.DocFlavor;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
 import java.util.*;
 import java.util.Timer;
+
+import static javafx.scene.paint.Color.WHITE;
 
 
 public class FoodApp extends Application {
@@ -40,13 +45,22 @@ public class FoodApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/app/foodapp/view/foodapp.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("/app/foodapp/view/foodapp.fxml"));
+        StackPane root = new StackPane();
+        Scene scene = new Scene(root,1500,700);
+        root.setStyle("-fx-background-image: url('https://hal-normandie-univ.archives-ouvertes.fr/UNILEHAVRE/public/GREAH_HAL.png'); -fx-background-size: 500 500;");
+        primaryStage.setScene(scene);
+
         primaryStage.setTitle("FoodApp");
         primaryStage1=primaryStage;
+        //gg.getChildren().add(root);
         //primaryStage.setFullScreen(true);
-        primaryStage.setHeight(700);
-        primaryStage.setWidth(1500);
-        primaryStage.setScene(new Scene(root));
+        //primaryStage.setHeight(700);
+        //primaryStage.setWidth(1500);
+        //gg.setBackground(new Background());
+        //StackPane root = new StackPane();
+       // gg.setPrefWidth(200);
+        //root.setStyle("-fx-background-color: red;");
         primaryStage.show();
         LogPage(primaryStage);
     }
@@ -57,21 +71,24 @@ public class FoodApp extends Application {
 
         final Label password = new Label("Password :");
         final Label userName = new Label("Username :");
+        password.setTextFill(WHITE);
+        userName.setTextFill(WHITE);
+
         final Button signButton = new Button("Sign in");
         final Button logButton = new Button("Log in");
         signButton.setLayoutX(1222);
         signButton.paddingProperty();
 
-        TextField passwordTextField = new TextField("sofiane");
-        TextField userNameTextField = new TextField("8dd4");
+        TextField userNameField = new TextField("sofiane");
+        PasswordField passwordField =  new PasswordField();;
 
         //Label notExist=new Label("");
 
         logButton.setOnAction(actionEvent -> {
             try {
                 ArrayList<String> usersInfos = new ArrayList<>();
-                usersInfos.add(passwordTextField.getText());
-                usersInfos.add(userNameTextField.getText());
+                usersInfos.add(userNameField.getText());
+                usersInfos.add(passwordField.getText());
                 //Label notExist=ConexionWindow.sign(usersInfos);
                 //notExist.setText(ConexionWindow.sign(usersInfos).getText());
                 loginInfos = FavoriteRecipes.SignIn(usersInfos,1);
@@ -117,8 +134,9 @@ public class FoodApp extends Application {
         signButton.setOnAction(sign -> {
             try {
                 ArrayList<String> usersInfos = new ArrayList<>();
-                usersInfos.add(passwordTextField.getText());
-                usersInfos.add(userNameTextField.getText());
+                usersInfos.add(userNameField.getText());
+                usersInfos.add(passwordField.getText());
+                vbox.setSpacing(20);
                 loginInfos = FavoriteRecipes.SignIn(usersInfos,2);
                 if (loginInfos.get(2)=="AccountCreated"){
                     vbox.getChildren().remove(0,vbox.getChildren().size());
@@ -167,13 +185,22 @@ public class FoodApp extends Application {
         HBox hbox =new HBox();
         hbox.getChildren().add(signButton);
         hbox.getChildren().add(logButton);
-        vbox.getChildren().add(hbox);
+        hbox.setSpacing(20);
         // vbox.getChildren().add(signButton);
         // vbox.getChildren().add(logButton);
         vbox.getChildren().add(userName);
-        vbox.getChildren().add(passwordTextField);
+        vbox.getChildren().add(userNameField);
         vbox.getChildren().add(password);
-        vbox.getChildren().add(userNameTextField);
+        vbox.getChildren().add(passwordField);
+        vbox.getChildren().add(hbox);
+        vbox.setSpacing(5);
+        vbox.setStyle("-fx-background-color: #505050;");
+
+        vbox.setPadding(new Insets(10,10,10,10));
+        //vbox.setStyle("-fx-background-color: pink;");
+
+
+
 
 
         hbox.setStyle("-fx-alignment:TOP_CENTER");
@@ -355,8 +382,10 @@ public class FoodApp extends Application {
         vbox.setLayoutY(0);
         final Button button = new Button("Search");
         final Button favorites = new Button("Favorites");
-        final Button logOff = new Button("Log off");
-        logOff.setOnAction(logoff->{
+        final Button logOut = new Button("Log Out");
+        final Button addMyRecipeButton = new Button("Add a recipe");
+
+        logOut.setOnAction(logoff->{
             LogPage(primaryStage1);
         });
 
@@ -368,13 +397,22 @@ public class FoodApp extends Application {
         hBoxMain.getChildren().add(button);
         hBoxMain.getChildren().add(textField);
         hBoxMain.getChildren().add(favorites);
-        hBoxMain.getChildren().add(logOff);
+        hBoxMain.getChildren().add(addMyRecipeButton);
+        hBoxMain.getChildren().add(logOut);
 
         // vbox.getChildren().add(button);
         vbox.getChildren().add(ingredient);
         vbox.getChildren().add(hBoxMain);
         vbox.setStyle("-fx-alignment:TOP_CENTER");
         vbox.setLayoutX(600);
+
+        addMyRecipeButton.setOnAction(addRecipeFunc ->{
+            addARecipe();
+        });
+
+
+
+
         favorites.setOnAction(fav->{
             try {
                 showMyFavorites(loginInfos,textField);
@@ -395,6 +433,17 @@ public class FoodApp extends Application {
                 e.printStackTrace();
             }
         });
+    }
+
+    private void addARecipe() {
+        vbox2.getChildren().remove(0,vbox2.getChildren().size());
+        Label title = new Label("Title : ");
+        TextField titleField = new TextField();
+        HBox titleAndFieldTitleHbox = new HBox();
+        titleAndFieldTitleHbox.getChildren().add(title);
+        titleAndFieldTitleHbox.getChildren().add(titleField);
+
+        vbox2.getChildren().add(titleAndFieldTitleHbox);
     }
 
     private void showMyFavorites(ArrayList<String> loginInfos,TextField textField) throws IOException, ParseException {
