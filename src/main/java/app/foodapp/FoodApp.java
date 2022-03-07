@@ -384,7 +384,6 @@ public class FoodApp extends Application {
         final Button button = new Button("Search");
         final Button favorites = new Button("Favorites");
         final Button logOut = new Button("Log Out");
-
         final Button addMyRecipeButton = new Button("Add a recipe");
 
         logOut.setOnAction(logoff->{
