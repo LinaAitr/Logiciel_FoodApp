@@ -22,12 +22,17 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import javax.print.DocFlavor;
 import java.awt.*;
 import java.awt.Menu;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
@@ -85,6 +90,11 @@ public class FoodApp extends Application {
 
         final Button signButton = new Button("Sign in");
         final Button logButton = new Button("Log in");
+        String s = "Account doesnt exist !";
+        Label notExist = new Label(s);
+        notExist.setTextFill(WHITE);
+
+        notExist.setVisible(false);
         signButton.setLayoutX(1222);
         signButton.paddingProperty();
 
@@ -92,7 +102,6 @@ public class FoodApp extends Application {
         PasswordField passwordField =  new PasswordField();;
 
         //Label notExist=new Label("");
-
         logButton.setOnAction(actionEvent -> {
             try {
                 ArrayList<String> usersInfos = new ArrayList<>();
@@ -102,14 +111,14 @@ public class FoodApp extends Application {
                 //notExist.setText(ConexionWindow.sign(usersInfos).getText());
                 loginInfos = FavoriteRecipes.SignIn(usersInfos,1);
                 if (loginInfos.get(2)=="notExist"){
-                    Label notExist = new Label("Account doesnt exist ! PLease verify spelling or create a new one !");
-                    vbox.getChildren().add(notExist);
+                    notExist.setVisible(true);
                     Timer t =new Timer();
                     t.schedule(new TimerTask() {
                         @Override
                         public void run() {
                             // vbox.getChildren().remove(notExist);
                             notExist.setVisible(false);
+                           // notExist.setVisible(false);
                         }
                     },1000);
 
@@ -139,8 +148,6 @@ public class FoodApp extends Application {
         });
 
 
-
-
         signButton.setOnAction(sign -> {
             try {
                 ArrayList<String> usersInfos = new ArrayList<>();
@@ -150,7 +157,7 @@ public class FoodApp extends Application {
                 loginInfos = FavoriteRecipes.SignIn(usersInfos,2);
                 if (loginInfos.get(2)=="AccountCreated"){
                     vbox.getChildren().remove(0,vbox.getChildren().size());
-                    Label notExist = new Label("Account created !");
+                     notExist.setText("Account created !");
                     Label welcomeUser = new Label(" Welcome "+usersInfos.get(0));
                     vbox.getChildren().add(notExist);
                     vbox.getChildren().add(welcomeUser);
@@ -189,7 +196,6 @@ public class FoodApp extends Application {
         });
 
 
-
         //signButton.setStyle("-fx-background-color: pink");
         signButton.setLayoutX(1200);
         HBox hbox =new HBox();
@@ -203,14 +209,12 @@ public class FoodApp extends Application {
         vbox.getChildren().add(password);
         vbox.getChildren().add(passwordField);
         vbox.getChildren().add(hbox);
+        vbox.getChildren().add(notExist);
         vbox.setSpacing(5);
         vbox.setStyle("-fx-background-color: #505050;");
 
         vbox.setPadding(new Insets(10,10,10,10));
         //vbox.setStyle("-fx-background-color: pink;");
-
-
-
 
 
         hbox.setStyle("-fx-alignment:TOP_CENTER");
@@ -225,7 +229,6 @@ public class FoodApp extends Application {
         double windowWidth = primaryStage.getMaxWidth();
         vbox.setLayoutX((windowHeight/2)-100);
         vbox.setLayoutY(windowHeight/2-100);
-
 
         primaryStage.setScene(sc);
     }
@@ -332,8 +335,8 @@ public class FoodApp extends Application {
 
 
 
-    public void showSingelRecipe(Hyperlink tg, String id, TextField textField){
-        tg.setOnAction(event->{
+    public void showSingelRecipe(Hyperlink nameRecipe, String id, TextField textField){
+        nameRecipe.setOnAction(event->{
             try {
                 RecipeInformations rec = new RecipeInformations(id);
                 vbox2.getChildren().remove(0,vbox2.getChildren().size());
@@ -348,7 +351,7 @@ public class FoodApp extends Application {
                     }
                 });
                 vbox2.getChildren().add(previous);
-                Label title = new Label(tg.getText());
+                Label title = new Label(nameRecipe.getText());
                 Label time = new Label("Time : "+ rec.getReadyInMinutes());
                 Label servings = new Label(rec.getServings());
                 ArrayList<String> ingredients =rec.extendedIngredients();
@@ -362,8 +365,8 @@ public class FoodApp extends Application {
                 for (int i=0;i<ingredients.size();i++){
                     Label ingredient = new Label("     -"+ingredients.get(i));
                     vbox2.getChildren().add(ingredient);
-
                 }
+
                 ArrayList<String> steps =rec.getInstructions();
 
                 Label stepsLabel = new Label("steps : ");
@@ -373,11 +376,6 @@ public class FoodApp extends Application {
                     vbox2.getChildren().add(step);
 
                 }
-
-
-
-
-
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -460,15 +458,121 @@ public class FoodApp extends Application {
     }
 
     private void showListOfMyRecipes() throws IOException, ParseException {
-        ArrayList<String> listName = AddRecipes.ShowRecipes(loginInfos);
         vbox2.setLayoutX(100);
         vbox2.setLayoutY(150);
-        for (int i = 0 ; i<listName.size();i++){
-            Hyperlink name = new Hyperlink("-"+ listName.get(i));
-            vbox2.getChildren().add(name);
+        String fileName = "MyRecipes.json";
+        File f = new File(fileName);
+        ArrayList<String> userAndPassword = new ArrayList<>();
+        userAndPassword.add(0,loginInfos.get(0));
+        userAndPassword.add(1,loginInfos.get(1));
+        String code = String.valueOf(userAndPassword);
+        f.createNewFile();
+        ArrayList<JSONObject> names = new ArrayList<>();
+
+        if (f.isFile()) {
+            if (f.length()!=0){
+                JSONParser jsonP = new JSONParser();
+                JSONArray arrayOfRecipes = (JSONArray) jsonP.parse(new FileReader(fileName));
+                for (int i=0; i<arrayOfRecipes.size();i++) {
+                    System.out.println();
+                    JSONObject myRecipes = (JSONObject) arrayOfRecipes.get(i);
+                    names.add(myRecipes);
+                        JSONObject recipe = (JSONObject) myRecipes.get(code);
+                        Hyperlink name = new Hyperlink("-"+recipe.get("Name")+" "+recipe.get("Time"));
+                        vbox2.getChildren().add(name);
+                    name.setOnAction(event->{
+                        try {
+                            showDetailsOfMyRecipes((String) recipe.get("Name"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }
+                }
+            }
+            else{
+                Label notFound = new Label("No recipe found");
+                vbox2.getChildren().add(notFound);
+            }
+        }
+
+
+
+
+
+    private void showDetailsOfMyRecipes(String name) throws IOException, ParseException {
+        vbox2.getChildren().remove(0,vbox2.getChildren().size());
+        String fileName = "MyRecipes.json";
+        File f = new File(fileName);
+        ArrayList<String> userAndPassword = new ArrayList<>();
+        userAndPassword.add(0,loginInfos.get(0));
+        userAndPassword.add(1,loginInfos.get(1));
+        String code = String.valueOf(userAndPassword);
+        ArrayList<JSONObject> names = new ArrayList<>();
+        if (f.isFile()) {
+            if (f.length()!=0){
+                JSONParser jsonP = new JSONParser();
+                JSONArray arrayOfRecipes = (JSONArray) jsonP.parse(new FileReader(fileName));
+                for (int i=0; i<arrayOfRecipes.size();i++) {
+                    System.out.println();
+                    JSONObject myRecipes = (JSONObject) arrayOfRecipes.get(i);
+                    if (myRecipes.get(code)!=null) {
+                        JSONObject recipe = (JSONObject) myRecipes.get(code);
+                        JSONArray arrayOfIngredients = (JSONArray) recipe.get("Ingredients");
+                        System.out.println((String) recipe.get("Name"));
+                        System.out.println(name);
+                        if ((String) recipe.get("Name")  == name) {
+                            Label nameRecipe = new Label("-" + recipe.get("Name") + " " + recipe.get("Time"));
+                            vbox2.getChildren().add(nameRecipe);
+                            Label ingredientsLabel = new Label("Ingredients :");
+                            vbox2.getChildren().add(ingredientsLabel);
+
+                            for (int j = 0; j < arrayOfIngredients.size(); j++) {
+                                JSONObject ingredient = (JSONObject) arrayOfIngredients.get(j);
+                                Label ingredientRecipe = new Label("-Name : " + ingredient.get("Name"));
+                                Label quantity = new Label("-Quantity : " + ingredient.get("Quantity") + " " + ingredient.get("Unity"));
+                                vbox2.getChildren().addAll(ingredientRecipe, quantity);
+                            }
+                            JSONArray arrayOfSteps = (JSONArray) recipe.get("Steps");
+
+                            for (int j = 0; j < arrayOfSteps.size(); j++) {
+                                JSONObject step = (JSONObject) arrayOfSteps.get(j);
+                                names.add(step);
+                                Label stepRecipe = new Label("-step " + (j + 1) + " : " + step.get("Step"));
+                                vbox2.getChildren().add(stepRecipe);
+                            }
+
+
+                        }
+                    }
+                }
+            }
+
+            }
 
         }
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     private void addARecipe() {
         vbox2.getChildren().remove(0,vbox2.getChildren().size());
