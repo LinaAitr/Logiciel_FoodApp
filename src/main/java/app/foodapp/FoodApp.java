@@ -33,6 +33,7 @@ import java.net.URL;
 import java.util.*;
 import java.util.Timer;
 
+import static javafx.scene.paint.Color.GRAY;
 import static javafx.scene.paint.Color.WHITE;
 
 
@@ -51,6 +52,7 @@ public class FoodApp extends Application {
         Scene scene = new Scene(root,1500,700);
         root.setStyle("-fx-background-image: url('https://hal-normandie-univ.archives-ouvertes.fr/UNILEHAVRE/public/GREAH_HAL.png'); -fx-background-size: 500 500;");
         primaryStage.setScene(scene);
+
 
         primaryStage.setTitle("FoodApp");
         primaryStage1=primaryStage;
@@ -391,7 +393,6 @@ public class FoodApp extends Application {
         });
 
 
-
         Label ingredient = new Label("Give us an ingredient");
         TextField textField = new TextField("");
         HBox hBoxMain = new HBox();
@@ -439,13 +440,38 @@ public class FoodApp extends Application {
     private void addARecipe() {
         vbox2.getChildren().remove(0,vbox2.getChildren().size());
         Label title = new Label("Title : ");
-        TextField titleField = new TextField();vbox2.setLayoutX(100);
-            vbox2.setLayoutY(150);
+        TextField titleField = new TextField();
+        vbox2.setLayoutX(500);
+        vbox2.setLayoutY(500);
         HBox titleAndFieldTitleHbox = new HBox();
         titleAndFieldTitleHbox.getChildren().add(title);
         titleAndFieldTitleHbox.getChildren().add(titleField);
+        Label ingredientText = new Label("Ingredients :");
+        TextField titleFieldIngredient = new TextField();
+        titleFieldIngredient.setPromptText("Ingredient name");
+        TextField titleFieldIngredientAmount = new TextField();
+        titleFieldIngredientAmount.setPromptText("Amount");
+        TextField titleFieldIngredientUnit = new TextField();
+        titleFieldIngredientUnit.setPromptText("Unit");
+        Button addIngredient = new Button("Add Ingredient");
+        Label stepsText = new Label("Steps :");
+        TextField stepsTextField = new TextField();
+        Button addSteps = new Button("Add a step");
+        Button submit = new Button("Submit");
 
+
+        HBox ingredientsHbox = new HBox();
+        ingredientsHbox.getChildren().addAll(titleFieldIngredient,titleFieldIngredientAmount,titleFieldIngredientUnit);
         vbox2.getChildren().add(titleAndFieldTitleHbox);
+        vbox2.getChildren().add(ingredientText);
+        vbox2.getChildren().add(ingredientsHbox);
+        vbox2.getChildren().add(addIngredient);
+        vbox2.getChildren().add(stepsText);
+        vbox2.getChildren().add(stepsTextField);
+        vbox2.getChildren().add(addSteps);
+        vbox2.getChildren().add(submit);
+
+
     }
 
     private void showMyFavorites(ArrayList<String> loginInfos,TextField textField) throws IOException, ParseException {
