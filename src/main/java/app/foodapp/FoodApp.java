@@ -30,10 +30,12 @@ import org.json.simple.parser.ParseException;
 import javax.print.DocFlavor;
 import java.awt.*;
 import java.awt.Menu;
+import java.awt.ScrollPane;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.util.*;
@@ -53,7 +55,8 @@ public class FoodApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/app/foodapp/view/foodapp.fxml"));
-        //StackPane root = new StackPane();
+        //StackPane root2 = new StackPane();
+        //ScrollPane g = new ScrollPane();
         Scene scene = new Scene(root);
        // root.setStyle("-fx-background-image: url('https://hal-normandie-univ.archives-ouvertes.fr/UNILEHAVRE/public/GREAH_HAL.png'); -fx-background-size: 500 500;");
         primaryStage.setScene(scene);
@@ -76,7 +79,7 @@ public class FoodApp extends Application {
         LogPage(primaryStage);
     }
 
-    private void LogPage(Stage primaryStage) {
+    private void LogPage(Stage primaryStage) throws MalformedURLException {
         primaryStage1.setHeight(500);
         primaryStage1.setWidth(500);
         vbox2.getChildren().remove(0,vbox2.getChildren().size());
@@ -87,6 +90,12 @@ public class FoodApp extends Application {
         final Label userName = new Label("Username :");
         password.setTextFill(WHITE);
         userName.setTextFill(WHITE);
+       // File file = new File("FoodApp.png");
+       // String logostg = file.toURI().toURL().toString();
+        //final Image iconLogo = new Image(logostg);
+       // ImageView iconLogoVieu = new ImageView(iconLogo);
+        //iconLogoVieu.setFitWidth(100);
+       // vbox.getChildren().add(iconLogoVieu);
 
         final Button signButton = new Button("Sign in");
         final Button logButton = new Button("Log in");
@@ -98,7 +107,7 @@ public class FoodApp extends Application {
         signButton.setLayoutX(1222);
         signButton.paddingProperty();
 
-        TextField userNameField = new TextField("sofiane");
+        TextField userNameField = new TextField("");
         PasswordField passwordField =  new PasswordField();;
 
         //Label notExist=new Label("");
@@ -245,6 +254,8 @@ public class FoodApp extends Application {
 
     public void showRecipes(TextField textField,ArrayList<String> lisOfId) throws IOException, ParseException {
         vbox2.getChildren().remove(0,vbox2.getChildren().size());
+        vbox2.setLayoutX(200);
+        vbox2.setLayoutY(150);
         vbox2.getChildren().addAll(new Text("Recipes with "+ textField.getText() +" :"));
         //VBox vbox = new VBox();
         int size = lisOfId.size();
@@ -266,8 +277,7 @@ public class FoodApp extends Application {
 
             hbox.setSpacing(100);
             vbox2.getChildren().add(hbox);
-            vbox2.setLayoutX(200);
-            vbox2.setLayoutY(150);
+
 
         }
     }
@@ -276,7 +286,6 @@ public class FoodApp extends Application {
         for (int i = j *5; i<(j *5)+numberRecipesByColumn; i++){
             VBox vbox3 = new VBox();
             RecipeInformations rec = new RecipeInformations(lisOfId.get(i));
-            final Image imageRecipe = new Image(rec.getImage());
 
             File file2 = new File("/amuhome/k21232433/Bureau/Genie logiciel/foodapp/coeurRempli.png");
             String localUrlFullHeart = file2.toURI().toURL().toString();
@@ -286,15 +295,15 @@ public class FoodApp extends Application {
             String localUrl = file.toURI().toURL().toString();
             final Image icon = new Image(localUrl);
 
+
             ArrayList<String> idLIstFavorite = FavoriteRecipes.ShowFavorites(loginInfos);
-
-
             Hyperlink title =new Hyperlink(""+rec.getTitle());
             Label time = new Label("Time : "+rec.getReadyInMinutes());
             //Hyperlink title =new Hyperlink("title"+i);
             showSingleRecipe(title, lisOfId.get(i), textField);
             title.setMaxHeight(400);
             String recipeId = rec.getId();
+            final Image imageRecipe = new Image(rec.getImage());
             final ImageView recipeImage = new ImageView(imageRecipe);
             final ImageView favoriteImage;
 
@@ -386,7 +395,16 @@ public class FoodApp extends Application {
                 Label stepsLabel = new Label("steps : ");
                 vbox2.getChildren().add(stepsLabel);
                 for (int i=0;i<steps.size();i++){
-                    Label step = new Label("     -"+steps.get(i));
+                    String stp=steps.get(i);
+                    int j = stp.length();
+                        for (int k =0 ;k <j/50;k++){
+                            if (j/50>1){
+                                Label step = new Label("     -"+stp.substring(0,50));
+                                stp=stp.substring(51);
+                                vbox2.getChildren().add(step);
+                            }
+                    }
+                    Label step = new Label("     -"+stp);
                     vbox2.getChildren().add(step);
 
                 }
@@ -413,7 +431,11 @@ public class FoodApp extends Application {
         final Button showMyRecipes = new Button("Show my recipes");
 
         logOut.setOnAction(logoff->{
-            LogPage(primaryStage1);
+            try {
+                LogPage(primaryStage1);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
         });
         showMyRecipes.setOnAction(showRecipes->{
             try {
