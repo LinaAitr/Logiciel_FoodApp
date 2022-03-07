@@ -234,108 +234,122 @@ public class FoodApp extends Application {
     }
     public  void getListOfIdForSearch(TextField textField) throws IOException, ParseException {
         ArrayList<String> lisOfId = RequestAPI.SearchByKey(textField.getText());
-        showRecipes(textField,lisOfId,4);
+        showRecipes(textField,lisOfId);
 
     }
     public  void getListOfIdForFavorites(TextField textField) throws IOException, ParseException {
         ArrayList<String> lisOfId = FavoriteRecipes.ShowFavorites(loginInfos);
-        showRecipes(textField,lisOfId,lisOfId.size()-1);
+        showRecipes(textField,lisOfId);
 
     }
 
-    public void showRecipes(TextField textField,ArrayList<String> lisOfId, int n) throws IOException, ParseException {
-        vbox2.getChildren().addAll(new Text("Recipes with "+ textField.getText() +" :"));
-
-        //VBox vbox = new VBox();
+    public void showRecipes(TextField textField,ArrayList<String> lisOfId) throws IOException, ParseException {
         vbox2.getChildren().remove(0,vbox2.getChildren().size());
-        for (int j=0; j<=(n/5);j++){
+        vbox2.getChildren().addAll(new Text("Recipes with "+ textField.getText() +" :"));
+        //VBox vbox = new VBox();
+        int size = lisOfId.size();
+        int numberOfRows = size/5;
+        vbox2.setSpacing(50);
+        if (size%5 != 0){
+            numberOfRows++;
+        }
+
+        for (int j=0; j<numberOfRows;j++){
             HBox hbox = new HBox();
             hbox.setId(String.valueOf(j));
-            for (int i=j*5; i<(j+1)*(n);i++){
-                VBox vbox3 = new VBox();
-                RecipeInformations rec = new RecipeInformations(lisOfId.get(i));
-                final Image imageRecipe = new Image(rec.getImage());
-
-                File file2 = new File("/amuhome/k21232433/Bureau/Genie logiciel/foodapp/coeurRempli.png");
-                String localUrlFullHeart = file2.toURI().toURL().toString();
-                final Image iconFull = new Image(localUrlFullHeart);
-
-                File file = new File("/amuhome/k21232433/Bureau/Genie logiciel/foodapp/coeurVide.png");
-                String localUrl = file.toURI().toURL().toString();
-                final Image icon = new Image(localUrl);
-
-                ArrayList<String> idLIstFavorite = FavoriteRecipes.ShowFavorites(loginInfos);
-
-
-                Hyperlink title =new Hyperlink(""+rec.getTitle());
-                Label time = new Label("Time : "+rec.getReadyInMinutes());
-                //Hyperlink title =new Hyperlink("title"+i);
-                showSingelRecipe(title,lisOfId.get(i),textField );
-                title.setMaxHeight(400);
-                String recipeId = rec.getId();
-                final ImageView recipeImage = new ImageView(imageRecipe);
-                final ImageView favoriteImage;
-
-                if (idLIstFavorite.contains(recipeId)){
-                    favoriteImage =new ImageView(iconFull);
-                }
-                else favoriteImage =new ImageView(icon);
-
-
-                Button addFavoriteButton = new Button();
-                addFavoriteButton.setOnAction(addToFavorite ->{
-                    try {
-                        if ( !idLIstFavorite.contains(rec.getId())){
-
-                            favoriteImage.setImage(iconFull);
-                            FavoriteRecipes.FillFile(rec.getId(),loginInfos);
-                        }
-                        else
-                        {
-
-                            favoriteImage.setImage(icon);
-                            FavoriteRecipes.DeleteFavorite(loginInfos,idLIstFavorite.indexOf(rec.getId()));
-
-                        }
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                });
-                addFavoriteButton.setStyle("-fx-background-color: transparent;");
-                addFavoriteButton.setGraphic(favoriteImage);
-                recipeImage.setFitHeight(100);
-                recipeImage.setFitWidth(200);
-                favoriteImage.setFitHeight(20);
-                favoriteImage.setFitWidth(20);
-                vbox3.getChildren().add(title);
-                HBox hboxFav = new HBox();
-                hboxFav.getChildren().add(time);
-                hboxFav.getChildren().add(addFavoriteButton);
-                hboxFav.setSpacing(30);
-                hboxFav.setStyle("-fx-alignment:TOP_CENTER");
-                vbox3.setStyle("-fx-alignment:TOP_CENTER");
-                vbox3.getChildren().add(hboxFav);
-                vbox3.setStyle("-fx-background-color: pink;");
-
-                vbox3.getChildren().add(recipeImage);
-
-                hbox.getChildren().add(vbox3);
-
+            if (size >= (j+1)*5){
+                showRecipesByColumns(textField, lisOfId, j, hbox, 5);
             }
-            hbox.setSpacing(50);
+            else{
+                showRecipesByColumns(textField, lisOfId, j, hbox, size%5);
+            }
+
+            hbox.setSpacing(100);
             vbox2.getChildren().add(hbox);
-            vbox2.setLayoutX(100);
+            vbox2.setLayoutX(200);
             vbox2.setLayoutY(150);
 
         }
     }
 
+    private void showRecipesByColumns(TextField textField, ArrayList<String> lisOfId, int j, HBox hbox, int numberRecipesByColumn) throws IOException, ParseException {
+        for (int i = j *5; i<(j *5)+numberRecipesByColumn; i++){
+            VBox vbox3 = new VBox();
+            RecipeInformations rec = new RecipeInformations(lisOfId.get(i));
+            final Image imageRecipe = new Image(rec.getImage());
+
+            File file2 = new File("/amuhome/k21232433/Bureau/Genie logiciel/foodapp/coeurRempli.png");
+            String localUrlFullHeart = file2.toURI().toURL().toString();
+            final Image iconFull = new Image(localUrlFullHeart);
+
+            File file = new File("/amuhome/k21232433/Bureau/Genie logiciel/foodapp/coeurVide.png");
+            String localUrl = file.toURI().toURL().toString();
+            final Image icon = new Image(localUrl);
+
+            ArrayList<String> idLIstFavorite = FavoriteRecipes.ShowFavorites(loginInfos);
 
 
-    public void showSingelRecipe(Hyperlink nameRecipe, String id, TextField textField){
+            Hyperlink title =new Hyperlink(""+rec.getTitle());
+            Label time = new Label("Time : "+rec.getReadyInMinutes());
+            //Hyperlink title =new Hyperlink("title"+i);
+            showSingleRecipe(title, lisOfId.get(i), textField);
+            title.setMaxHeight(400);
+            String recipeId = rec.getId();
+            final ImageView recipeImage = new ImageView(imageRecipe);
+            final ImageView favoriteImage;
+
+            if (idLIstFavorite.contains(recipeId)){
+                favoriteImage =new ImageView(iconFull);
+            }
+            else favoriteImage =new ImageView(icon);
+
+
+            Button addFavoriteButton = new Button();
+            addFavoriteButton.setOnAction(addToFavorite ->{
+                try {
+                    if ( !idLIstFavorite.contains(rec.getId())){
+
+                        favoriteImage.setImage(iconFull);
+                        FavoriteRecipes.FillFile(rec.getId(),loginInfos);
+                    }
+                    else
+                    {
+
+                        favoriteImage.setImage(icon);
+                        FavoriteRecipes.DeleteFavorite(loginInfos,idLIstFavorite.indexOf(rec.getId()));
+
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            });
+            addFavoriteButton.setStyle("-fx-background-color: transparent;");
+            addFavoriteButton.setGraphic(favoriteImage);
+            recipeImage.setFitHeight(100);
+            recipeImage.setFitWidth(200);
+            favoriteImage.setFitHeight(20);
+            favoriteImage.setFitWidth(20);
+            vbox3.getChildren().add(title);
+            HBox hboxFav = new HBox();
+            hboxFav.getChildren().add(time);
+            hboxFav.getChildren().add(addFavoriteButton);
+            hboxFav.setSpacing(50);
+            hboxFav.setStyle("-fx-alignment:TOP_CENTER");
+            vbox3.getChildren().add(hboxFav);
+            vbox3.setStyle("-fx-background-color: pink;");
+
+            vbox3.getChildren().add(recipeImage);
+
+            hbox.getChildren().add(vbox3);
+
+        }
+    }
+
+
+    public void showSingleRecipe(Hyperlink nameRecipe, String id, TextField textField){
         nameRecipe.setOnAction(event->{
             try {
                 RecipeInformations rec = new RecipeInformations(id);
