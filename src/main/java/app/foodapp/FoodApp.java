@@ -49,14 +49,16 @@ public class FoodApp extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/app/foodapp/view/foodapp.fxml"));
         //StackPane root = new StackPane();
-        Scene scene = new Scene(root,1500,700);
-        root.setStyle("-fx-background-image: url('https://hal-normandie-univ.archives-ouvertes.fr/UNILEHAVRE/public/GREAH_HAL.png'); -fx-background-size: 500 500;");
+        Scene scene = new Scene(root);
+       // root.setStyle("-fx-background-image: url('https://hal-normandie-univ.archives-ouvertes.fr/UNILEHAVRE/public/GREAH_HAL.png'); -fx-background-size: 500 500;");
         primaryStage.setScene(scene);
         scene.setFill(LIGHTGREY);
 
-
         primaryStage.setTitle("FoodApp");
         primaryStage1=primaryStage;
+
+
+
         //gg.getChildren().add(root);
         //primaryStage.setFullScreen(true);
         //primaryStage.setHeight(700);
@@ -70,6 +72,9 @@ public class FoodApp extends Application {
     }
 
     private void LogPage(Stage primaryStage) {
+        primaryStage1.setHeight(500);
+        primaryStage1.setWidth(500);
+        vbox2.getChildren().remove(0,vbox2.getChildren().size());
         vbox.getChildren().remove(0,vbox.getChildren().size());
         Group group = new Group();
 
@@ -107,6 +112,7 @@ public class FoodApp extends Application {
                             notExist.setVisible(false);
                         }
                     },1000);
+
                 }
                 else if (loginInfos.get(2)=="alreadyCreated2"){
                     vbox.getChildren().remove(0,vbox.getChildren().size());
@@ -122,7 +128,7 @@ public class FoodApp extends Application {
                     },3000);
                     //vbox.getChildren().addAll(mainPage());
                     mainPage();
-                }
+               }
 
 
             } catch (IOException e) {
@@ -384,13 +390,27 @@ public class FoodApp extends Application {
     public void mainPage( ){
         vbox.setLayoutX(0);
         vbox.setLayoutY(0);
+        //primaryStage1.setHeight(1500);
+       // primaryStage1.setWidth(1000);
+        primaryStage1.setFullScreen(true);
+       // primaryStage1.setFullScreen(true);
         final Button button = new Button("Search");
         final Button favorites = new Button("Favorites");
         final Button logOut = new Button("Log Out");
         final Button addMyRecipeButton = new Button("Add a recipe");
+        final Button showMyRecipes = new Button("Show my recipes");
 
         logOut.setOnAction(logoff->{
             LogPage(primaryStage1);
+        });
+        showMyRecipes.setOnAction(showRecipes->{
+            try {
+                showListOfMyRecipes();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         });
 
 
@@ -401,6 +421,7 @@ public class FoodApp extends Application {
         hBoxMain.getChildren().add(textField);
         hBoxMain.getChildren().add(favorites);
         hBoxMain.getChildren().add(addMyRecipeButton);
+        hBoxMain.getChildren().add(showMyRecipes);
         hBoxMain.getChildren().add(logOut);
 
         // vbox.getChildren().add(button);
@@ -436,6 +457,17 @@ public class FoodApp extends Application {
                 e.printStackTrace();
             }
         });
+    }
+
+    private void showListOfMyRecipes() throws IOException, ParseException {
+        ArrayList<String> listName = AddRecipes.ShowRecipes(loginInfos);
+        vbox2.setLayoutX(100);
+        vbox2.setLayoutY(150);
+        for (int i = 0 ; i<listName.size();i++){
+            Hyperlink name = new Hyperlink("-"+ listName.get(i));
+            vbox2.getChildren().add(name);
+
+        }
     }
 
     private void addARecipe() {
@@ -487,6 +519,7 @@ public class FoodApp extends Application {
        submit.setOnAction(submitAction ->{
            try {
                AddRecipes.AddRecipe(loginInfos,titleField.getText(),timeField.getText(),IngredientHash,steps);
+               vbox2.getChildren().remove(0,vbox2.getChildren().size());
            } catch (IOException e) {
                e.printStackTrace();
            } catch (ParseException e) {

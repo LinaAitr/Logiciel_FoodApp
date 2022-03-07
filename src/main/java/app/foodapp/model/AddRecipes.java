@@ -73,7 +73,7 @@ public class AddRecipes {
         }
     }
 
-    public static void ShowRecipes(ArrayList<String> user) throws IOException, ParseException {
+    public static ArrayList<String> ShowRecipes(ArrayList<String> user) throws IOException, ParseException {
         String fileName = "MyRecipes.json";
         File f = new File(fileName);
         ArrayList<String> userAndPassword = new ArrayList<>();
@@ -81,9 +81,11 @@ public class AddRecipes {
         userAndPassword.add(1,user.get(1));
         String code = String.valueOf(userAndPassword);
         f.createNewFile();
+        ArrayList<String> names = new ArrayList<>();
 
         if (f.isFile()) {
             if (f.length()!=0){
+                String result = "";
                 JSONParser jsonP = new JSONParser();
                 JSONArray arrayOfRecipes = (JSONArray) jsonP.parse(new FileReader(fileName));
                 for (int i=0; i<arrayOfRecipes.size();i++) {
@@ -91,9 +93,11 @@ public class AddRecipes {
                     JSONObject myRecipes = (JSONObject) arrayOfRecipes.get(i);
                     if (myRecipes.get(code)!=null){
                         System.out.println("Recipe number "+ (i+1) +" : ");
+                        result += "Recipe number "+ (i+1) + " : " ;
                         JSONObject recipe = (JSONObject) myRecipes.get(code);
                         JSONArray arrayOfIngredients = (JSONArray) recipe.get("Ingredients");
                         System.out.println("Name :" +recipe.get("Name"));
+                        names.add((String) recipe.get("Name"));
                         System.out.println("Time :" +recipe.get("Time"));
                         System.out.println("Ingredients :");
                         for (int j=0; j<arrayOfIngredients.size();j++) {
@@ -128,7 +132,7 @@ public class AddRecipes {
         }
 
 
-
+ return names;
         }
     }
 
