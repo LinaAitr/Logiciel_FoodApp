@@ -1,5 +1,6 @@
 package app.foodapp;
 
+import app.foodapp.model.AddRecipes;
 import app.foodapp.model.FavoriteRecipes;
 import app.foodapp.model.RecipeInformations;
 import app.foodapp.model.RequestAPI;
@@ -33,8 +34,7 @@ import java.net.URL;
 import java.util.*;
 import java.util.Timer;
 
-import static javafx.scene.paint.Color.GRAY;
-import static javafx.scene.paint.Color.WHITE;
+import static javafx.scene.paint.Color.*;
 
 
 public class FoodApp extends Application {
@@ -47,11 +47,12 @@ public class FoodApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        //Parent root = FXMLLoader.load(getClass().getResource("/app/foodapp/view/foodapp.fxml"));
-        StackPane root = new StackPane();
+        Parent root = FXMLLoader.load(getClass().getResource("/app/foodapp/view/foodapp.fxml"));
+        //StackPane root = new StackPane();
         Scene scene = new Scene(root,1500,700);
         root.setStyle("-fx-background-image: url('https://hal-normandie-univ.archives-ouvertes.fr/UNILEHAVRE/public/GREAH_HAL.png'); -fx-background-size: 500 500;");
         primaryStage.setScene(scene);
+        scene.setFill(LIGHTGREY);
 
 
         primaryStage.setTitle("FoodApp");
@@ -441,8 +442,10 @@ public class FoodApp extends Application {
         vbox2.getChildren().remove(0,vbox2.getChildren().size());
         Label title = new Label("Title : ");
         TextField titleField = new TextField();
-        vbox2.setLayoutX(500);
-        vbox2.setLayoutY(500);
+        Label timeLabel = new Label("Time : ");
+        TextField timeField = new TextField();
+        vbox2.setLayoutX(400);
+        vbox2.setLayoutY(200);
         HBox titleAndFieldTitleHbox = new HBox();
         titleAndFieldTitleHbox.getChildren().add(title);
         titleAndFieldTitleHbox.getChildren().add(titleField);
@@ -458,18 +461,63 @@ public class FoodApp extends Application {
         TextField stepsTextField = new TextField();
         Button addSteps = new Button("Add a step");
         Button submit = new Button("Submit");
+        Button restart = new Button("Restart");
+
+        ArrayList<String>  ingredients = new ArrayList<>();
+        HashMap<String, ArrayList<String>> IngredientHash = new HashMap<>();
+        ArrayList<String> steps = new ArrayList<>();
+
+
+        addIngredient.setOnAction(addAnIngredient ->{
+            ingredients.add(titleFieldIngredientAmount.getText());
+            ingredients.add(titleFieldIngredientUnit.getText());
+            IngredientHash.put(titleFieldIngredient.getText(),ingredients) ;
+            titleFieldIngredientAmount.clear();
+            titleFieldIngredientUnit.clear();
+            titleFieldIngredient.clear();
+
+
+
+        });
+        addSteps.setOnAction(addAStep ->{
+            steps.add(stepsTextField.getText());
+            stepsTextField.clear();
+        });
+
+       submit.setOnAction(submitAction ->{
+           try {
+               AddRecipes.AddRecipe(loginInfos,titleField.getText(),timeField.getText(),IngredientHash,steps);
+           } catch (IOException e) {
+               e.printStackTrace();
+           } catch (ParseException e) {
+               e.printStackTrace();
+           }
+       });
+
+       restart.setOnAction(restartAction->{
+           addARecipe();
+       });
+
 
 
         HBox ingredientsHbox = new HBox();
         ingredientsHbox.getChildren().addAll(titleFieldIngredient,titleFieldIngredientAmount,titleFieldIngredientUnit);
         vbox2.getChildren().add(titleAndFieldTitleHbox);
+        HBox timeHbox = new HBox();
+        timeHbox.getChildren().add(timeLabel);
+        timeHbox.getChildren().add(timeField);
+        vbox2.getChildren().add(timeHbox);
         vbox2.getChildren().add(ingredientText);
         vbox2.getChildren().add(ingredientsHbox);
         vbox2.getChildren().add(addIngredient);
         vbox2.getChildren().add(stepsText);
         vbox2.getChildren().add(stepsTextField);
         vbox2.getChildren().add(addSteps);
-        vbox2.getChildren().add(submit);
+        vbox2.setSpacing(20);
+        HBox submitAndRestart = new HBox();
+        submitAndRestart.getChildren().add(submit);
+        submitAndRestart.getChildren().add(restart);
+        vbox2.getChildren().add(submitAndRestart);
 
 
     }
