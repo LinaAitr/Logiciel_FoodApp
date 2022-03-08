@@ -243,16 +243,19 @@ public class FoodApp extends Application {
     }
     public  void getListOfIdForSearch(TextField textField) throws IOException, ParseException {
         ArrayList<String> lisOfId = RequestAPI.SearchByKey(textField.getText()).get(0);
+        vbox2.getChildren().addAll(new Text("Recipes with "+ textField.getText() +" :"));
+
         showRecipes(textField,lisOfId);
 
     }
     public  void getListOfIdForFavorites(TextField textField) throws IOException, ParseException {
-        ArrayList<String> lisOfId = FavoriteRecipes.ShowFavorites(loginInfos);
-        if (lisOfId.size()==0){
+        ArrayList<String> listOfId = FavoriteRecipes.ShowFavorites(loginInfos);//todo
+        System.out.println(listOfId);
+        if (listOfId.size()==0){
             Label noFavorite = new Label("Nothing in here ");
             vbox2.getChildren().add(noFavorite);
         }
-        else showRecipes(textField,lisOfId);
+        else showRecipes(textField,listOfId);
 
     }
 
@@ -260,8 +263,6 @@ public class FoodApp extends Application {
         vbox2.getChildren().remove(0,vbox2.getChildren().size());
         vbox2.setLayoutX(200);
         vbox2.setLayoutY(150);
-        vbox2.getChildren().addAll(new Text("Recipes with "+ textField.getText() +" :"));
-        //VBox vbox = new VBox();
         int size = lisOfId.size();
         int numberOfRows = size/5;
         vbox2.setSpacing(50);
@@ -303,7 +304,6 @@ public class FoodApp extends Application {
             ArrayList<String> idLIstFavorite = FavoriteRecipes.ShowFavorites(loginInfos);
             Hyperlink title =new Hyperlink(""+rec.getTitle());
             Label time = new Label("Time : "+rec.getReadyInMinutes());
-            //Hyperlink title =new Hyperlink("title"+i);
             showSingleRecipe(title, lisOfId.get(i), textField);
             title.setMaxHeight(400);
             String recipeId = rec.getId();
@@ -333,9 +333,7 @@ public class FoodApp extends Application {
 
                     }
 
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (ParseException e) {
+                } catch (IOException | ParseException e) {
                     e.printStackTrace();
                 }
             });
@@ -371,9 +369,7 @@ public class FoodApp extends Application {
                 previous.setOnAction(prev ->{
                     try {
                         getListOfIdForSearch(textField);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (ParseException e) {
+                    } catch (IOException | ParseException e) {
                         e.printStackTrace();
                     }
                 });
@@ -413,9 +409,7 @@ public class FoodApp extends Application {
 
                 }
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ParseException e) {
+            } catch (IOException | ParseException e) {
                 e.printStackTrace();
             }
         });
@@ -444,9 +438,7 @@ public class FoodApp extends Application {
         showMyRecipes.setOnAction(showRecipes->{
             try {
                 showListOfMyRecipes();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ParseException e) {
+            } catch (IOException | ParseException e) {
                 e.printStackTrace();
             }
         });
@@ -478,9 +470,7 @@ public class FoodApp extends Application {
         favorites.setOnAction(fav->{
             try {
                 showMyFavorites(loginInfos,textField);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ParseException e) {
+            } catch (IOException | ParseException e) {
                 e.printStackTrace();
             }
         });
@@ -489,9 +479,7 @@ public class FoodApp extends Application {
             try {
                 vbox2.getChildren().remove(0,vbox2.getChildren().size());
                 getListOfIdForSearch(textField);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ParseException e) {
+            } catch (IOException | ParseException e) {
                 e.printStackTrace();
             }
         });
@@ -564,9 +552,7 @@ public class FoodApp extends Application {
                     JSONArray arrayOfRecipes = null;
                     try {
                         arrayOfRecipes = (JSONArray) jsonP.parse(new FileReader(fileName));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (ParseException e) {
+                    } catch (IOException | ParseException e) {
                         e.printStackTrace();
                     }
                     for (int i=0; i<arrayOfRecipes.size();i++) {
@@ -600,40 +586,13 @@ public class FoodApp extends Application {
                                 }
                                 vbox2.setSpacing(20);
 
-
                             }
                         }
                     }
                 }
-
             }
         });
-
-
-
-
-
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    }
 
     private void addARecipe() {
         vbox2.getChildren().remove(0,vbox2.getChildren().size());
@@ -685,9 +644,7 @@ public class FoodApp extends Application {
            try {
                AddRecipes.AddRecipe(loginInfos,titleField.getText(),timeField.getText(),IngredientHash,steps);
                vbox2.getChildren().remove(0,vbox2.getChildren().size());
-           } catch (IOException e) {
-               e.printStackTrace();
-           } catch (ParseException e) {
+           } catch (IOException | ParseException e) {
                e.printStackTrace();
            }
        });

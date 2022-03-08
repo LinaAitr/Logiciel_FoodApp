@@ -37,11 +37,11 @@ public class FavoriteRecipes {
 
                 }
 
-                FileWriter fw = new FileWriter(fileName);
-                BufferedWriter bw = new BufferedWriter(fw);
-                fw.write(String.valueOf(jsonArray));
-                bw.newLine();
-                fw.close();
+                FileWriter fileWriter = new FileWriter(fileName);
+                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+                fileWriter.write(String.valueOf(jsonArray));
+                bufferedWriter.newLine();
+                fileWriter.close();
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -59,13 +59,13 @@ public class FavoriteRecipes {
     userAndPassword.add(1,listOfInfos.get(1));
     String code = String.valueOf(userAndPassword);
     String fileName = "Favorites.json";
-    nameList.clear();
+    idList.clear();
     //boolean containsValue= false;
    // int j=-1;
-    File f = new File(fileName);
-    f.createNewFile();
-    if (f.isFile()) {
-        if (f.length()!=0){
+    File file = new File(fileName);
+    file.createNewFile();
+    if (file.isFile()) {
+        if (file.length()!=0){
             JSONParser jsonP = new JSONParser();
             JSONArray arrayOfRecipes = (JSONArray) jsonP.parse(new FileReader(fileName));
                 for (int i=0; i<arrayOfRecipes.size();i++) {
