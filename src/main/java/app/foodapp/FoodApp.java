@@ -242,13 +242,17 @@ public class FoodApp extends Application {
         primaryStage.setScene(sc);
     }
     public  void getListOfIdForSearch(TextField textField) throws IOException, ParseException {
-        ArrayList<String> lisOfId = RequestAPI.SearchByKey(textField.getText());
+        ArrayList<String> lisOfId = RequestAPI.SearchByKey(textField.getText()).get(0);
         showRecipes(textField,lisOfId);
 
     }
     public  void getListOfIdForFavorites(TextField textField) throws IOException, ParseException {
         ArrayList<String> lisOfId = FavoriteRecipes.ShowFavorites(loginInfos);
-        showRecipes(textField,lisOfId);
+        if (lisOfId.size()==0){
+            Label noFavorite = new Label("Nothing in here ");
+            vbox2.getChildren().add(noFavorite);
+        }
+        else showRecipes(textField,lisOfId);
 
     }
 

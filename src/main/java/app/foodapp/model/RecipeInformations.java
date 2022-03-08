@@ -52,19 +52,20 @@ public class RecipeInformations {
         return (String) recipeObj.get("image");
     }
     public ArrayList<String> getInstructions(){
-
-        JSONArray dataObject = (JSONArray) recipeObj.get("analyzedInstructions") ;
-        JSONObject recipeData = (JSONObject) dataObject.get(0);
-        JSONArray dataObject2 = (JSONArray) recipeData.get("steps") ;
         ArrayList<String> steps =new ArrayList<>();
 
-        System.out.println("instructions : ");
+        JSONArray dataObject = (JSONArray) recipeObj.get("analyzedInstructions") ;
+        if (dataObject.size()==0){
+            return steps;
+        }
+        JSONObject recipeData = (JSONObject) dataObject.get(0);
+        JSONArray dataObject2 = (JSONArray) recipeData.get("steps") ;
         for (int i=0; i<dataObject2.size();i++){
             JSONObject recipeData2 = (JSONObject) dataObject2.get(i);
-            //System.out.println("Step "+i+" : "+recipeData2.get("step"));
             steps.add("Step "+i+" : "+recipeData2.get("step"));
         }
-return steps;
+
+     return steps;
         }
 
     public String getId(){
@@ -92,22 +93,29 @@ return steps;
 
     public static void SearchById(RecipeInformations recipe) throws IOException, ParseException {
             System.out.println();
-            recipe.getTitle();
+            System.out.println("Title : "+recipe.getTitle());
             System.out.println();
-            recipe.getSummary();
+            System.out.println("Summary : "+recipe.getSummary());
             System.out.println();
-            recipe.getReadyInMinutes();
+            System.out.println("Time : "+recipe.getReadyInMinutes());
             System.out.println();
             recipe.getServings();
+            System.out.println("For : "+recipe.getServings());
             System.out.println();
-            recipe.getImage();
+            System.out.println("Image : "+recipe.getImage());
             System.out.println();
-            recipe.extendedIngredients();
+            System.out.println("Ingredients :");
+            ArrayList<String> ingr = recipe.extendedIngredients();
+            for (int j=0; j<ingr.size();j++){
+                System.out.println("   -"+ingr.get(j));
+            }
             System.out.println();
-            recipe.getInstructions();
+            System.out.println("Instructions :");
+            ArrayList<String> instr = recipe.getInstructions();
+                for (int j=0; j<instr.size();j++){
+                System.out.println("   -"+instr.get(j));
+            }
             System.out.println();
-
-
 
     }
 

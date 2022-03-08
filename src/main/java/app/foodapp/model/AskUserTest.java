@@ -36,9 +36,16 @@ public class AskUserTest {
             System.out.print("Give us your key word : ");
             String keyWord = inputUser.next();
             System.out.println("--------------------------");
-            if (RequestAPI.SearchByKey(keyWord).size()!=0){
+            if (RequestAPI.SearchByKey(keyWord).get(1).size()!=0){
+                ArrayList<String> names =RequestAPI.SearchByKey(keyWord).get(1);
+                for (int i=0; i<names.size();i++){
+                    System.out.println(i+"-"+names.get(i));
+                }
                 System.out.println("--------------------------");
-                recipeInfoByID(user,inputUser);
+                if (names.size()!=0) {
+                    recipeInfoByID(user,inputUser);
+                }
+
 
             }
             AskUser(user);
@@ -48,7 +55,12 @@ public class AskUserTest {
             System.out.println();
             System.out.print("Give us your ingredient : ");
             String ingredient = inputUser.next();
-            if (RequestAPI.SearchByIngredient(ingredient)) {
+            ArrayList<String> names =RequestAPI.SearchByIngredient(ingredient).get(1);
+            System.out.println(names);
+            for (int i=0; i<names.size();i++){
+                System.out.println(i+"-"+names.get(i));
+            }
+            if (names.size()!=0) {
                 recipeInfoByID(user,inputUser);
             }
             AskUser(user);
@@ -56,6 +68,15 @@ public class AskUserTest {
         }
          else if (choice == 3) {
              ArrayList<String> listOfId = FavoriteRecipes.ShowFavorites(user);
+             if (listOfId.size()==0){
+                 System.out.println("Nothing to show");
+             }
+             else{
+                 for (int j=0; j<listOfId.size();j++){
+                     System.out.println(listOfId.get(j));
+                 }
+             }
+
             if (listOfId.size()!=0){
                 int number ;
                 do {

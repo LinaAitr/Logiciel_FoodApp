@@ -50,12 +50,15 @@ public class FavoriteRecipes {
     }
 
     static ArrayList<String> nameList= new ArrayList<>();
+    static ArrayList<String> idList= new ArrayList<>();
+
 
     public static ArrayList<String> ShowFavorites(ArrayList<String> listOfInfos) throws IOException, ParseException {
     ArrayList<String> userAndPassword = new ArrayList<>();
     userAndPassword.add(0,listOfInfos.get(0));
     userAndPassword.add(1,listOfInfos.get(1));
-    String code = String.valueOf(userAndPassword);    String fileName = "Favorites.json";
+    String code = String.valueOf(userAndPassword);
+    String fileName = "Favorites.json";
     nameList.clear();
     //boolean containsValue= false;
    // int j=-1;
@@ -68,8 +71,7 @@ public class FavoriteRecipes {
                 for (int i=0; i<arrayOfRecipes.size();i++) {
                     JSONObject favoriteRecipe = (JSONObject) arrayOfRecipes.get(i);
                     if (favoriteRecipe.get(code)!=null && favoriteRecipe.get(code)!=""){
-                        //containsValue=true;
-                        nameList.add((String) favoriteRecipe.get(code));
+                        idList.add((String) favoriteRecipe.get(code));
                         //j++;
                         // System.out.print(j+") ");
                         //System.out.println(favoriteRecipe.get(code));
@@ -82,7 +84,7 @@ public class FavoriteRecipes {
 
     }
 
-        return nameList;
+        return idList;
     }
 
 
