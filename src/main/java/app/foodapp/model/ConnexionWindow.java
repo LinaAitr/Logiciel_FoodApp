@@ -1,11 +1,5 @@
 package app.foodapp.model;
-
-import com.sun.webkit.Timer;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;

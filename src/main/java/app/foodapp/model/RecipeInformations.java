@@ -11,13 +11,13 @@ import java.util.ArrayList;
 
 public class RecipeInformations {
     JSONObject recipeObj;
-   // public static String APIKey = "ab7c3f5a18a04dd8903bc5fdb0be40e9";
-   //public static String APIKey = "30ca87269ac8432c8130d7bef6ae2e49";
-    //public static String APIKey = "4e944d67e59d4271b4181168f3535444";
-   //public static String APIKey   = "79f2327aad3240e68f49b7de252cd5fe";
-   // public static String APIKey = "a2c302f11e894e71962240cde6bd7c5e";
-   // public static String APIKey =  "46058900bcc748ed8daaf0ba6ec0deea";
-   //public static String APIKey =  "62347f3022614a4ea4288fb87c696515";
+    // public static String APIKey = "ab7c3f5a18a04dd8903bc5fdb0be40e9";
+    // public static String APIKey = "30ca87269ac8432c8130d7bef6ae2e49";
+    // public static String APIKey = "4e944d67e59d4271b4181168f3535444";
+    //public static String APIKey   = "79f2327aad3240e68f49b7de252cd5fe";
+    // public static String APIKey = "a2c302f11e894e71962240cde6bd7c5e";
+    // public static String APIKey =  "46058900bcc748ed8daaf0ba6ec0deea";
+    // public static String APIKey =  "62347f3022614a4ea4288fb87c696515";
 
 
 
@@ -28,29 +28,25 @@ public class RecipeInformations {
     }
 
     public String getTitle(){
-       // System.out.println("title: "+recipeObj.get("title"));
         return (String) recipeObj.get("title");
     }
-    public String getSummary(){
 
-        //System.out.println("Summary: "+recipeObj.get("summary"));
+    public String getSummary(){
         return (String) recipeObj.get("summary");
     }
 
     public String getReadyInMinutes(){
-
-       // System.out.println("readyInMinutes: "+recipeObj.get("readyInMinutes")+" mn");
         return recipeObj.get("readyInMinutes")+" mn";
     }
-    public String getServings(){
 
-        //System.out.println("servings: "+recipeObj.get("servings"));
+    public String getServings(){
         return "servings: "+recipeObj.get("servings");
     }
+
     public String getImage(){
-      //  System.out.println("image: "+recipeObj.get("image"));
         return (String) recipeObj.get("image");
     }
+
     public ArrayList<String> getInstructions(){
         ArrayList<String> steps =new ArrayList<>();
 
@@ -64,20 +60,17 @@ public class RecipeInformations {
             JSONObject recipeData2 = (JSONObject) dataObject2.get(i);
             steps.add("Step "+i+" : "+recipeData2.get("step"));
         }
-
      return steps;
-        }
+    }
 
     public String getId(){
         System.out.println("id: "+recipeObj.get("id"));
         String id = String.valueOf(recipeObj.get("id"));
-
         return id ;
     }
 
 
     public ArrayList<String> extendedIngredients(){
-
         JSONArray missedIngredients = (JSONArray) recipeObj.get("extendedIngredients");
         System.out.println("Ingredients : ");
         ArrayList<String> ingredients =new ArrayList<>();
@@ -87,39 +80,27 @@ public class RecipeInformations {
            // System.out.println("-"+newMissedIngredients.getName()+" : "+newMissedIngredients.getAmount()+" "+newMissedIngredients.getUnit());
         ingredients.add("-"+newMissedIngredients.getName()+" : "+newMissedIngredients.getAmount()+" "+newMissedIngredients.getUnit());
         }
- return ingredients;
+        return ingredients;
     }
 
 
     public static void SearchById(RecipeInformations recipe) throws IOException, ParseException {
-            System.out.println();
-            System.out.println("Title : "+recipe.getTitle());
-            System.out.println();
-            System.out.println("Summary : "+recipe.getSummary());
-            System.out.println();
-            System.out.println("Time : "+recipe.getReadyInMinutes());
-            System.out.println();
-            recipe.getServings();
-            System.out.println("For : "+recipe.getServings());
-            System.out.println();
-            System.out.println("Image : "+recipe.getImage());
-            System.out.println();
-            System.out.println("Ingredients :");
-            ArrayList<String> ingr = recipe.extendedIngredients();
-            for (int j=0; j<ingr.size();j++){
-                System.out.println("   -"+ingr.get(j));
-            }
-            System.out.println();
-            System.out.println("Instructions :");
-            ArrayList<String> instr = recipe.getInstructions();
-                for (int j=0; j<instr.size();j++){
-                System.out.println("   -"+instr.get(j));
-            }
-            System.out.println();
-
+        System.out.println("\nTitle : "+recipe.getTitle());
+        System.out.println("\nSummary : "+recipe.getSummary());
+        System.out.println("\nTime : "+recipe.getReadyInMinutes());
+        System.out.println("\n\nFor : "+recipe.getServings());
+        System.out.println("\nImage : "+recipe.getImage());
+        System.out.println("\nIngredients :");
+        ArrayList<String> ingr = recipe.extendedIngredients();
+        for (int j=0; j<ingr.size();j++){
+            System.out.println("   -"+ingr.get(j));
+        }
+        System.out.println("\nInstructions :");
+        ArrayList<String> instr = recipe.getInstructions();
+        for (int j=0; j<instr.size();j++){
+            System.out.println("   -"+instr.get(j));
+        }
+        System.out.println();
     }
-
-
-
 }
 

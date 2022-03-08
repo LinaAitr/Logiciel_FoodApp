@@ -1,6 +1,8 @@
-package app.foodapp.model;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+package app.foodapp;
+import app.foodapp.model.AddRecipes;
+import app.foodapp.model.FavoriteRecipes;
+import app.foodapp.model.RecipeInformations;
+import app.foodapp.model.RequestAPI;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;

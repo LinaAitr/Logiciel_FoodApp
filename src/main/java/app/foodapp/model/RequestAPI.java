@@ -17,13 +17,11 @@ public class RequestAPI {
 
     //public static String APIKey = "ab7c3f5a18a04dd8903bc5fdb0be40e9";
     //public static String APIKey = "30ca87269ac8432c8130d7bef6ae2e49";
-    public static String APIKey = "4e944d67e59d4271b4181168f3535444";
+    //public static String APIKey = "4e944d67e59d4271b4181168f3535444";
     //public static String APIKey   = "79f2327aad3240e68f49b7de252cd5fe";
     //public static String APIKey = "a2c302f11e894e71962240cde6bd7c5e";
-    //public static String APIKey =  "46058900bcc748ed8daaf0ba6ec0deea";
+    public static String APIKey =  "46058900bcc748ed8daaf0ba6ec0deea";
     //public static String APIKey =  "62347f3022614a4ea4288fb87c696515";
-
-
 
 
     public static StringBuilder ConnectAPI(URL url) throws IOException {
@@ -45,10 +43,9 @@ public class RequestAPI {
         }
         return informationString;
     }
-    static ArrayList<String> idList= new ArrayList<>();
+
+    public static ArrayList<String> idList= new ArrayList<>();
     static ArrayList<String> nameList= new ArrayList<>();
-
-
 
     public static ArrayList<ArrayList<String>> SearchByIngredient(String ingredient) throws IOException {
         ArrayList<ArrayList<String>> content = new ArrayList<>();
@@ -65,16 +62,13 @@ public class RequestAPI {
                     String id = valueOf(recipeData.get("id"));
                     idList.add(id);
                     nameList.add(name);
-
             }
         } catch (ParseException | IOException e) {
             e.printStackTrace();
         }
-
         //content.clear();
         content.add(idList);
         content.add(nameList);
-
         return content;
     }
 
@@ -98,8 +92,6 @@ public class RequestAPI {
                 idList.add(id);
                 nameList.add(name);
             }
-
-
         } catch (ParseException | IOException e) {
             e.printStackTrace();
         }
@@ -108,5 +100,4 @@ public class RequestAPI {
         content.add(nameList);
         return content;
     }
-
 }
