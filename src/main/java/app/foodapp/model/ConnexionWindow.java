@@ -11,7 +11,7 @@ import org.json.simple.parser.ParseException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ConexionWindow {
+public class ConnexionWindow {
 
 
     static public Label sign(ArrayList<String> usersInfos) throws IOException, ParseException {

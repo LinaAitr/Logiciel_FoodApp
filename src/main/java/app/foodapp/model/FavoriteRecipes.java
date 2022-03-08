@@ -54,37 +54,35 @@ public class FavoriteRecipes {
 
 
     public static ArrayList<String> ShowFavorites(ArrayList<String> listOfInfos) throws IOException, ParseException {
-    ArrayList<String> userAndPassword = new ArrayList<>();
-    userAndPassword.add(0,listOfInfos.get(0));
-    userAndPassword.add(1,listOfInfos.get(1));
-    String code = String.valueOf(userAndPassword);
-    String fileName = "Favorites.json";
-    idList.clear();
-    //boolean containsValue= false;
-   // int j=-1;
-    File file = new File(fileName);
-    file.createNewFile();
-    if (file.isFile()) {
-        if (file.length()!=0){
-            JSONParser jsonP = new JSONParser();
-            JSONArray arrayOfRecipes = (JSONArray) jsonP.parse(new FileReader(fileName));
-                for (int i=0; i<arrayOfRecipes.size();i++) {
-                    JSONObject favoriteRecipe = (JSONObject) arrayOfRecipes.get(i);
-                    if (favoriteRecipe.get(code)!=null && favoriteRecipe.get(code)!=""){
-                        idList.add((String) favoriteRecipe.get(code));
-                        //j++;
-                        // System.out.print(j+") ");
-                        //System.out.println(favoriteRecipe.get(code));
+        ArrayList<String> userAndPassword = new ArrayList<>();
+        userAndPassword.add(0,listOfInfos.get(0));
+        userAndPassword.add(1,listOfInfos.get(1));
+        String code = String.valueOf(userAndPassword);
+        String fileName = "Favorites.json";
+        idList.clear();
+        File file = new File(fileName);
+        file.createNewFile();
+        if (file.isFile()) {
+            if (file.length()!=0){
+                JSONParser jsonP = new JSONParser();
+                JSONArray arrayOfRecipes = (JSONArray) jsonP.parse(new FileReader(fileName));
+                    for (int i=0; i<arrayOfRecipes.size();i++) {
+                        JSONObject favoriteRecipe = (JSONObject) arrayOfRecipes.get(i);
+                        if (favoriteRecipe.get(code)!=null && favoriteRecipe.get(code)!=""){
+                            idList.add((String) favoriteRecipe.get(code));
+                            //j++;
+                            // System.out.print(j+") ");
+                            //System.out.println(favoriteRecipe.get(code));
+                        }
                     }
-                }
-          //if (!containsValue)  System.out.println("Nothing to show");
+              //if (!containsValue)  System.out.println("Nothing to show");
 
-    }
-        //else System.out.println("Nothing to show");
+            }
+            //else System.out.println("Nothing to show");
 
-    }
+        }
 
-        return idList;
+            return idList;
     }
 
 
@@ -93,13 +91,13 @@ public class FavoriteRecipes {
 
     public static ArrayList<String> SignIn(ArrayList<String> listOfInfos, int logAndSign) throws IOException, ParseException {
         String fileName = "Favorites.json";
-
         ArrayList<String> userAndPassword = new ArrayList<>();
         userAndPassword.add(0,listOfInfos.get(0));
         userAndPassword.add(1,listOfInfos.get(1));
         String code = String.valueOf(userAndPassword);
         File f = new File(fileName);
         f.createNewFile();
+
         if (f.isFile()) {
             JSONParser jsonP = new JSONParser();
             JSONArray jsonArray = new JSONArray();
@@ -111,10 +109,8 @@ public class FavoriteRecipes {
                     if(jsonArray.contains(jsonObject1)){
                         if (logAndSign == 2){
                             listOfInfos.add(2, "alreadyCreated");
-
                         }
-                        else
-                        {
+                        else {
                             listOfInfos.add(2, "alreadyCreated2");
                         }
                         return listOfInfos;
@@ -122,14 +118,12 @@ public class FavoriteRecipes {
 
                    jsonArray.add(jsonObject1);
                 }
-                else
-                {
+                else {
                     JSONObject jsonObject1 = new JSONObject();
                     jsonObject1.put(code, "");
                     jsonArray.add(jsonObject1);
                 }
-                if (logAndSign==1)
-                {
+                if (logAndSign==1) {
                     listOfInfos.add(2,"notExist");
                     return listOfInfos;
                 }
@@ -140,7 +134,6 @@ public class FavoriteRecipes {
                 fw.close();
                 listOfInfos.add(2, "AccountCreated");
 
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -148,18 +141,13 @@ public class FavoriteRecipes {
         return listOfInfos;
     }
 
-
-
-
-
-
-        public static void DeleteFavorite(ArrayList<String> listOfInfos, int number) throws IOException, ParseException {
+    public static void DeleteFavorite(ArrayList<String> listOfInfos, int number) throws IOException, ParseException {
         String fileName = "Favorites.json";
         ArrayList<String> userAndPassword = new ArrayList<>();
         userAndPassword.add(0,listOfInfos.get(0));
         userAndPassword.add(1,listOfInfos.get(1));
         String code = String.valueOf(userAndPassword);
-            File f = new File(fileName);
+        File f = new File(fileName);
         f.createNewFile();
         if (f.isFile()) {
             if (f.length()!=0){
@@ -171,22 +159,17 @@ public class FavoriteRecipes {
                     if (favoriteRecipe.containsKey(code) && favoriteRecipe.containsValue(nameList.get(number))){
                         arrayOfRecipes.remove(favoriteRecipe);
                     }
-                    }
-
+                }
                 FileWriter fw = new FileWriter(fileName);
                 BufferedWriter bw = new BufferedWriter(fw);
                 fw.write(String.valueOf(arrayOfRecipes));
                 bw.newLine();
                 fw.close();
-
-                }
             }
-
-
-
-            }
-
+        }
     }
+
+}
 
 
 
