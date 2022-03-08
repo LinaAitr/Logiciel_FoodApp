@@ -45,26 +45,12 @@ public class FoodApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/app/foodapp/view/foodapp.fxml"));
-        //StackPane root2 = new StackPane();
-        //ScrollPane g = new ScrollPane();
         Scene scene = new Scene(root);
        // root.setStyle("-fx-background-image: url('https://hal-normandie-univ.archives-ouvertes.fr/UNILEHAVRE/public/GREAH_HAL.png'); -fx-background-size: 500 500;");
         primaryStage.setScene(scene);
-        scene.setFill(LIGHTGREY);
 
         primaryStage.setTitle("FoodApp");
         primaryStage1=primaryStage;
-
-
-
-        //gg.getChildren().add(root);
-        //primaryStage.setFullScreen(true);
-        //primaryStage.setHeight(700);
-        //primaryStage.setWidth(1500);
-        //gg.setBackground(new Background());
-        //StackPane root = new StackPane();
-       // gg.setPrefWidth(200);
-        //root.setStyle("-fx-background-color: red;");
         primaryStage.show();
         LogPage(primaryStage);
     }
@@ -80,12 +66,16 @@ public class FoodApp extends Application {
         final Label userName = new Label("Username :");
         password.setTextFill(WHITE);
         userName.setTextFill(WHITE);
-       // File file = new File("FoodApp.png");
-       // String logostg = file.toURI().toURL().toString();
-        //final Image iconLogo = new Image(logostg);
-       // ImageView iconLogoVieu = new ImageView(iconLogo);
-        //iconLogoVieu.setFitWidth(100);
-       // vbox.getChildren().add(iconLogoVieu);
+       File file = new File("FoodApp.png");
+       String logostg = file.toURI().toURL().toString();
+       final Image iconLogo = new Image(logostg);
+       ImageView iconLogoVieu = new ImageView(iconLogo);
+        iconLogoVieu.setFitWidth(200);
+        iconLogoVieu.setFitHeight(100);
+        VBox imageBox = new VBox();
+        imageBox.setStyle("-fx-background-color: white;");
+        imageBox.getChildren().add(iconLogoVieu);
+        vbox.getChildren().add(imageBox);
 
         final Button signButton = new Button("Sign in");
         final Button logButton = new Button("Log in");
@@ -205,17 +195,13 @@ public class FoodApp extends Application {
         vbox.setStyle("-fx-background-color: #505050;");
 
         vbox.setPadding(new Insets(10,10,10,10));
-        //vbox.setStyle("-fx-background-color: pink;");
-
 
         hbox.setStyle("-fx-alignment:TOP_CENTER");
-
 
         group.getChildren().add(vbox);
         group.getChildren().add(vbox2);
         group.setStyle("-fx-alignment:TOP_CENTER");
         Scene sc =new Scene(group);
-        //primaryStage.setResizable(false);
         double windowHeight = primaryStage.getHeight();
         double windowWidth = primaryStage.getMaxWidth();
         vbox.setLayoutX((windowHeight/2)-100);
@@ -223,14 +209,14 @@ public class FoodApp extends Application {
 
         primaryStage.setScene(sc);
     }
-    
+
     public  void getListOfIdForSearch(TextField textField) throws IOException, ParseException {
         ArrayList<String> lisOfId = RequestAPI.SearchByKey(textField.getText()).get(0);
         vbox2.getChildren().addAll(new Text("Recipes with "+ textField.getText() +" :"));
 
         showRecipes(textField,lisOfId);
     }
-    
+
     public  void getListOfIdForFavorites(TextField textField) throws IOException, ParseException {
         ArrayList<String> listOfId = FavoriteRecipes.ShowFavorites(loginInfos);//todo
         System.out.println(listOfId);
@@ -278,7 +264,6 @@ public class FoodApp extends Application {
             String localUrl = file.toURI().toURL().toString();
             final Image icon = new Image(localUrl);
 
-
             ArrayList<String> idLIstFavorite = FavoriteRecipes.ShowFavorites(loginInfos);
             Hyperlink title =new Hyperlink(""+rec.getTitle());
             Label time = new Label("Time : "+rec.getReadyInMinutes());
@@ -303,9 +288,7 @@ public class FoodApp extends Application {
                         favoriteImage.setImage(iconFull);
                         FavoriteRecipes.FillFile(rec.getId(),loginInfos);
                     }
-                    else
-                    {
-
+                    else {
                         favoriteImage.setImage(icon);
                         FavoriteRecipes.DeleteFavorite(loginInfos,idLIstFavorite.indexOf(rec.getId()));
 
@@ -371,17 +354,21 @@ public class FoodApp extends Application {
 
                 Label stepsLabel = new Label("steps : ");
                 vbox2.getChildren().add(stepsLabel);
+                vbox2.setSpacing(10);
                 for (int i=0;i<steps.size();i++){
-                    String stp=steps.get(i);
-                    int j = stp.length();
-                        for (int k =0 ;k <j/50;k++){
-                            if (j/50>1){
-                                Label step = new Label("     -"+stp.substring(0,50));
-                                stp=stp.substring(51);
-                                vbox2.getChildren().add(step);
+                    String stepString=steps.get(i);
+                    String stepStringWthSpaces = " ";
+                        for (int index=0; index<stepString.length();index++){
+                            stepStringWthSpaces += stepString.charAt(index);
+                            if(index%150 == 0 && index > 100){
+                                while(stepString.charAt(index)!= ' ') {
+                                    stepStringWthSpaces += stepString.charAt(index);
+                                    index++;
+                                }
+                                stepStringWthSpaces += '\n';
                             }
-                    }
-                    Label step = new Label("     -"+stp);
+                        }
+                    Label step = new Label("    "+stepStringWthSpaces);
                     vbox2.getChildren().add(step);
 
                 }
@@ -391,14 +378,11 @@ public class FoodApp extends Application {
             }
         });
     }
-    
+
     public void mainPage( ){
         vbox.setLayoutX(0);
         vbox.setLayoutY(0);
-        //primaryStage1.setHeight(1500);
-       // primaryStage1.setWidth(1000);
         primaryStage1.setFullScreen(true);
-       // primaryStage1.setFullScreen(true);
         final Button button = new Button("Search");
         final Button favorites = new Button("Favorites");
         final Button logOut = new Button("Log Out");
@@ -407,6 +391,8 @@ public class FoodApp extends Application {
 
         logOut.setOnAction(logoff->{
             try {
+                primaryStage1.setHeight(500);
+                primaryStage1.setWidth(500);
                 LogPage(primaryStage1);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -423,6 +409,7 @@ public class FoodApp extends Application {
 
         Label ingredient = new Label("Give us an ingredient");
         TextField textField = new TextField("");
+
         HBox hBoxMain = new HBox();
         hBoxMain.getChildren().add(button);
         hBoxMain.getChildren().add(textField);
@@ -430,17 +417,23 @@ public class FoodApp extends Application {
         hBoxMain.getChildren().add(addMyRecipeButton);
         hBoxMain.getChildren().add(showMyRecipes);
         hBoxMain.getChildren().add(logOut);
+       // hBoxMain.setStyle("-fx-background-color: gray");
+        hBoxMain.setStyle("-fx-background-color: #505050; -fx-alignment: TOP_CENTER");
+         hBoxMain.setSpacing(20);
+         //hBoxMain.setAlignment(Pos.CENTER);
+         hBoxMain.setPadding(new Insets(30,((primaryStage1.getWidth())/2),30,(primaryStage1.getWidth())/2));
 
         // vbox.getChildren().add(button);
         vbox.getChildren().add(ingredient);
         vbox.getChildren().add(hBoxMain);
+        //vbox.setAlignment(Pos.CENTER);
         vbox.setStyle("-fx-alignment:TOP_CENTER");
-        vbox.setLayoutX(600);
 
+        vbox.setLayoutX(270);
         addMyRecipeButton.setOnAction(addRecipeFunc ->{
             addARecipe();
         });
-        
+
         favorites.setOnAction(fav->{
             try {
                 showMyFavorites(loginInfos,textField);
@@ -504,7 +497,7 @@ public class FoodApp extends Application {
             vbox2.getChildren().add(notFound);
         }
     }
-    
+
 
     private void showDetailsOfMyRecipes(Hyperlink name,String nameText)  {
         name.setOnAction(event->{
@@ -572,7 +565,7 @@ public class FoodApp extends Application {
         Label timeLabel = new Label("Time : ");
         TextField timeField = new TextField();
         vbox2.setLayoutX(400);
-        vbox2.setLayoutY(200);
+        vbox2.setLayoutY(300);
         HBox titleAndFieldTitleHbox = new HBox();
         titleAndFieldTitleHbox.getChildren().add(title);
         titleAndFieldTitleHbox.getChildren().add(titleField);
@@ -593,7 +586,7 @@ public class FoodApp extends Application {
         ArrayList<String>  ingredients = new ArrayList<>();
         HashMap<String, ArrayList<String>> IngredientHash = new HashMap<>();
         ArrayList<String> steps = new ArrayList<>();
-        
+
         addIngredient.setOnAction(addAnIngredient ->{
             ingredients.add(titleFieldIngredientAmount.getText());
             ingredients.add(titleFieldIngredientUnit.getText());
@@ -620,7 +613,7 @@ public class FoodApp extends Application {
        restart.setOnAction(restartAction->{
            addARecipe();
        });
-       
+
         HBox ingredientsHbox = new HBox();
         ingredientsHbox.getChildren().addAll(titleFieldIngredient,titleFieldIngredientAmount,titleFieldIngredientUnit);
         vbox2.getChildren().add(titleAndFieldTitleHbox);
