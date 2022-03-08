@@ -7,7 +7,6 @@ import app.foodapp.model.RequestAPI;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -369,16 +368,6 @@ public class FoodApp extends Application {
                                 stepStringWthSpaces += '\n';
                             }
                         }
-
-//                    int j = stepString.length();
-//                    System.out.println(stepString);
-//                        for (int k =0 ;k <j/150;k++){
-//                            if (j/50>1){
-//                                Label step = new Label("    "+stepString.substring(0,150));
-//                                stepString=stepString.substring(151);
-//                                vbox2.getChildren().add(step);
-//                            }
-//                    }
                     Label step = new Label("    "+stepStringWthSpaces);
                     vbox2.getChildren().add(step);
 
@@ -393,11 +382,7 @@ public class FoodApp extends Application {
     public void mainPage( ){
         vbox.setLayoutX(0);
         vbox.setLayoutY(0);
-        //primaryStage1.setHeight(1500);
-       // primaryStage1.setWidth(1000);
-        //primaryStage1.setResizable(true);
         primaryStage1.setFullScreen(true);
-       // primaryStage1.setFullScreen(true);
         final Button button = new Button("Search");
         final Button favorites = new Button("Favorites");
         final Button logOut = new Button("Log Out");
@@ -406,6 +391,8 @@ public class FoodApp extends Application {
 
         logOut.setOnAction(logoff->{
             try {
+                primaryStage1.setHeight(500);
+                primaryStage1.setWidth(500);
                 LogPage(primaryStage1);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -578,7 +565,7 @@ public class FoodApp extends Application {
         Label timeLabel = new Label("Time : ");
         TextField timeField = new TextField();
         vbox2.setLayoutX(400);
-        vbox2.setLayoutY(200);
+        vbox2.setLayoutY(300);
         HBox titleAndFieldTitleHbox = new HBox();
         titleAndFieldTitleHbox.getChildren().add(title);
         titleAndFieldTitleHbox.getChildren().add(titleField);
