@@ -116,10 +116,14 @@ public class AddRecipes {
 
 
                     }
+                    else
+                    {
+                        System.out.println();
+                        System.out.println("No recipe found");
+                        System.out.println();
+                    }
 
-                    System.out.println();
-                    System.out.println("No recipe found");
-                    System.out.println();
+
 
                 }
             }
