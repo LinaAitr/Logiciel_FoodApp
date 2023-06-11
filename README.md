@@ -9,7 +9,7 @@ Necessite JavaFX
 Team 1 : FRESNEL Clement, AIT-RAZZOUK Lina
 Team 2 : KEBCI Sofiane, RAMDANI Meriem
 
-NB :  Impossible de lancer le logiciel, problème iconnus, à resoudre
+NB :  Impossible de lancer le logiciel, problème iconnu, à resoudre
 
 (Fonctionnait auparavant)
 
